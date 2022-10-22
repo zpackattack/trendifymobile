@@ -7,15 +7,15 @@ import Header from '../components/home.header'
 
 
 
-const LandingPage = () =>
+const Home = () =>
 {
     return(
-        <div class = "font-poppins">
-            <Header />
-            <Body />
+        <view>
+            
+            <Text>Hi</Text>
 
-        </div>
+        </view>
     );
 };
 
-export default LandingPage;
+export default Home;

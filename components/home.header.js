@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Text, View, Button } from 'react-native'
+import React from "react";
+import { Text, View} from 'react-native'
 
-export default function Header ()
+function Header()
 {
     return
     (
@@ -11,3 +11,4 @@ export default function Header ()
         </View>
     );
 };
+export default Header;
