@@ -4,6 +4,7 @@ import { Button, View, Text, Pressable, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import navBar from './components/BottomNav.component';
 
 
@@ -19,11 +20,25 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen({ navigation }) {
+function TopTracks({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
+    <View style={styles.homeScreeBackground}>
+      <Text style={styles.homeTitleText}>Details Screen</Text>
       <Button
+        style = {styles.Buttons}
+        title="Go to Details... again"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
+
+function TopArtists({ navigation }) {
+  return (
+    <View style={styles.homeScreeBackground}>
+      <Text style={styles.homeTitleText}>Details Screen</Text>
+      <Button
+        style = {styles.Buttons}
         title="Go to Details... again"
         onPress={() => navigation.navigate('Details')}
       />
@@ -33,11 +48,61 @@ function DetailsScreen({ navigation }) {
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 function MyTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={DetailsScreen} />
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: '#1BD760',
+        tabBarInactiveTintColor: '#fff',
+        tabBarStyle: {backgroundColor: "black"}
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          header: () => null,
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TopTracks"
+        component={TopTracks}
+        options={{
+          header: () => null,
+          tabBarLabel: 'Top Tracks',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="album" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TopArtists"
+        component={TopArtists}
+        options={{
+          header: () => null,
+          tabBarLabel: 'Top Artists',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-music" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="RecentlyPlayed"
+        component={TopArtists}
+        options={{
+          header: () => null,
+          tabBarLabel: 'Recently Played',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="history" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -75,6 +140,10 @@ const styles = StyleSheet.create({
   homeTitleText:{ 
     color: '#fff',
   },
+  ButtonText:{
+    textColor: '#1BD760',
+  }
+  
 });
 
 /*
