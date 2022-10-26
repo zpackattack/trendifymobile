@@ -5,12 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Login from './screens/Login';
 import Home from './screens/Home';
 import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
 import RecentlyPlayed from './screens/RecentlyPlayed';
 
-import navBar from './components/BottomNav.component';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -72,11 +73,19 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} />
+      
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <MyStack />
     </NavigationContainer>
   );
 }

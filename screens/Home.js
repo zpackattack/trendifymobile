@@ -22,19 +22,6 @@ function Home({ navigation }) {
 export default Home;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#240530',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    mainText: {
-      paddingTop: 50,
-      flex: 1,
-      color: '#ffffff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     homeScreeBackground: { 
       flex: 1, 
       alignItems: 'center', 
