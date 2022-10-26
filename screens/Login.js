@@ -20,7 +20,7 @@ function Login()
         <View style={styles.inputView}>
             <TextInput
             style={styles.TextInput}
-            placeholder="Email."
+            placeholder="Email"
             placeholderTextColor="#003f5c"
             
             />
@@ -29,19 +29,21 @@ function Login()
         <View style={styles.inputView}>
             <TextInput
             style={styles.TextInput}
-            placeholder="Password."
+            placeholder="Password"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
             
             />
         </View>
     
-        <TouchableOpacity>
-            <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
+        
     
         <TouchableOpacity style={styles.loginBtn}>
             <Text style={styles.loginText}>LOGIN</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+            <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
         </View>
     );
@@ -74,12 +76,13 @@ const styles = StyleSheet.create({
       height: 50,
       flex: 1,
       padding: 10,
-      marginLeft: 20,
+
     },
    
     forgot_button: {
       height: 30,
-      marginBottom: 30,
+      marginTop: 30,
+      color:  '#1BD760',
     },
    
     loginBtn: {
@@ -89,6 +92,6 @@ const styles = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "#FF1493",
+      backgroundColor: "#af40e3",
     },
   });
