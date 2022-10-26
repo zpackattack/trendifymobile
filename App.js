@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Login from './screens/Login';
+import Register from './screens/Register';
 import Home from './screens/Home';
 import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
@@ -76,12 +77,19 @@ function MyTabs() {
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} />
-      
+      <Stack.Screen name="Login" component={Login} 
+      options={{
+        header: () => null,
+      }}
+      />
+      <Stack.Screen name="Register" component={Register} 
+      options={{
+        header: () => null,
+      }}/>
     </Stack.Navigator>
   );
 }
-
+//for now change MyStack to MyTabs to see the other pages
 function App() {
   return (
     <NavigationContainer>

@@ -10,9 +10,7 @@ import {   StyleSheet,
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
-
-function Login({navigation})
+function Register({navigation})
 {
     return (
         <View style={styles.container}>
@@ -37,7 +35,6 @@ function Login({navigation})
             
             />
         </View>
-        
     
         
     
@@ -46,14 +43,13 @@ function Login({navigation})
         </TouchableOpacity>
 
         <TouchableOpacity>
-            <Text style={styles.registerTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
-            
+            <Text style={styles.forgot_button} onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
         </TouchableOpacity>
         </View>
     );
 }
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
     container: {
@@ -83,11 +79,10 @@ const styles = StyleSheet.create({
 
     },
    
-    registerTxt: {
+    forgot_button: {
       height: 30,
       marginTop: 30,
       color:  '#1BD760',
-
     },
    
     loginBtn: {
