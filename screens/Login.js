@@ -7,6 +7,7 @@ import {   StyleSheet,
     TextInput,
     Button,
     TouchableOpacity, } from 'react-native';
+import LogoHeader from '../components/LogoHeader';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,7 +17,7 @@ function Login({navigation})
 {
     return (
         <View style={styles.container}>
-        <Image style={styles.image} source={require("../images/logo.png")} />
+        <LogoHeader />
     
 
         <View style={styles.inputView}>
@@ -37,7 +38,6 @@ function Login({navigation})
             
             />
         </View>
-        
     
         
     
@@ -57,22 +57,18 @@ export default Login;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: "#240530",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-   
-    image: {
-      marginBottom: 40,
-    },
+        flex: 1,
+        backgroundColor: "#240530",
+        alignItems: "center",
+        justifyContent: "center",
+      },
    
     inputView: {
       backgroundColor: "#ffffff",
       borderRadius: 30,
       width: "70%",
       height: 45,
-      marginBottom: 20,
+      marginBottom: 25,
       alignItems: "center",
     },
    
@@ -80,14 +76,16 @@ const styles = StyleSheet.create({
       height: 50,
       flex: 1,
       padding: 10,
-
     },
    
     registerTxt: {
       height: 30,
       marginTop: 30,
       color:  '#1BD760',
+    },
 
+    ForgotPassword: {
+        color:  '#1BD760',
     },
    
     loginBtn: {
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
       height: 50,
       alignItems: "center",
       justifyContent: "center",
-      marginTop: 40,
+      marginTop: 20,
       backgroundColor: "#af40e3",
     },
   });

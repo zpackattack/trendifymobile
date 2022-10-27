@@ -7,45 +7,63 @@ import {   StyleSheet,
     TextInput,
     Button,
     TouchableOpacity, } from 'react-native';
+import LogoHeader from '../components/LogoHeader';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Register({navigation})
 {
     return (
-        <View style={styles.container}>
-        <Image style={styles.image} source={require("../images/logo.png")} />
-    
-
-        <View style={styles.inputView}>
+      <View style={styles.container}>
+      <Image style={styles.Logo} source={require("../images/logotransparent.png")} />
+  
+      <View style={styles.inputView}>
             <TextInput
             style={styles.TextInput}
-            placeholder="Email"
+            placeholder="Your Name"
             placeholderTextColor="#003f5c"
             
             />
-        </View>
-    
-        <View style={styles.inputView}>
-            <TextInput
-            style={styles.TextInput}
-            placeholder="Password"
-            placeholderTextColor="#003f5c"
-            secureTextEntry={true}
-            
-            />
-        </View>
-    
-        
-    
-        <TouchableOpacity style={styles.loginBtn}>
-            <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+      </View>
 
-        <TouchableOpacity>
-            <Text style={styles.forgot_button} onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
-        </TouchableOpacity>
-        </View>
+      <View style={styles.inputView}>
+          <TextInput
+          style={styles.TextInput}
+          placeholder="Email"
+          placeholderTextColor="#003f5c"
+          
+          />
+      </View>
+  
+      <View style={styles.inputView}>
+          <TextInput
+          style={styles.TextInput}
+          placeholder="Password"
+          placeholderTextColor="#003f5c"
+          secureTextEntry={true}
+          
+          />
+      </View>
+
+      <View style={styles.inputView}>
+          <TextInput
+          style={styles.TextInput}
+          placeholder="Confirm Password"
+          placeholderTextColor="#003f5c"
+          secureTextEntry={true}
+          
+          />
+      </View>
+  
+  
+      <TouchableOpacity style={styles.loginBtn}>
+          <Text style={styles.Register}>Register</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity>
+          <Text style={styles.LoginTxt} onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
+      </TouchableOpacity>
+      </View>
     );
 }
 
@@ -59,8 +77,12 @@ const styles = StyleSheet.create({
       justifyContent: "center",
     },
    
-    image: {
+    Logo: {
+      marginTop: 100,
       marginBottom: 40,
+      width: 345,
+      height: 100,
+      resizeMode: 'fit',
     },
    
     inputView: {
@@ -79,7 +101,7 @@ const styles = StyleSheet.create({
 
     },
    
-    forgot_button: {
+    LoginTxt: {
       height: 30,
       marginTop: 30,
       color:  '#1BD760',
