@@ -86,6 +86,10 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
+      <Stack.Screen name="MainApp" component={MyTabs}
+      options={{
+        header: () => null,
+      }}/>
     </Stack.Navigator>
   );
 }
