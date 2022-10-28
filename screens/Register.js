@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
       marginBottom: 40,
       width: 345,
       height: 100,
-      resizeMode: 'fit',
+      resizeMode: 'cover',
     },
    
     inputView: {
