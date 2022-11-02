@@ -16,6 +16,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Login({navigation})
 {
+  const handleLogin = (credentials) => 
+  {
+    const url = '';
+  }
     return (
         <View style={styles.container}>
         <LogoHeader />
