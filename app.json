@@ -7,6 +7,12 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "Trendify.com.Trendify"
+    },
+    "android": {
+      "package": "Trendify.com.Trendify"
+    }
   }
 }
