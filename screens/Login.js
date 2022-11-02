@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
+
+
 import {   StyleSheet,
     Text,
     View,
@@ -97,4 +99,5 @@ const styles = StyleSheet.create({
       marginTop: 20,
       backgroundColor: "#af40e3",
     },
+    
   });
