@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
+import Home from './Home';
 
 
 
@@ -63,7 +64,7 @@ function Login({navigation})
         onSubmit={(values) => 
         {
           console.log(values);
-            //navigation.navigate('App');
+          navigation.navigate('MainApp');
         }}
       >
         {(props) => 
