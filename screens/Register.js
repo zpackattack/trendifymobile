@@ -10,55 +10,83 @@ import {   StyleSheet,
 import LogoHeader from '../components/LogoHeader';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Formik } from 'formik';
 
 function Register({navigation})
 {
     return (
       <View style={styles.container}>
       <Image style={styles.Logo} source={require("../images/logotransparent.png")} />
-  
-      <View style={styles.inputView}>
+
+      <Formik 
+        initialValues={{name:'', email: '', password: '', confirmPassword: ''}}
+        onSubmit={(values) => 
+        {
+          console.log(values);
+            //navigation.navigate('App');
+        }}
+      >
+        {(props) => 
+        (
+          <View>
+            <View style={styles.inputView}>
             <TextInput
             style={styles.TextInput}
+            textAlign={'center'}
             placeholder="Your Name"
             placeholderTextColor="#003f5c"
-            
+            onChangeText={props.handleChange('name')}
+            value={props.values.name}
             />
       </View>
 
       <View style={styles.inputView}>
           <TextInput
           style={styles.TextInput}
+          textAlign={'center'}
           placeholder="Email"
           placeholderTextColor="#003f5c"
-          
+          onChangeText={props.handleChange('email')}
+          value={props.values.email}
           />
       </View>
   
       <View style={styles.inputView}>
           <TextInput
           style={styles.TextInput}
+          textAlign={'center'}
           placeholder="Password"
           placeholderTextColor="#003f5c"
           secureTextEntry={true}
-          
+          onChangeText={props.handleChange('password')}
+          value={props.values.password}
           />
       </View>
 
       <View style={styles.inputView}>
           <TextInput
           style={styles.TextInput}
+          textAlign={'center'}
           placeholder="Confirm Password"
           placeholderTextColor="#003f5c"
           secureTextEntry={true}
-          
+          onChangeText={props.handleChange('confirmPassword')}
+          value={props.values.confirmPassword}
           />
       </View>
+
+          <TouchableOpacity style={styles.loginBtn}>
+            <Text 
+              style={styles.loginText} 
+              onPress={props.handleSubmit}
+              textAlign={'center'}>Register</Text>
+          </TouchableOpacity>
+        </View>
+          
+        )}
+        
+      </Formik>
   
-  
-      <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.Register}>Register</Text>
-      </TouchableOpacity>
 
       <TouchableOpacity>
           <Text style={styles.LoginTxt} onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
@@ -98,7 +126,7 @@ const styles = StyleSheet.create({
       height: 50,
       flex: 1,
       padding: 10,
-
+      width: 275,
     },
    
     LoginTxt: {
@@ -115,5 +143,6 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       marginTop: 40,
       backgroundColor: "#af40e3",
+      width: 275,
     },
   });

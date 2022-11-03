@@ -13,6 +13,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Formik } from 'formik';
 
 
 
@@ -56,33 +57,58 @@ function Login({navigation})
   return (
       <View style={styles.container}>
       <LogoHeader />
+
+      <Formik 
+        initialValues={{email: '', password: ''}}
+        onSubmit={(values) => 
+        {
+          console.log(values);
+            //navigation.navigate('App');
+        }}
+      >
+        {(props) => 
+        (
+          <View>
+            <View style={styles.inputView}>
+              <TextInput
+              style={styles.TextInput}
+              textAlign={'center'}
+              placeholder="Email"
+              placeholderTextColor="#003f5c"
+              onChangeText={props.handleChange('email')}
+              value={props.values.email}
+              />
+            </View>
+            <View style={styles.inputView}>
+              <TextInput
+              style={styles.TextInput}
+              textAlign={'center'}
+              placeholder="Password"
+              placeholderTextColor="#003f5c"
+              onChangeText={props.handleChange('password')}
+              value={props.values.password}
+              secureTextEntry={true}
+              />
+              </View>
+
+              <TouchableOpacity style={styles.loginBtn}>
+                <Text 
+                  style={styles.loginText} 
+                  onPress={props.handleSubmit}
+                  textAlign={'center'}>Login</Text>
+              </TouchableOpacity>
+          </View>
+          
+        )}
+        
+      </Formik>
   
 
-      <View style={styles.inputView}>
-          <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          placeholderTextColor="#003f5c"
-          
-          />
-      </View>
-  
-      <View style={styles.inputView}>
-          <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          
-          />
-      </View>
+
 
       <Text style={styles.messageBox} type={messageType}>{message}</Text>
 
-      <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText} onPress={handleLogin}>Login</Text>
-      </TouchableOpacity>
-
+ 
       <TouchableOpacity>
           <Text style={styles.registerTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
           
@@ -114,12 +140,14 @@ const styles = StyleSheet.create({
       height: 50,
       flex: 1,
       padding: 10,
+      width: 275,
     },
    
     registerTxt: {
       height: 30,
       marginTop: 30,
       color:  '#1BD760',
+      
     },
 
     ForgotPassword: {
@@ -127,7 +155,7 @@ const styles = StyleSheet.create({
     },
    
     loginBtn: {
-      width: "80%",
+      width: 275,
       borderRadius: 25,
       height: 50,
       alignItems: "center",
