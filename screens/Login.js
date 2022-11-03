@@ -7,21 +7,26 @@ import {   StyleSheet,
     Image,
     TextInput,
     Button,
-    TouchableOpacity, } from 'react-native';
+    TouchableOpacity,
+    Pressable } from 'react-native';
 import LogoHeader from '../components/LogoHeader';
 import axios from 'axios'; 
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
-import Home from './Home';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from './../hooks/useTogglePasswordAvalibility';
 
 
 function Login({navigation})
 {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+  const [password, setPassword] = useState('');
+  
 
   const handleLogin = (credentials) => 
   {
@@ -96,9 +101,12 @@ function Login({navigation})
               placeholderTextColor="#003f5c"
               onChangeText={props.handleChange('password')}
               value={props.values.password}
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
               />
-              </View>
+              <Pressable onPress={handlePasswordVisibility}>
+                <MaterialCommunityIcons name={rightIcon} size={22} color='#232323' />
+              </Pressable>
+            </View>
 
               <Text style={styles.messageBox} type={messageType}>{message}</Text>
 
@@ -113,16 +121,9 @@ function Login({navigation})
         )}
         
       </Formik>
-  
-
-
-
-      
-
  
       <TouchableOpacity>
           <Text style={styles.registerTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
-          
       </TouchableOpacity>
       </View>
   );
@@ -144,7 +145,8 @@ const styles = StyleSheet.create({
       width: "70%",
       height: 45,
       marginBottom: 25,
-      alignItems: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
     },
    
     TextInput: {
