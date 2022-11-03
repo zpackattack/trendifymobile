@@ -27,26 +27,25 @@ function Login({navigation})
   {
     const url = 'https://trendify-project.herokuapp.com/api/login';
 
-    axios
-      .post(url, credentials)
-      .then((response) => 
+    axios.post(url, credentials).then((response) => 
       {
+        console.log("talk");
         const result = response.data;
         const {message, status, data} = result;
 
-        if (status !== 'SUCESS')
+        if (response.data['success'] == true)
         {
-          handleMessage(message, status);
+          navigation.navigate('MainApp', {...data[0]});
+          
         }
         else
         {
-          navigation.navigate('app', {...data[0]});
+          handleMessage(message, status);
         }
-      })
-      .catch(error => {
-      console.log(error.JSON());
+      }).catch((error) => {
+        console.log(error);
       handleMessage("An error occurred. Check your network");
-    })
+    });
   }
 
   const handleMessage = (message, type = 'FAILED') =>
@@ -60,11 +59,20 @@ function Login({navigation})
       <LogoHeader />
 
       <Formik 
-        initialValues={{email: '', password: ''}}
+        initialValues={{login: '', password: ''}}
         onSubmit={(values) => 
         {
-          console.log(values);
-          navigation.navigate('MainApp');
+          if(values.login == '' || values.password == '')
+          {
+            handleMessage("Please fill all fields");
+          }
+          else{
+            console.log(values);
+            handleMessage("");
+            handleLogin(values);
+            //navigation.navigate('MainApp');
+            
+          }
         }}
       >
         {(props) => 
@@ -76,8 +84,8 @@ function Login({navigation})
               textAlign={'center'}
               placeholder="Email"
               placeholderTextColor="#003f5c"
-              onChangeText={props.handleChange('email')}
-              value={props.values.email}
+              onChangeText={props.handleChange('login')}
+              value={props.values.login}
               />
             </View>
             <View style={styles.inputView}>
@@ -91,6 +99,8 @@ function Login({navigation})
               secureTextEntry={true}
               />
               </View>
+
+              <Text style={styles.messageBox} type={messageType}>{message}</Text>
 
               <TouchableOpacity style={styles.loginBtn}>
                 <Text 
@@ -107,7 +117,7 @@ function Login({navigation})
 
 
 
-      <Text style={styles.messageBox} type={messageType}>{message}</Text>
+      
 
  
       <TouchableOpacity>
