@@ -6,14 +6,22 @@ import {   StyleSheet,
     Image,
     TextInput,
     Button,
-    TouchableOpacity, } from 'react-native';
+    TouchableOpacity,
+  Pressable } from 'react-native';
 import LogoHeader from '../components/LogoHeader';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from './../hooks/useTogglePasswordAvalibility';
+import { useState } from 'react';
 
 function Register({navigation})
 {
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+    
+  const [password, setPassword] = useState('');
     return (
       <View style={styles.container}>
       <Image style={styles.Logo} source={require("../images/logotransparent.png")} />
@@ -57,10 +65,13 @@ function Register({navigation})
           textAlign={'center'}
           placeholder="Password"
           placeholderTextColor="#003f5c"
-          secureTextEntry={true}
+          secureTextEntry={passwordVisibility}
           onChangeText={props.handleChange('password')}
           value={props.values.password}
           />
+          <Pressable onPress={handlePasswordVisibility}>
+                <MaterialCommunityIcons name={rightIcon} size={22} color='#232323' />
+          </Pressable>
       </View>
 
       <View style={styles.inputView}>
@@ -69,10 +80,13 @@ function Register({navigation})
           textAlign={'center'}
           placeholder="Confirm Password"
           placeholderTextColor="#003f5c"
-          secureTextEntry={true}
+          secureTextEntry={passwordVisibility}
           onChangeText={props.handleChange('confirmPassword')}
           value={props.values.confirmPassword}
           />
+          <Pressable onPress={handlePasswordVisibility}>
+                <MaterialCommunityIcons name={rightIcon} size={22} color='#232323' />
+          </Pressable>
       </View>
 
           <TouchableOpacity style={styles.loginBtn}>
@@ -119,7 +133,8 @@ const styles = StyleSheet.create({
       width: "70%",
       height: 45,
       marginBottom: 20,
-      alignItems: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
     },
    
     TextInput: {
