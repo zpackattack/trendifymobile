@@ -1,10 +1,7 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { Button, View, Text, Pressable, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-
+import styles from '../components/styles';
 
 
 function Home({ navigation }) {
@@ -20,19 +17,3 @@ function Home({ navigation }) {
   }
 
 export default Home;
-
-const styles = StyleSheet.create({
-    homeScreeBackground: { 
-      flex: 1, 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      backgroundColor: '#240530', 
-    },
-    homeTitleText:{ 
-      color: '#fff',
-    },
-    ButtonText:{
-      textColor: '#1BD760',
-    }
-    
-  });

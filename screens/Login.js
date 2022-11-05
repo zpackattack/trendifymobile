@@ -17,6 +17,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from './../hooks/useTogglePasswordAvalibility';
+import styles from './../components/styles';
 
 
 function Login({navigation})
@@ -75,7 +76,7 @@ function Login({navigation})
             console.log(values);
             handleMessage("");
             handleLogin(values);
-            //navigation.navigate('MainApp');
+            navigation.navigate('MainApp');
             
           }
         }}
@@ -84,9 +85,10 @@ function Login({navigation})
         (
           <View>
             <View style={styles.inputView}>
+              <MaterialCommunityIcons style={styles.iconLR} name={'email'} size={22} color='#232323' />
               <TextInput
               style={styles.TextInput}
-              textAlign={'center'}
+              textAlign={'left'}
               placeholder="Email"
               placeholderTextColor="#003f5c"
               onChangeText={props.handleChange('login')}
@@ -94,9 +96,10 @@ function Login({navigation})
               />
             </View>
             <View style={styles.inputView}>
+              <MaterialCommunityIcons style={styles.iconLR} name={'lock'} size={22} color='#232323' />
               <TextInput
               style={styles.TextInput}
-              textAlign={'center'}
+              textAlign={'left'}
               placeholder="Password"
               placeholderTextColor="#003f5c"
               onChangeText={props.handleChange('password')}
@@ -104,7 +107,7 @@ function Login({navigation})
               secureTextEntry={passwordVisibility}
               />
               <Pressable onPress={handlePasswordVisibility}>
-                <MaterialCommunityIcons name={rightIcon} size={22} color='#232323' />
+                <MaterialCommunityIcons style={styles.passEye} name={rightIcon} size={22} color='#232323' />
               </Pressable>
             </View>
 
@@ -130,56 +133,3 @@ function Login({navigation})
 }
 
 export default Login;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#240530",
-        alignItems: "center",
-        justifyContent: "center",
-      },
-   
-    inputView: {
-      backgroundColor: "#ffffff",
-      borderRadius: 30,
-      width: "70%",
-      height: 45,
-      marginBottom: 25,
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-   
-    TextInput: {
-      height: 50,
-      flex: 1,
-      padding: 10,
-      width: 275,
-    },
-   
-    registerTxt: {
-      height: 30,
-      marginTop: 30,
-      color:  '#1BD760',
-      
-    },
-
-    ForgotPassword: {
-        color:  '#1BD760',
-    },
-   
-    loginBtn: {
-      width: 275,
-      borderRadius: 25,
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 20,
-      backgroundColor: "#af40e3",
-    },
-    messageBox:
-    {
-      textAlign: 'center',
-      fontSize: 13,
-      color: 'red',
-    },
-  });

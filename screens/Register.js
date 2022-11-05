@@ -14,14 +14,50 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from './../hooks/useTogglePasswordAvalibility';
+import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
+import styles from './../components/styles';
 
 function Register({navigation})
 {
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState();
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
     
   const [password, setPassword] = useState('');
+
+  const handleLogin = (credentials) => 
+  {
+    const url = 'https://trendify-project.herokuapp.com/api/register';
+
+    axios.post(url, credentials).then((response) => 
+      {
+        console.log("talk");
+        const result = response.data;
+        const {message, status, data} = result;
+
+        if (response.data['success'] == true)
+        {
+          navigation.navigate('MainApp', {...data[0]});
+          
+        }
+        else
+        {
+          handleMessage(message, status);
+        }
+      }).catch((error) => {
+        console.log(error);
+      handleMessage("An error occurred. Check your network");
+    });
+  }
+
+  const handleMessage = (message, type = 'FAILED') =>
+  {
+    setMessage(message);
+    setMessageType(type);
+  }
+
     return (
       <View style={styles.container}>
       <Image style={styles.Logo} source={require("../images/logotransparent.png")} />
@@ -30,28 +66,40 @@ function Register({navigation})
         initialValues={{name:'', email: '', password: '', confirmPassword: ''}}
         onSubmit={(values) => 
         {
-          console.log(values);
-            //navigation.navigate('App');
+          if(values.name == '' || values.email == '' || values.password == '' || values.confirmPassword == '')
+          {
+            handleMessage("Please fill all fields");
+          }
+          else{
+            console.log(values);
+            handleMessage("");
+            handleLogin(values);
+            //navigation.navigate('MainApp');
+            
+          }
         }}
       >
         {(props) => 
         (
           <View>
+            
             <View style={styles.inputView}>
-            <TextInput
-            style={styles.TextInput}
-            textAlign={'center'}
-            placeholder="Your Name"
-            placeholderTextColor="#003f5c"
-            onChangeText={props.handleChange('name')}
-            value={props.values.name}
-            />
-      </View>
+              <AntDesign style={styles.iconLR} name={'user'} size={22} color='#232323' /> 
+              <TextInput
+              style={styles.TextInput}
+              textAlign={'left'}
+              placeholder="Your Name"
+              placeholderTextColor="#003f5c"
+              onChangeText={props.handleChange('name')}
+              value={props.values.name}
+              />
+            </View>
 
       <View style={styles.inputView}>
+        <MaterialCommunityIcons style={styles.iconLR} name={'email'} size={22} color='#232323' />
           <TextInput
           style={styles.TextInput}
-          textAlign={'center'}
+          textAlign={'left'}
           placeholder="Email"
           placeholderTextColor="#003f5c"
           onChangeText={props.handleChange('email')}
@@ -60,9 +108,10 @@ function Register({navigation})
       </View>
   
       <View style={styles.inputView}>
+        <MaterialCommunityIcons style={styles.iconLR} name={'lock'} size={22} color='#232323' />
           <TextInput
           style={styles.TextInput}
-          textAlign={'center'}
+          textAlign={'left'}
           placeholder="Password"
           placeholderTextColor="#003f5c"
           secureTextEntry={passwordVisibility}
@@ -70,14 +119,15 @@ function Register({navigation})
           value={props.values.password}
           />
           <Pressable onPress={handlePasswordVisibility}>
-                <MaterialCommunityIcons name={rightIcon} size={22} color='#232323' />
+                <MaterialCommunityIcons style={styles.passEye} name={rightIcon} size={22} color='#232323' />
           </Pressable>
       </View>
 
       <View style={styles.inputView}>
+        <MaterialCommunityIcons style={styles.iconLR} name={'lock'} size={22} color='#232323' />
           <TextInput
           style={styles.TextInput}
-          textAlign={'center'}
+          textAlign={'left'}
           placeholder="Confirm Password"
           placeholderTextColor="#003f5c"
           secureTextEntry={passwordVisibility}
@@ -85,9 +135,11 @@ function Register({navigation})
           value={props.values.confirmPassword}
           />
           <Pressable onPress={handlePasswordVisibility}>
-                <MaterialCommunityIcons name={rightIcon} size={22} color='#232323' />
+                <MaterialCommunityIcons style={styles.passEye} name={rightIcon} size={22} color='#232323' />
           </Pressable>
       </View>
+
+        <Text style={styles.messageBox} type={messageType}>{message}</Text>
 
           <TouchableOpacity style={styles.loginBtn}>
             <Text 
@@ -110,54 +162,3 @@ function Register({navigation})
 }
 
 export default Register;
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#240530",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-   
-    Logo: {
-      marginTop: 25,
-      marginBottom: 40,
-      width: 345,
-      height: 100,
-      resizeMode: 'cover',
-    },
-   
-    inputView: {
-      backgroundColor: "#ffffff",
-      borderRadius: 30,
-      width: "70%",
-      height: 45,
-      marginBottom: 20,
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-   
-    TextInput: {
-      height: 50,
-      flex: 1,
-      padding: 10,
-      width: 275,
-    },
-   
-    LoginTxt: {
-      height: 30,
-      marginTop: 30,
-      color:  '#1BD760',
-    },
-   
-    loginBtn: {
-      width: "80%",
-      borderRadius: 25,
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 40,
-      backgroundColor: "#af40e3",
-      width: 275,
-    },
-  });

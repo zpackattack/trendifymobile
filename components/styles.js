@@ -1,46 +1,100 @@
-import styled from "styled-components";
-import { View } from 'react-native';
+import {   StyleSheet,
+    Text,
+    View,
+    Image,
+    TextInput,
+    Button,
+    TouchableOpacity,
+  Pressable } from 'react-native';
 
+const styles = StyleSheet.create({
+    //Register and Login styles
+    container: {
+      flex: 1,
+      backgroundColor: "#240530",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+   
+    Logo: {
+      marginTop: 25,
+      marginBottom: 40,
+      width: 345,
+      height: 100,
+      resizeMode: 'cover',
+    },
+   
+    inputView: {
+      backgroundColor: "#ffffff",
+      borderRadius: 30,
+      width: "70%",
+      height: 45,
+      marginBottom: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+   
+    TextInput: {
+      height: 50,
+      flex: 1,
+      padding: 10,
+      width: 275,
+    },
+   
+    LoginTxt: {
+      height: 30,
+      marginTop: 30,
+      color:  '#1BD760',
+    },
+   
+    registerTxt: {
+      height: 30,
+      marginTop: 30,
+      color:  '#1BD760',  
+    },
 
-// colors
-export const Colors = 
-{
-    primary: '#af40e3',
-    primHover: '#a121de',
-    secondary: '#1BD760',
-    secondHover: '#139761',
-    background: '#240530',
-    white: '#FFFFFF',
-    red: '#EF4444',
-};
+    ForgotPassword: {
+        color:  '#1BD760',
+    },
+   
+    loginBtn: {
+      width: 275,
+      borderRadius: 25,
+      height: 50,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 20,
+      backgroundColor: "#af40e3",
+    },
 
-const {primary, primHover, secondary, secondHover, background, white, red} = Colors;
+    messageBox:
+    {
+      textAlign: 'center',
+      fontSize: 13,
+      color: 'red',
+    },
 
-export const StyledContainer = styled.view`
-    flex: 1;
-    background-color: ${background};
-`;
+    iconLR: {
+        paddingLeft: 10,
+    },
 
-export const InnerContainer = styled.view`
-    flex: 1;
-    alignItems: "center";
-    justifyContent: "center";
-`;
+    passEye:{
+        paddingRight: 10,
+    },
 
-export const LoginLogo = styled.image`
-    marginBottom: 25;
-`;
+    //Home Screen Styles
+    homeScreeBackground: { 
+        flex: 1, 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        backgroundColor: '#240530', 
+      },
+      homeTitleText:{ 
+        color: '#fff',
+      },
+      ButtonText:{
+        textColor: '#1BD760',
+      }
+  });
 
-export const TitleLogin = styled.text`
-    marginBottom: 25;
-    fontSize: 60px;
-    color:  ${white};
-`;
-
-export const StyledFormArea = styled.view`
-    width: 90%;
-`;
-
-export const StyledTextInput = styled.TextInput`
-
-`;
+  export default styles;
