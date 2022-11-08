@@ -8,6 +8,7 @@ import {   StyleSheet,
     Button,
     TouchableOpacity,
   Pressable } from 'react-native';
+import axios from 'axios'; 
 import LogoHeader from '../components/LogoHeader';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -27,7 +28,7 @@ function Register({navigation})
     
   const [password, setPassword] = useState('');
 
-  const handleLogin = (credentials) => 
+  const handleSignup = (credentials) => 
   {
     const url = 'https://trendify-project.herokuapp.com/api/register';
 
@@ -39,7 +40,7 @@ function Register({navigation})
 
         if (response.data['success'] == true)
         {
-          navigation.navigate('MainApp', {...data[0]});
+          navigation.navigate('MainApp', {...data});
           
         }
         else
@@ -66,14 +67,19 @@ function Register({navigation})
         initialValues={{name:'', email: '', password: '', confirmPassword: ''}}
         onSubmit={(values) => 
         {
+          values = {...values};
           if(values.name == '' || values.email == '' || values.password == '' || values.confirmPassword == '')
           {
             handleMessage("Please fill all fields");
           }
+          else if (values.password !== values.confirmPassword)
+          {
+            handleMessage('Passwords do not match');
+          }
           else{
             console.log(values);
             handleMessage("");
-            handleLogin(values);
+            handleSignup(values);
             //navigation.navigate('MainApp');
             
           }

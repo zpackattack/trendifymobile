@@ -31,6 +31,7 @@ function Login({navigation})
 
   const handleLogin = (credentials) => 
   {
+    handleMessage(null);
     const url = 'https://trendify-project.herokuapp.com/api/login';
 
     axios.post(url, credentials).then((response) => 
@@ -41,7 +42,7 @@ function Login({navigation})
 
         if (response.data['success'] == true)
         {
-          navigation.navigate('MainApp', {...data[0]});
+          navigation.navigate('SpotifyLogin', {...data[0]});
           
         }
         else
@@ -50,7 +51,7 @@ function Login({navigation})
         }
       }).catch((error) => {
         console.log(error);
-      handleMessage("An error occurred. Check your network");
+        handleMessage("An error occurred. Check your network");
     });
   }
 
@@ -76,7 +77,7 @@ function Login({navigation})
             console.log(values);
             handleMessage("");
             handleLogin(values);
-            navigation.navigate('MainApp');
+            navigation.navigate('SpotifyLogin');
             
           }
         }}

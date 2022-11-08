@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import SpotifyLogin from './screens/SpotifyLogin';
 import Home from './screens/Home';
 import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
@@ -85,6 +86,11 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
+      <Stack.Screen name="SpotifyLogin" component={SpotifyLogin} 
+      options={{
+        header: () => null,
+      }}
+      />
       <Stack.Screen name="MainApp" component={MyTabs}
       options={{
         header: () => null,

@@ -1,3 +1,4 @@
+import { CurrentRenderContext } from '@react-navigation/native';
 import {   StyleSheet,
     Text,
     View,
@@ -82,6 +83,11 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
 
+    //Spotify Login Styles
+    spotifyLoginButton:{
+      backgroundColor: '2ebd59'
+    },
+
     //Home Screen Styles
     homeScreeBackground: { 
         flex: 1, 
@@ -94,7 +100,26 @@ const styles = StyleSheet.create({
       },
       ButtonText:{
         textColor: '#1BD760',
-      }
+      },
+      navigation:{
+        flexDirection: 'row',
+      },
+      searchLogo:{
+        right: 65,
+        bottom: 285,
+        height: 55,
+        width: 55,
+      },
+      title:{
+        alignItems: 'center',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 45,
+        bottom: 290,
+        right: 28
+      },
+      
+
   });
 
   export default styles;
