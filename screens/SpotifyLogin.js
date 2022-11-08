@@ -6,7 +6,7 @@ import { AuthSession } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 
 
-
+//glkfjhkl
 function Home({ navigation, route }) {
   const scopesArr = ['user-modify-playback-state','user-read-currently-playing','user-read-playback-state','user-library-modify',
                     'user-library-read','playlist-read-private','playlist-read-collaborative','playlist-modify-public',
