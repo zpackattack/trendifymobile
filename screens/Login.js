@@ -16,8 +16,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useTogglePasswordVisibility } from './../hooks/useTogglePasswordAvalibility';
-import styles from './../components/styles';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordAvalibility';
+import styles from '../components/styles';
 
 
 function Login({navigation})

@@ -63,5 +63,5 @@ buck-out/
 .expo/*
 web-build/
 
-# env
-.env
+# client info
+secrets.js
