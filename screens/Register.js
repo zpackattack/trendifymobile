@@ -9,15 +9,15 @@ import {   StyleSheet,
     TouchableOpacity,
   Pressable } from 'react-native';
 import axios from 'axios'; 
-import LogoHeader from '../../components/LogoHeader';
+import LogoHeader from '../components/LogoHeader';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useTogglePasswordVisibility } from '../../hooks/useTogglePasswordAvalibility';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordAvalibility';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
-import styles from '../../components/styles';
+import styles from '../components/styles';
 
 function Register({navigation})
 {
