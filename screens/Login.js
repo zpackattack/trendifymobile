@@ -40,9 +40,9 @@ function Login({navigation})
         const result = response.data;
         const {message, status, data} = result;
 
-        if (response.data['success'] == true)
+        if (response.status == 200)
         {
-          navigation.navigate('SpotifyLogin', {...data[0]});
+          navigation.navigate('SpotifyLogin');
           
         }
         else
@@ -77,7 +77,7 @@ function Login({navigation})
             console.log(values);
             handleMessage("");
             handleLogin(values);
-            navigation.navigate('SpotifyLogin');
+            //navigation.navigate('SpotifyLogin');
             
           }
         }}
