@@ -14,7 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordAvalibility';
+import { useTogglePasswordVisibility, useTogglePasswordVisibility1 } from '../hooks/useTogglePasswordAvalibility';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import styles from '../components/styles';
@@ -25,6 +25,8 @@ function Register({navigation})
   const [messageType, setMessageType] = useState();
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
+  const { passwordVisibility1, rightIcon1, handlePasswordVisibility1 } =
+    useTogglePasswordVisibility1();
     
   const [password, setPassword] = useState('');
 
@@ -77,9 +79,13 @@ function Register({navigation})
           {
             handleMessage('Passwords do not match');
           }
+          else if(values.name.length<3)
+          {
+            handleMessage('Please enter name longer than 3 characters');
+          }
           else{
             console.log(values);
-            newValues = {login: values.email, password: values.password, name: values.name};
+            let newValues = {login: values.email, password: values.password, name: values.name};
             console.log(newValues);
             handleMessage("");
             handleSignup(newValues);
@@ -139,12 +145,12 @@ function Register({navigation})
           textAlign={'left'}
           placeholder="Confirm Password"
           placeholderTextColor="#003f5c"
-          secureTextEntry={passwordVisibility}
+          secureTextEntry={passwordVisibility1}
           onChangeText={props.handleChange('confirmPassword')}
           value={props.values.confirmPassword}
           />
-          <Pressable onPress={handlePasswordVisibility}>
-                <MaterialCommunityIcons style={styles.passEye} name={rightIcon} size={22} color='#232323' />
+          <Pressable onPress={handlePasswordVisibility1}>
+                <MaterialCommunityIcons style={styles.passEye} name={rightIcon1} size={22} color='#232323' />
           </Pressable>
       </View>
 

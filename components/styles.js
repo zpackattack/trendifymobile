@@ -1,4 +1,5 @@
 import { CurrentRenderContext } from '@react-navigation/native';
+import { useFonts, Open_Sans } from '@expo-google-fonts/inter';
 import {   StyleSheet,
     Text,
     View,
@@ -7,6 +8,8 @@ import {   StyleSheet,
     Button,
     TouchableOpacity,
   Pressable } from 'react-native';
+
+  
 
 const styles = StyleSheet.create({
     //Register and Login styles
@@ -33,6 +36,16 @@ const styles = StyleSheet.create({
       marginBottom: 20,
       flexDirection: 'row',
       alignItems: 'center',
+    },
+
+    LoginLogo: {
+      marginBottom: 25,
+    },
+
+    Trendify: {
+      marginBottom: 25,
+      fontSize: 60,
+      color:  '#FFF',
     },
    
     TextInput: {
