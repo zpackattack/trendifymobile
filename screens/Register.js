@@ -37,10 +37,10 @@ function Register({navigation})
         console.log("talk");
         const result = response.data;
         const {message, status, data} = result;
-
-        if (response.data['success'] == true)
+        console.log(response.data);
+        if (response.data == 200)
         {
-          navigation.navigate('MainApp', {...data});
+          navigation.navigate('MainApp');
           
         }
         else
@@ -78,8 +78,10 @@ function Register({navigation})
           }
           else{
             console.log(values);
+            newValues = {login: values.email, password: values.password, name: values.name};
+            console.log(newValues);
             handleMessage("");
-            handleSignup(values);
+            handleSignup(newValues);
             //navigation.navigate('MainApp');
             
           }
