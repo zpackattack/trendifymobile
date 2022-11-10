@@ -38,6 +38,7 @@ function Register({navigation})
         const result = response.data;
         const {message, status, data} = result;
         console.log(response.data);
+        
         if (response.data == 200)
         {
           navigation.navigate('MainApp');
