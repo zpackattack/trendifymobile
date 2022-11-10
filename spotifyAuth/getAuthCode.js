@@ -1,5 +1,6 @@
 import { AuthSession } from "expo";
 import { getSpotifyCredentials } from "./getSpotifyCredentials";
+import { spotifyCredentials } from "../secrets";
 
 const scopesArr = [
     "user-modify-playback-state",
@@ -17,15 +18,15 @@ const scopesArr = [
 const scopes = scopesArr.join(" ");
 
 export const getAuthorizationCode = async () => {
+    let result = null;
     try {
-        const credentials = await getSpotifyCredentials();
-        const redirectUrl = AuthSession.getRedirectUrl();
-        const result = await AuthSession.startAsync({
+        const redirectUrl = await AuthSession.getRedirectUrl();
+        result = await AuthSession.startAsync({
             authUrl:
                 "https://accounts.spotify.com/authorize" +
                 "?response_type=code" +
                 "&client_id=" +
-                credentials.clientId +
+                spotifyCredentials.CLIENT_ID +
                 (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
                 "&redirect_uri=" +
                 encodeURIComponent(redirectUrl),
