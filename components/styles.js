@@ -1,13 +1,7 @@
 import { CurrentRenderContext } from '@react-navigation/native';
 import { useFonts, Open_Sans } from '@expo-google-fonts/inter';
-import {   StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    Button,
-    TouchableOpacity,
-  Pressable } from 'react-native';
+import {   StyleSheet,} from 'react-native';
+  
 
   
 
@@ -64,7 +58,8 @@ const styles = StyleSheet.create({
     registerTxt: {
       height: 30,
       marginTop: 30,
-      color:  '#1BD760',  
+      color:  '#1BD760',
+      
     },
 
     ForgotPassword: {

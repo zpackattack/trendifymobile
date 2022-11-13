@@ -20,8 +20,11 @@ import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordAvalibili
 import styles from '../components/styles';
 
 
+
 function Login({navigation})
 {
+
+
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
