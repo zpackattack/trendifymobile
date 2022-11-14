@@ -49,11 +49,21 @@ function SpotifyLogin({ navigation, route }) {
 
 export default SpotifyLogin;
 */
+import styles from "../components/styles";
 
 import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { makeRedirectUri, ResponseType, useAuthRequest } from 'expo-auth-session';
 import { Button } from 'react-native';
+import {
+    View,
+    Text,
+    Pressable,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+import { spotifyCredentials } from "../secrets";
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -65,17 +75,28 @@ const discovery = {
 };
 
 export default function SpotifyLogin({navigation}) {
+
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: 'f2654301008b4cba927766c7b3efdbcb',
-      scopes: ['Treyz3@icloud.com', 'playlist-modify-public'],
+      clientId: '57411e11c64544e1b6a193a7af57fcc9',
+      scopes: [
+        "user-modify-playback-state",
+        "user-read-currently-playing",
+        "user-read-playback-state",
+        "user-library-modify",
+        "user-library-read",
+        "playlist-read-private",
+        "playlist-read-collaborative",
+        "playlist-modify-public",
+        "playlist-modify-private",
+        "user-read-recently-played",
+        "user-top-read",
+    ],
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
       usePKCE: false,
-      redirectUri: makeRedirectUri({
-        scheme: 'exp://localhost:19000/--/'
-      }),
+      redirectUri: spotifyCredentials.REDIRECT_URI
     },
     discovery
   );
@@ -88,12 +109,15 @@ export default function SpotifyLogin({navigation}) {
   }, [response]);
 
   return (
-    <Button
-      disabled={!request}
-      title="Login"
-      onPress={() => {
-        promptAsync();
-      }}
-    />
-  );
+    <View style={styles.homeScreeBackground}>
+                <TouchableOpacity
+                    onPress={() => {
+                        promptAsync();
+                    }}
+                    style={styles.spotifyLoginButton}
+                >
+                    <Text style={styles.ForgotPassword}>Login to Spotify</Text>
+                </TouchableOpacity>
+    </View>
+  )
 }
