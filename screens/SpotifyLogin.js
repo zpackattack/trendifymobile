@@ -96,7 +96,9 @@ export default function SpotifyLogin({navigation}) {
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
       usePKCE: false,
-      redirectUri: spotifyCredentials.REDIRECT_URI
+      redirectUri: makeRedirectUri({
+        scheme: 'spotify'
+      }),
     },
     discovery
   );
@@ -110,14 +112,13 @@ export default function SpotifyLogin({navigation}) {
 
   return (
     <View style={styles.homeScreeBackground}>
-                <TouchableOpacity
-                    onPress={() => {
-                        promptAsync();
-                    }}
-                    style={styles.spotifyLoginButton}
-                >
-                    <Text style={styles.ForgotPassword}>Login to Spotify</Text>
-                </TouchableOpacity>
+      <Button
+        disabled={!request}
+        title="Login"
+        onPress={() => {
+          promptAsync();
+        }}
+      />
     </View>
   )
 }

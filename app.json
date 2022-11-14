@@ -3,6 +3,11 @@
     "name": "blank",
     "slug": "blank",
     "version": "1.0.0",
+    "ios":{
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["spotify"]
+      }
+    },
     "platforms": [
       "ios",
       "android",
