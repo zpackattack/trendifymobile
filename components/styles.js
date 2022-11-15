@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#240530', 
       },
-      homeTitleText:{ 
+      subText:{ 
+        fontSize: 20,
         color: '#fff',
       },
       ButtonText:{
@@ -112,20 +113,32 @@ const styles = StyleSheet.create({
       navigation:{
         flexDirection: 'row',
       },
-      searchLogo:{
-        right: 65,
-        bottom: 285,
-        height: 55,
-        width: 55,
+      searchlogo:{
+        bottom: 225,
+        height: 45,
+        width: 45,
+        left: 22
       },
       title:{
         alignItems: 'center',
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 45,
-        bottom: 290,
-        right: 28
+        bottom: 225,
+        //left: -10
       },
+
+      profileIcon: {
+        //width: 150,
+        //height: 150,
+        //border-radius: 50,
+        //background: '#512DA8',
+        //fontsize: 35,
+        //color: '#fff',
+        //text-align: center,
+        //height: 150,
+        //margin: 20px 0
+      }
       
 
   });

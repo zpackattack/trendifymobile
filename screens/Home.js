@@ -13,60 +13,141 @@ import styles from "../components/styles";
 // import { AuthSession } from 'expo';
 
 function Home({ navigation, route }) {
-    // const scopesArr = [
-    //     "user-modify-playback-state",
-    //     "user-read-currently-playing",
-    //     "user-read-playback-state",
-    //     "user-library-modify",
-    //     "user-library-read",
-    //     "playlist-read-private",
-    //     "playlist-read-collaborative",
-    //     "playlist-modify-public",
-    //     "playlist-modify-private",
-    //     "user-read-recently-played",
-    //     "user-top-read",
-    // ];
-    // const scopes = scopesArr.join(" ");
 
-    // const getAuthorizationCode = async () => {
-    //     try {
-    //         const credentials = await getSpotifyCredentials(); //we wrote this function above
-    //         const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
-    //         const result = await AuthSession.startAsync({
-    //             authUrl:
-    //                 "https://accounts.spotify.com/authorize" +
-    //                 "?response_type=code" +
-    //                 "&client_id=" +
-    //                 credentials.clientId +
-    //                 (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
-    //                 "&redirect_uri=" +
-    //                 encodeURIComponent(redirectUrl),
-    //         });
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    //     return result.params.code;
+    //const [direction, setDirection] = useState("ltr");
 
-    //     const { name, email } = route.params;
-    // };
     return (
+
         <View style={styles.homeScreeBackground}>
-            <View style={styles.navigation}>
-                <TouchableOpacity>
-                    <Image
-                        style={styles.searchLogo}
-                        source={require("../images/search.png")}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.title}>Trendify</Text>
+
+                <View style={styles.navigation}>
+                    <View style = {{flex:1}}>
+                        <TouchableOpacity>
+                            <Image
+                                style={styles.searchlogo}
+                                source={require("../images/search.png")}
+                            />
+                        </TouchableOpacity>
+                    
+                    </View>
+
+                    <View style = {{flex:2}}>
+                        <Text style={styles.title}>Trendify</Text>
+                    
+                    </View>
+                
+                    <View style = {{width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, backgroundColor:'red', left: -15}}>
+
+                        <Text
+                        
+                        //borderRadius style will help us make the Round Shape Image
+                        //style={{ width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, background:'green'}}
+                        style={{textAlign: 'center',textAlign: 'center', justifyContent: 'center', fontSize: 30, color: '#fff'}}
+                        >H
+                        </Text>
+                    </View>                
+
+                </View>
+                
+         
+
+                <Text style={styles.subText}>PlayList</Text>
+
+                <Text style={styles.subText}>Top Tracks</Text>
             </View>
-            <Text style={styles.homeTitleText}>Home Screen</Text>
-            <Button
-                title="Go to Details"
-                onPress={() => navigation.navigate("Details")}
-            />
-        </View>
+
+        
     );
-}
+
+    /*
+    <div class = "bg-[#111827] min-h-screen font-poppins">
+    <Nav />
+    <>
+        {user && numFollowing && topTracks && topArtists && accessToken ?
+            <div>
+                {currentPath.includes('/profile') ? 
+                    <Profile     
+                    profile = {user}
+                    numFollowing = {numFollowing}
+                    playlist = {playlist}
+                    topTracks = {topTenTracks}
+                    topArtists = {topTenArtists}
+                    /> : 
+                null }
+                {currentPath.includes('/toptracks') ? 
+                    <Tracks path = '/toptracks'      
+                    topTracks = {topTracks}
+                    setTimeRange = {updateTimeRange}
+                /> : 
+                null }
+                {currentPath.includes('/topartist') ? 
+                    <Artists     
+                    topArtists = {topArtists}
+                    setTimeRange = {updateTimeRange}
+                    /> : 
+                null }
+                {currentPath.includes('/player') ? 
+                    <Player 
+                        accessToken={accessToken}
+                        user = {user}
+                    /> : 
+                null }
+                {currentPath.includes('/playlist') ? 
+                    <Playlists     
+                    playlist = {playlist}
+                    recents = {recents}
+                    /> : 
+                null }
+            </div>
+        :
+        <div class = "flex h-screen justify-center items-center">
+                <div class="
+                spinner-border
+                animate-spin
+                inline-block
+                w-8
+                h-8
+                border-4
+                rounded-full
+                text-purple-500
+                " role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        }
+    </>
+    </div>
+    */
+    }
 
 export default Home;
+/*
+<View style={{width: '25%', height: '12%', backgroundColor: 'steelblue'}}>
+                <Button
+                    title="Top Tracks"
+                    //onPress={() => navigation.navigate("Details")}
+                />
+            </View>
+            
+            <View style={{width: '25%', height: '12%', backgroundColor: 'steelblue'}}>
+            
+            <Button
+                title="Top Artists"
+                //onPress={() => navigation.navigate("Details")}
+            />
+            </View>
+
+            <View style={{width: '25%', height: '12%', backgroundColor: 'steelblue'}}>
+            <Button
+                title=""
+                //onPress={() => navigation.navigate("Details")}
+            />
+            </View>
+
+            <View style={{width: '25%', height: '12%', backgroundColor: 'steelblue'}}>
+            <Button
+                title="Top Artists"
+                //onPress={() => navigation.navigate("Details")}
+            />
+            </View>
+        */
