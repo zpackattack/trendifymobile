@@ -105,26 +105,31 @@ const styles = StyleSheet.create({
       },
       subText:{ 
         fontSize: 20,
+        alignItems: 'left',
         color: '#fff',
+        //flex: 2
       },
       ButtonText:{
         textColor: '#1BD760',
       },
+
       navigation:{
         flexDirection: 'row',
+        padding: 30
       },
+
       searchlogo:{
-        bottom: 225,
+        //bottom: 225,
         height: 45,
         width: 45,
-        left: 22
+        //left: 22
       },
       title:{
         alignItems: 'center',
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 45,
-        bottom: 225,
+        fontSize: 40,
+        //bottom: 225,
         //left: -10
       },
 

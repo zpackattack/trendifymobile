@@ -20,41 +20,64 @@ function Home({ navigation, route }) {
 
         <View style={styles.homeScreeBackground}>
 
-                <View style={styles.navigation}>
-                    <View style = {{flex:1}}>
-                        <TouchableOpacity>
-                            <Image
-                                style={styles.searchlogo}
-                                source={require("../images/search.png")}
-                            />
-                        </TouchableOpacity>
-                    
-                    </View>
 
-                    <View style = {{flex:2}}>
-                        <Text style={styles.title}>Trendify</Text>
+
+            <View style = {{flex:1,flexDirection: 'row', padding: 30}}>
+
+                <View style= {{flex:1}}>
+                    <TouchableOpacity>
+                        <Image
+                            style={styles.searchlogo}
+                            source={require("../images/search.png")}
+                        />
+                    </TouchableOpacity>
                     
-                    </View>
+                </View>
+
                 
-                    <View style = {{width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, backgroundColor:'red', left: -15}}>
-
-                        <Text
-                        
-                        //borderRadius style will help us make the Round Shape Image
-                        //style={{ width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, background:'green'}}
-                        style={{textAlign: 'center',textAlign: 'center', justifyContent: 'center', fontSize: 30, color: '#fff'}}
-                        >H
-                        </Text>
-                    </View>                
-
+                <View style = {{flex:2}}>
+                    <Text style={styles.title}>Trendify</Text>
+                    
                 </View>
                 
-         
+                <View style = {{flex: 1, backgroundColor:'red'}}>
+                    
+                    <View style = {{left: ,width: 50, height: 50, borderRadius: 50 / 2, backgroundColor: 'blue'}}>
+                            <Text
+                            
+                            //borderRadius style will help us make the Round Shape Image
+                            //style={{ width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, background:'green'}}
+                            style={{textText: 'center', justifyContent: 'center', fontSize: 30, color: '#fff'}}
+                            >H
+                            </Text>
+
+
+                    </View>
+
+                
+                </View>
+
+
+
+            </View>
+            
+            
+            <View style = {{flex:2,padding: 30}}>
 
                 <Text style={styles.subText}>PlayList</Text>
 
+            </View>
+
+
+            <View style = {{flex:2,padding:30}}>
                 <Text style={styles.subText}>Top Tracks</Text>
             </View>
+
+                
+
+
+
+        </View>
 
         
     );
@@ -151,3 +174,38 @@ export default Home;
             />
             </View>
         */
+
+//original plan
+/*
+<View style={[styles.navigation]}>
+
+                    <View>
+                        <TouchableOpacity>
+                            <Image
+                                style={styles.searchlogo}
+                                source={require("../images/search.png")}
+                            />
+                        </TouchableOpacity>
+                    
+                    </View>
+
+                
+                    <View style = {{flex:2}}>
+                        <Text style={styles.title}>Trendify</Text>
+                    
+                    </View>
+                
+                    <View style = {{width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, backgroundColor:'red', left: -15}}>
+
+                        <Text
+                        
+                        //borderRadius style will help us make the Round Shape Image
+                        //style={{ width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, background:'green'}}
+                        style={{textAlign: 'center',textAlign: 'center', justifyContent: 'center', fontSize: 30, color: '#fff'}}
+                        >H
+                        </Text>
+                    </View>
+
+
+                </View>
+*/
