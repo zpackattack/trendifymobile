@@ -64,6 +64,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { spotifyCredentials } from "../secrets";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -79,7 +80,7 @@ export default function SpotifyLogin({navigation}) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: '57411e11c64544e1b6a193a7af57fcc9',
+      clientId: 'f2654301008b4cba927766c7b3efdbcb',
       scopes: [
         "user-modify-playback-state",
         "user-read-currently-playing",
@@ -96,9 +97,7 @@ export default function SpotifyLogin({navigation}) {
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
       usePKCE: false,
-      redirectUri: makeRedirectUri({
-        scheme: 'spotify'
-      }),
+      redirectUri: "exp://172.20.10.3:19000",
     },
     discovery
   );
@@ -106,9 +105,19 @@ export default function SpotifyLogin({navigation}) {
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { access_token } = response.params;
+      console.log("Access Token: " + access_token);
+      storeData(access_token);
       navigation.navigate('MainApp');
     }
   }, [response]);
+
+  const storeData = async(token) =>{
+    try{
+      await AsyncStorage.setItem('@access_token', token);
+    } catch (e) {
+      console.log('Error', e);
+    }
+  };
 
   return (
     <View style={styles.homeScreeBackground}>

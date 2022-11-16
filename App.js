@@ -11,6 +11,8 @@ import Home from './screens/Home';
 import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
 import RecentlyPlayed from './screens/RecentlyPlayed';
+//import {Provider} from 'react-redux';
+//import {store} from './redux';
 
 
 
