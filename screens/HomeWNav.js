@@ -61,7 +61,7 @@ export default function Dashboard({route, navigation}) {
     useEffect(() => {
         spotifyApi.getMe()
         .then(function(data) {
-            console.log('Some information about the authenticated user', data.body);
+            console.log('Some information about the authenticated user', data.body.id);
         }, function(err) {
             console.log('Something went wrong!', err);
         });
