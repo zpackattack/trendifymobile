@@ -10,11 +10,50 @@ import {
     TouchableOpacity,
 } from "react-native";
 import styles from "../components/styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { AuthSession } from 'expo';
 
 function Home({ navigation, route }) {
 
     //const [direction, setDirection] = useState("ltr");
+    
+    // Testing api
+    const [setInput] = React.useState('')
+    React.useEffect(() => {
+        getData();
+      }, [setInput]);
+    
+    getMyStringValue = async () => {
+        try {
+          return await AsyncStorage.getItem('@access_Token');
+        } catch(e) {
+          return null;
+        }
+      
+        console.log('Done.')
+      }
+    const getData = async () => {
+        
+        try {
+            const value = await AsyncStorage.getItem('@access_Token');
+          
+          if(value !== null) {
+            console.log("value: " + value);
+            setInput(value);
+            // value previously stored
+          }
+        } catch(e) {
+          // error reading value
+        }
+      }
+      function printdata()
+      {
+        const value = getData();
+        console.log("Value: r" + setInput);
+
+      }
+      //end test
+
 
     return (
 
@@ -65,6 +104,12 @@ function Home({ navigation, route }) {
             <View style = {{flex:2,padding: 30}}>
 
                 <Text style={styles.subText}>PlayList</Text>
+
+                <Button
+                
+                title="Login"
+                onPress={printdata}
+                />
 
             </View>
 

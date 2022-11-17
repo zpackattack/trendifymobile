@@ -113,7 +113,9 @@ export default function SpotifyLogin({navigation}) {
 
   const storeData = async(token) =>{
     try{
-      await AsyncStorage.setItem('@access_token', token);
+      await AsyncStorage.setItem('@access_Token', token);
+      //const value = await AsyncStorage.getItem('@accesstoken');
+      //console.log("Value: "+ value);
     } catch (e) {
       console.log('Error', e);
     }
