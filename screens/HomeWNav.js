@@ -44,7 +44,7 @@ export default function Dashboard({route, navigation}) {
     const [topTenTracks, setTopTenTracks] = useState();
     const [recents, setRecents] = useState();
     const { accessToken } = route.params;
-    console.log("working?: "+ accessToken);
+    //console.log("working?: "+ accessToken);
 
     const [timeRange, setTimeRange] = useState('long_term');
     const updateTimeRange = (timeTerm) => {
@@ -67,18 +67,19 @@ export default function Dashboard({route, navigation}) {
             console.log('Something went wrong!', err);
         });
     }, [accessToken])
-/*
+
     // FOLLOWING 
     useEffect(() => {
         //if(!accessToken) return
         spotifyApi.getFollowedArtists().then(
-            function(data) {
+        function(data) {
+            // 'This user is following 1051 artists!'
+            console.log('This user is following ', data.body.artists.total, ' artists!');
             setNumFollowing(data.body.artists.total);
-            },
-            function(err) {
-            console.log('Something went wrong..', err.message);
-            }
-    );}, [])
+        }, function(err) {
+            console.log('Something went wrong! here?', err);
+        });
+    }, [])
     
 
     // PLAYLIST 
@@ -89,6 +90,7 @@ export default function Dashboard({route, navigation}) {
             function(data) {
                 //console.log('Retrieved playlists', data.body);
                 setPlaylist(data.body);
+                console.log('Playlist: '+ data.body);
             },
             function(err) {
             console.log('Something went wrong..', err.message);
@@ -103,6 +105,7 @@ export default function Dashboard({route, navigation}) {
         .then(function(data) {
             let topArtists = data.body.items;
             setTopArtists(topArtists);
+            console.log('TopArt1'+ topArtists);
 
         });
         spotifyApi.getMyTopArtists({limit : 10 , time_range: "long_term"})
@@ -112,6 +115,7 @@ export default function Dashboard({route, navigation}) {
             console.log('TopArt'+ topArtists);
         });
     }, [timeRange])
+    /*
 
     // TOP TRACKS 
     useEffect(() => {
@@ -148,8 +152,17 @@ export default function Dashboard({route, navigation}) {
 
     return(
         <View style={styles.container}>
-            <Text style={styles.registerTxt}>Testing</Text>
+            <Text style={styles.LoginTxt}>Trendify</Text>
+            <Image
+                source={{
+                    uri:
+                    'https://raw.githubusercontent.com/AboutReact/sampleresource/master/old_logo.png',
+                }}
+                //borderRadius style will help us make the Round Shape Image
+                style={{ width: 200, height: 200, borderRadius: 200 / 2 }}
+            />
             <Text style={styles.registerTxt}>{user}</Text>
+            <Text style={styles.LoginTxt}>Following: {numFollowing}</Text>
         </View>
      )
 

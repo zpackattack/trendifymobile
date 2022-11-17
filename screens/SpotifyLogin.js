@@ -93,6 +93,7 @@ export default function SpotifyLogin({navigation}) {
         "playlist-modify-private",
         "user-read-recently-played",
         "user-top-read",
+        "user-follow-read"
     ],
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
