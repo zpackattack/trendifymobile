@@ -1,5 +1,7 @@
 import React from "react"
-import {NavLink} from 'react-router-dom'
+import { View } from "react-native-web";
+//import { View } from "react-native-web";
+//import {NavLink} from 'react-router-dom'
 import ErrorMessage from "./spotify.error"
 //import spotifyLogo from "../../images/spotifyIcon.png"
 
@@ -13,6 +15,12 @@ export default function Profile({ profile, numFollowing, playlist, topTracks, to
 
     const artists = topArtists.map((artist) => {
         return (
+            <View>
+                <Text>{artist.name}</Text>
+            </View>
+        )
+       
+        /* return (
             <a href = {artist.external_urls.spotify} target="_blank" rel="noopener noreferrer"
                 class="flex items-center gap-3 rounded-2xl bg-[#292f3d] mb-3 h-20 hover:bg-[#3e4450] 
                 no-underline text-slate-50 hover:text-sky-300
@@ -30,9 +38,10 @@ export default function Profile({ profile, numFollowing, playlist, topTracks, to
                 </div>
             </a>
         )
+        */
     })
 
-    const tracks = topTracks.map((track) => {
+    /*const tracks = topTracks.map((track) => {
         return (
             <a href = {`/track/${track.id}/${track.name.replace('/', '')}/${track.album.name.replace('/', '')}/${track.artists[0].name.replace('/', '')}`} target="_blank" rel="noopener noreferrer"
                 class="flex items-center gap-3 rounded-2xl bg-[#292f3d] mb-3 hover:bg-[#3e4450] no-underline duration-200
@@ -60,7 +69,7 @@ export default function Profile({ profile, numFollowing, playlist, topTracks, to
     // if they don't the picture of their top artist will be set as their picture
     const avatarImage = (profile.images.length === 0) ? 
     `${topArtists[0].images[0].url}` : `${profile.images[0].url}`;
-
+    
   return (
     <div class = "ml-auto mr-auto lg:px-10 px-2 lg:pb-20 pb-24">
         <div class="ml-auto mr-auto min-h-fit lg:w-3/6 flex items-center justify-center">
@@ -114,38 +123,7 @@ export default function Profile({ profile, numFollowing, playlist, topTracks, to
         </div>
 
 
-        <div class="grid lg:grid-flow-col grid-col-auto p-3 mr-auto ml-auto gap-2 max-w-screen-lg">
-            <div class="col-span-2 w-full">
-                <div class = "flex -mb-4">
-                    <strong class = "mr-auto font-bold text-2xl p-3 text-white tracking-wide">Your Top 10 Artists</strong>
-                    <NavLink exact to='/topartist'>
-                        <div class = "p-3 ml-auto">
-                            <button class="hover:bg-slate-400 hover:text-[#292f3d] text-slate-400 font-bold sm:py-2 sm:px-3 py-2 px-3 border-2 
-                                border-slate-400 rounded-full shadow tracking-wide lg:text-sm text-xs duration-300">SEE MORE</button>
-                        </div>
-                    </NavLink>
-                </div>
-
-                <div class="p-3">
-                    {artists}
-                </div>
-            </div>
-
-            <div class="col-span-2 w-full">
-                <div class = "flex -mb-4">
-                    <strong class = "mr-auto font-bold text-2xl p-3 text-white tracking-wide">Your Top 10 Tracks</strong>
-                    <NavLink exact to='/toptracks'>
-                        <div class = "p-3 ml-auto">
-                            <button class="hover:bg-slate-400 hover:text-[#292f3d] text-slate-400 font-bold sm:py-2 sm:px-3 py-2 px-3 border-2 
-                                border-slate-400 rounded-full shadow tracking-wide lg:text-sm text-xs duration-300">SEE MORE</button>
-                        </div>
-                    </NavLink>
-                </div>
-                <div class="max-w-10/12 p-3">
-                    {tracks}
-                </div>
-            </div>
-        </div>
+       
 
         <div class = "w-fit flex ml-auto mr-auto text-slate-400 justify-around items-center">
             <div class = "text-center lg:text-lg text-md pr-2">Data obtained from Spotify</div>
@@ -154,5 +132,12 @@ export default function Profile({ profile, numFollowing, playlist, topTracks, to
     </div>
 
   )
+  */
+ return(
+    <View>
+        <Text>{profile.display_name}</Text>
+        <Text>{artist.name}</Text>
+    </View>
+ )
 }
 

@@ -107,7 +107,8 @@ export default function SpotifyLogin({navigation}) {
       const { access_token } = response.params;
       console.log("Access Token: " + access_token);
       storeData(access_token);
-      navigation.navigate('MainApp');
+      console.log(access_token);
+      navigation.navigate('MainApp', {accessToken:access_token,});
     }
   }, [response]);
 

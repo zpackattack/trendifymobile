@@ -95,7 +95,7 @@ function MyStack() {
         header: () => null,
       }}/>
       
-      <Stack.Screen name="MainApp" component={MyTabs}
+      <Stack.Screen name="MainApp" component={HomeWNav}
       options={{
         header: () => null,
       }}/>

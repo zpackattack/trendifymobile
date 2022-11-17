@@ -2,23 +2,36 @@ import Home from './Home';
 import TopTracks from './TopTracks';
 import TopArtists from './TopArtists';
 import RecentlyPlayed from './RecentlyPlayed';
+import styles from "../components/styles";
+import {
+    Button,
+    View,
+    Text,
+    Pressable,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+} from "react-native";
 
 import { useState, useEffect } from "react"
 //import useAuth from "../components/spotify.useAuth"
 import SpotifyWebApi from "spotify-web-api-node"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Route } from 'react-native';
 
-import Nav from "../components/spotify/spotify.nav"
+//import Nav from "../components/spotify/spotify.nav"
 import Profile from "../components/spotify/spotify.profile"
-import Tracks from "../components/spotify/spotify.tracks"
-import Artists from "../components/spotify/spotify.artists"
+//import Tracks from "../components/spotify/spotify.tracks"
+//import Artists from "../components/spotify/spotify.artists"
 //import Player from "../components/spotify/spotify.player"
-import Playlists from "../components/spotify/spotify.playlists"
+//import Playlists from "../components/spotify/spotify.playlists"
 
 const spotifyApi = new SpotifyWebApi({
     clientId: 'f2654301008b4cba927766c7b3efdbcb',
+    redirectUri: "exp://172.20.10.3:19000",
   })
   
-export default function Dashboard({ code }) {   
+export default function Dashboard({route, navigation}) {   
     //const currentPath = window.location.pathname;
 
     // Stores the result from the api calls
@@ -30,6 +43,8 @@ export default function Dashboard({ code }) {
     const [topTracks, setTopTracks] = useState();
     const [topTenTracks, setTopTenTracks] = useState();
     const [recents, setRecents] = useState();
+    const { accessToken } = route.params;
+    console.log("working?: "+ accessToken);
 
     const [timeRange, setTimeRange] = useState('long_term');
     const updateTimeRange = (timeTerm) => {
@@ -38,31 +53,20 @@ export default function Dashboard({ code }) {
 
     // ACCESS TOKEN
     useEffect(() => {
-        getData();
-    }, [])
-    const getData = async () => {
-        
-        try {
-            const value = await AsyncStorage.getItem('@access_Token');
-          
-          if(value !== null) {
-            console.log("value: " + value);
-            spotifyApi.setAccessToken(value);
-            // value previously stored
-          }
-        } catch(e) {
-          // error reading value
-        }
-      }
+        if (!accessToken){console.log("NO"); return;}
+        spotifyApi.setAccessToken(accessToken);
+    }, [accessToken])
     
     // AUTHENTICATED USER
     useEffect(() => {
-        //if(!accessToken) return
-        spotifyApi.getMe().then(res => {
-            setUser(res.body)
+        spotifyApi.getMe()
+        .then(function(data) {
+            console.log('Some information about the authenticated user', data.body);
+        }, function(err) {
+            console.log('Something went wrong!', err);
         });
-    }, [])
-
+    }, [accessToken])
+/*
     // FOLLOWING 
     useEffect(() => {
         //if(!accessToken) return
@@ -74,6 +78,7 @@ export default function Dashboard({ code }) {
             console.log('Something went wrong..', err.message);
             }
     );}, [])
+    
 
     // PLAYLIST 
     useEffect(() => {
@@ -88,6 +93,7 @@ export default function Dashboard({ code }) {
             console.log('Something went wrong..', err.message);
             }
     );}, [, user])
+    
 
     // TOP ARTISTS
     useEffect(() => {
@@ -102,7 +108,7 @@ export default function Dashboard({ code }) {
         .then(function(data) {
             let topArtists = data.body.items;
             setTopTenArtists(topArtists);
-
+            console.log('TopArt'+ topArtists);
         });
     }, [timeRange])
 
@@ -136,19 +142,28 @@ export default function Dashboard({ code }) {
             console.log('Something went wrong!', err);
         }
     );}, [])
+*/
+  
 
+    return(
+        <View style={styles.container}>
+            <Text style={styles.registerTxt}>Testing</Text>
+            <Text style={styles.registerTxt}>{user}</Text>
+        </View>
+     )
 
-    return (
-        <div>
-          
-                            <Profile     
-                            profile = {user}
-                            numFollowing = {numFollowing}
-                            playlist = {playlist}
-                            topTracks = {topTenTracks}
-                            topArtists = {topTenArtists}
-                            /> 
-                        
-        </div>
-)}
+    /*return (
+        <View>
+
+            <Profile     
+            profile = {user}
+            numFollowing = {numFollowing}
+            playlist = {playlist}
+            topTracks = {topTenTracks}
+            topArtists = {topTenArtists}
+            /> 
+        
+        </View>
+    )*/
+}
 

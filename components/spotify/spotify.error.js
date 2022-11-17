@@ -1,7 +1,12 @@
 import React from "react"
 
 export default function Error() {
-
+    return(
+        <View>
+            <Text>It looks like we don't have enough information to show you. Please listen to more music then come back.</Text>
+        </View>
+    )
+/*
   return (
     <div class = "pt-10 lg:w-2/5 md:w-3/5 w-4/5 mr-auto ml-auto">
         <div role="alert" class="rounded-xl lg:p-4 md:p-4 p-3 shadow-xl bg-[#292f3d] w-fit mr-auto ml-auto lg:shadow-2xl shadow-lg hover:shadow-[#713299]/50 duration-300">
@@ -36,6 +41,6 @@ export default function Error() {
         </div>
         </div>
     </div>
-  )
+  )*/
 }
 
