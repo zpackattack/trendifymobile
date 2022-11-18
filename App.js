@@ -20,10 +20,12 @@ import HomeWNav from './screens/HomeWNav';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MyTabs({route}) {
+  const accessToken = route.params.accessToken;
   return (
     <Tab.Navigator
       initialRouteName="Home"
+      initialParam
       screenOptions={{
         tabBarActiveTintColor: '#1BD760',
         tabBarInactiveTintColor: '#fff',
@@ -94,6 +96,8 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
+
+
       
       <Stack.Screen name="MainApp" component={HomeWNav}
       options={{
