@@ -148,16 +148,16 @@ useEffect(() => {
 
             <View style={styles.headerRow}>
               <Button
-                    title="Profile"
-                    onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}
+                    title="All Time"
+                    
                 />
                 <Button
-                    title="Profile"
-                    onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}
+                    title="6 Months"
+                    
                 />
                 <Button
-                    title="Profile"
-                    onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}
+                    title="3 Months"
+                    
                 />
             </View>
             
