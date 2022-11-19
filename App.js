@@ -21,11 +21,10 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MyTabs({route}) {
-  const accessToken = route.params.accessToken;
+  const { accessToken } = route.params;
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      initialParam
       screenOptions={{
         tabBarActiveTintColor: '#1BD760',
         tabBarInactiveTintColor: '#fff',
@@ -34,7 +33,8 @@ function MyTabs({route}) {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeWNav}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Home',
@@ -46,6 +46,7 @@ function MyTabs({route}) {
       <Tab.Screen
         name="TopTracks"
         component={TopTracks}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Top Tracks',
@@ -57,6 +58,7 @@ function MyTabs({route}) {
       <Tab.Screen
         name="TopArtists"
         component={TopArtists}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Top Artists',
@@ -68,6 +70,7 @@ function MyTabs({route}) {
       <Tab.Screen
         name="RecentlyPlayed"
         component={RecentlyPlayed}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Recently Played',
@@ -96,10 +99,9 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
-
-
       
-      <Stack.Screen name="MainApp" component={HomeWNav}
+      
+      <Stack.Screen name="MainApp" component={MyTabs}
       options={{
         header: () => null,
       }}/>

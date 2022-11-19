@@ -1,7 +1,3 @@
-import Home from './Home';
-import TopTracks from './TopTracks';
-import TopArtists from './TopArtists';
-import RecentlyPlayed from './RecentlyPlayed';
 import styles from "../components/styles";
 import {
     Button,
@@ -11,12 +7,16 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
+    SafeAreaView, 
+    ScrollView,
 } from "react-native";
 
 import { useState, useEffect } from "react"
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
 import SpotifyWebApi from "spotify-web-api-node"
+import topTenTrackComp from '../components/spotifyComp/topTenTracks'
+import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Route } from 'react-native';
 
@@ -34,18 +34,20 @@ const spotifyApi = new SpotifyWebApi({
   
 export default function Dashboard({route, navigation}) {   
     //const currentPath = window.location.pathname;
+    
 
     // Stores the result from the api calls
-    const [user, setUser] = useState();
+    const [user, setUser] = useState([]);
     const [numFollowing, setNumFollowing] = useState();
     const [numFollowers, setNumFollowers] = useState();
     const [numPlaylists, setNumPlaylists] = useState();
-    const [playlist, setPlaylist] = useState();
-    const [topArtists, setTopArtists] = useState();
-    const [topArtistPic, setTopArtistPic] = useState();
-    const [topTenArtists, setTopTenArtists] = useState();
-    const [topTracks, setTopTracks] = useState();
-    const [topTenTracks, setTopTenTracks] = useState();
+    const [playlist, setPlaylist] = useState([]);
+    const [topArtists, setTopArtists] = useState([]);
+    const [ProfilePic, setProfilePic] = useState();
+    const [topTenArtists, setTopTenArtists] = useState([]);
+    const [playlistCover, setPlaylistCover] = useState([]);
+    const [topTracks, setTopTracks] = useState([]);
+    const [topTenTracks, setTopTenTracks] = useState([]);
     const [recents, setRecents] = useState();
     const { accessToken } = route.params;
     //console.log("working?: "+ accessToken);
@@ -54,20 +56,28 @@ export default function Dashboard({route, navigation}) {
     const updateTimeRange = (timeTerm) => {
         setTimeRange(timeTerm);
     }
-
+    
     // ACCESS TOKEN
     useEffect(() => {
         if (!accessToken){console.log("NO"); return;}
         spotifyApi.setAccessToken(accessToken);
     }, [accessToken])
-    
+    let useAltPFP = false;
     // AUTHENTICATED USER
     useEffect(() => {
         spotifyApi.getMe()
         .then(function(data) {
             console.log('Some information about the authenticated user', data.body.id);
-            setUser(data.body.id);
+            setUser(data.body);
             setNumFollowers(data.body.followers.total);
+            console.log(data.body.images.length);
+            if(data.body.images.length != 0){
+                setProfilePic(data.body.images[0].url);
+            }
+            else{
+                useAltPFP = true;
+                console.log(useAltPFP);
+            }
             
         }, function(err) {
             console.log('Something went wrong!', err);
@@ -87,35 +97,20 @@ export default function Dashboard({route, navigation}) {
         });
     }, [])
     
-    const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
     // PLAYLIST 
 
     useEffect(() => {
-        /*
-        axios
-      .get(PLAYLISTS_ENDPOINT, {
-        headers: {
-          Authorization: "Bearer " + accessToken,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setPlaylist(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-        if(!accessToken) return*/
-        if(!user) return
-        spotifyApi.getUserPlaylists(user).then(
+        if(!user.id) return
+        spotifyApi.getUserPlaylists(user.id).then(
             function(data) {
                 const j = JSON.stringify(data.body);
-                setPlaylist(JSON.parse(j));
-                console.log('Playlist: '+ data.body.items[0].images[0].url);
-                setNumPlaylists(data.body.total);
+                setPlaylist(data.body);
+                //console.log('Playlist: '+ data.body.items[0].images[0].url);
+                setPlaylistCover(data.body.items[0].images[0].url);
+                
             },
             function(err) {
-            console.log('Something went wrong..', err.message);
+            console.log('Something went wrong.. here', err.message);
             }
         );
     }, [, user])
@@ -129,7 +124,12 @@ export default function Dashboard({route, navigation}) {
         .then(function(data) {
             let topArtists = data.body.items;
             setTopArtists(topArtists);
-            setTopArtistPic(data.body.items[0].images[0].url)
+            if(useAltPFP)
+            {
+                setProfilePic(data.body.items[0].images[0].url);
+            }
+            setNumPlaylists(data.body.total);
+            //setTopArtistPic(data.body.items[0].images[0].url)
             //console.log('TopArt1'+ data.body.items);
 
         });
@@ -137,28 +137,24 @@ export default function Dashboard({route, navigation}) {
         .then(function(data) {
             let topArtists = data.body.items;
             setTopTenArtists(topArtists);
-            console.log('TopArt '+ topArtists);
+            //console.log('TopArt '+ topArtists);
         });
     }, [timeRange])
-    /*
+    
 
     // TOP TRACKS 
     useEffect(() => {
         //if(!accessToken) return
-        spotifyApi.getMyTopTracks({limit : 50 , time_range: timeRange})
+        spotifyApi.getMyTopTracks({limit : 10 , time_range: timeRange})
         .then(function(data) {
             let topTracks = data.body.items;
             setTopTracks(topTracks)
+            //console.log(data.body.items[0].name)
         }, function(err) {
-            console.log('Something went wrong!', err);
-        });
-
-        spotifyApi.getMyTopTracks({limit : 10 , time_range: 'long_term'})
-        .then(function(data) {
-            let topTracks = data.body.items;
-            setTopTenTracks(topTracks)
+            console.log('Something went wrong! ', err);
         });
     }, [timeRange])
+    /*
     
     // SHOW RECENTLY PLAYED TRACKS
     useEffect(() => {
@@ -173,24 +169,62 @@ export default function Dashboard({route, navigation}) {
         }
     );}, [])
 */
+    function tester()
+    {
+        console.log("Top tracks test" , topTracks[2].name)
+    }
+    
 
     return(
-        <View style={styles.container}>
-            <Text style={styles.LoginTxt}>Trendify</Text>
-            <Image
-                source={{
-                    url:
-                    topArtistPic,
-                }}
-                //borderRadius style will help us make the Round Shape Image
-                style={{ width: 200, height: 200, borderRadius: 200 / 2 }}
-            />
-            <Text style={styles.registerTxt}>{user}</Text>
-            <Text style={styles.LoginTxt}>Following: {numFollowing}</Text>
-            <Text style={styles.LoginTxt}>Followers: {numFollowers}</Text>
-            <Text style={styles.LoginTxt}>Playlists: {numPlaylists}</Text>
-        </View>
-     )
+        <SafeAreaView style={styles.homeContainer}>
+            <ScrollView>
+                <View style={styles.headerRow}>
+                    <Text style={styles.TrendifyHome}>Trendify</Text>
+                    <View style={{alignItems: 'flex-end'}}>
+                        <Image
+                            source={{
+                                url: ProfilePic,
+                            }}
+                            //borderRadius style will help us make the Round Shape Image
+                            style={{alignSelf: 'flex-end', width: 75, height: 75, borderRadius: 75 / 2, }}
+                        />
+                    </View>
+                </View>
+                <Text style={styles.registerTxt}>{user.id}</Text>
+                <Text style={styles.LoginTxt}>Following: {numFollowing}</Text>
+                <Text style={styles.LoginTxt}>Followers: {numFollowers}</Text>
+                <Text style={styles.LoginTxt}>Playlists: {playlist.total}</Text>
+                <Button onPress={tester} title="Test"/>
+
+                <View>
+                <Text style={styles.playlistTitle}>Playlists:</Text>
+                  <ScrollView horizontal={true}>
+                    <Image
+                      source={{
+                          url: playlistCover,
+                      }}
+                      //borderRadius style will help us make the Round Shape Image
+                      style={{ width: 200, height: 200, borderRadius: 50 / 2 }}
+                    />
+                  </ScrollView>
+                </View>
+
+                <View style={{paddingVertical: '5%'}}>
+                <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
+                  <ScrollView horizontal={true}>
+                    <Image
+                      source={{
+                          url: playlistCover,
+                      }}
+                      //borderRadius style will help us make the Round Shape Image
+                      style={{ width: 200, height: 200, borderRadius: 50 / 2 }}
+                    />
+                  </ScrollView>
+                </View>
+
+            </ScrollView>
+        </SafeAreaView >
+     );
 
     /*return (
         <View>
