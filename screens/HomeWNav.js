@@ -11,11 +11,11 @@ import {
     ScrollView,
 } from "react-native";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
-import SpotifyWebApi from "spotify-web-api-node"
-import topTenTrackComp from '../components/spotifyComp/topTenTracks'
+import SpotifyWebApi from "spotify-web-api-node";
+import topTenTrackComp from '../components/spotifyComp/topTracks'
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Route } from 'react-native';
@@ -190,7 +190,7 @@ export default function Dashboard({route, navigation}) {
                 <View style={styles.trackCol}>
                     <Text style={styles.trackText}>{track.name}</Text>
                     <Text style={styles.trackText}>{track.album.name}</Text>
-                    <Text style={styles.trackText}>{track.artists[0].name}</Text>
+                    <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
                 </View>
             </View>
         );
@@ -205,7 +205,7 @@ const topTenArtistView = topTenArtists.map((art) => {
                     url: art.images[0].url,
                 }}
                 //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 80 / 2 }}
             />
             <View style={styles.artistCol}>
                 <Text style={styles.artistText}>{art.name}</Text>
@@ -213,6 +213,11 @@ const topTenArtistView = topTenArtists.map((art) => {
         </View>
     );
 })
+
+function goToProfile()
+{
+    navigation.navigate('RecentlyPlayed', {accessToken: accessToken});
+}
     
 
     return(
@@ -221,13 +226,16 @@ const topTenArtistView = topTenArtists.map((art) => {
                 <View style={styles.headerRow}>
                     <Text style={styles.TrendifyHome}>Trendify</Text>
                     <View style={{alignItems: 'flex-end'}}>
-                        <Image
-                            source={{
-                                url: ProfilePic,
-                            }}
-                            //borderRadius style will help us make the Round Shape Image
-                            style={{alignSelf: 'flex-end', width: 75, height: 75, borderRadius: 75 / 2, }}
-                        />
+                        <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
+                            <Image
+                                source={{
+                                    url: ProfilePic,
+                                }}
+                                
+                                //borderRadius style will help us make the Round Shape Image
+                                style={{alignSelf: 'flex-end', width: 75, height: 75, borderRadius: 75 / 2, }}
+                            />
+                        </Pressable>
                     </View>
                 </View>
                 
@@ -236,11 +244,12 @@ const topTenArtistView = topTenArtists.map((art) => {
                   <ScrollView horizontal={true}>
                     {PlaylistCollection}
                   </ScrollView>
+
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
-                  {topTenTracksView}
+                  {topTenTracksView }
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>

@@ -13,7 +13,9 @@ export default function HomeStack(route) {
   return (
     <Stack.Navigator >
       <Stack.Screen name="home" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="Favorites" component={Favorites} options={{ headerShown: false }}  />
+      <Stack.Screen name="topTracks" component={TopTracks} options={{ headerShown: false }}  />
+      <Stack.Screen name="topArtists" component={TopArtists} options={{ headerShown: false }}  />
+      <Stack.Screen name="recentlyPlayed" component={RecentlyPlayed} options={{ headerShown: false }}  />
     </Stack.Navigator>
   )
 }

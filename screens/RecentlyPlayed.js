@@ -32,6 +32,7 @@ function RecentlyPlayed({ route, navigation }) {
   const [numFollowing, setNumFollowing] = useState();
   const [numFollowers, setNumFollowers] = useState();
   const [playlist, setPlaylist] = useState([]);
+  const [numPlaylists, setNumPlaylists] = useState();
   const [topTenArtists, setTopTenArtists] = useState([]);
   const [artProfilePic, setArtProfilePic] = useState();
   const [ProfilePic, setProfilePic] = useState();
@@ -94,15 +95,18 @@ function RecentlyPlayed({ route, navigation }) {
       if(!user.id) return
       spotifyApi.getUserPlaylists(user.id).then(
           function(data) {
-              setPlaylist(data.body);
-              //setPic(data.body.items.url);
-              console.log('Playlist: ', data.body.next);
+              const j = JSON.stringify(data.body);
+              setPlaylist(data.body.items);
+              //console.log('Playlist: '+ data.body.items[0].images[0].url);
+              //setPlaylistCover(data.body.items[0].images[0].url);
+              setNumPlaylists(data.body.total);
+              
           },
           function(err) {
           console.log('Something went wrong.. here', err.message);
           }
       );
-    }, [, user])
+  }, [, user])
 
     // FOLLOWING 
     useEffect(() => {
@@ -116,49 +120,51 @@ function RecentlyPlayed({ route, navigation }) {
           console.log('Something went wrong! here?', err);
       });
     }, [])
-    
-    /*
-    const artists = playlist.items.slice(0, 1).map((artist) => {
-      
-      return(
-        <View>
-          <Image
-            source={{
-                url: artist.url,
-            }}
-            //borderRadius style will help us make the Round Shape Image
-            style={{ width: 200, height: 200, borderRadius: 200 / 2 }}
-          />
-        </View>
-      );
-    });
 
-    function CreatePlaylistRow()
-    {
-      for (let i = 0; i < playlist.items.length; i++) {
-        let albumCover = playlist.items[0].images.url;
-        return(
-          <View>
-            <Image
-              source={{
-                  url: albumCover,
-              }}
-              //borderRadius style will help us make the Round Shape Image
-              style={{ width: 200, height: 200, borderRadius: 200 / 2 }}
-            />
-          </View>
-        );
-      } 
-    }*/
+    useEffect(() => {
+      if(!accessToken) return
+      spotifyApi.getMyRecentlyPlayedTracks({
+          limit : 50
+      }).then(function(data) {
+          // Output items
+          setRecents(data.body.items);
+          console.log(data.body.items[0].track.artists[0].name);
+      }, function(err) {
+          console.log('Something went wrong!', err);
+      }
+  );}, [accessToken])
   
-    /*const avatarImage = avatarCheck();
+    const PlaylistCollection = playlist.map((play) => {
+        
+      return(
+          <Image
+                source={{
+                    url: play.images[0].url,
+                }}
+                //borderRadius style will help us make the Round Shape Image
+                style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
+              />
+      );
+    })
 
-    function avatarCheck()
-    {
-      try{return user.images.url;}
-      catch(e){return topTenArtists[0].images.url; };
-    }
-*/
+    const recentlyPlayedView = recents.map((recent) => {
+        return(
+            <View style={styles.trackRow}>
+            <Image
+                  source={{
+                      url: recent.track.album.images[0].url,
+                  }}
+                  //borderRadius style will help us make the Round Shape Image
+                  style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+                />
+                <View style={styles.trackCol}>
+                    <Text style={styles.trackText}>{recent.track.name}</Text>
+                    <Text style={styles.trackText}>{recent.track.album.name}</Text>
+                    <Text style={styles.trackSubText}>{recent.track.artists[0].name}</Text>
+                </View>
+            </View>
+        );
+  })
 
     return (
       <SafeAreaView style={styles.container}>
@@ -188,7 +194,7 @@ function RecentlyPlayed({ route, navigation }) {
                     <Text style={styles.statsProfileWord}>Followers</Text>
                   </View>
                   <View style={styles.statsCol3}>
-                    <Text style={styles.statsProfile}>{playlist.total}</Text>
+                    <Text style={styles.statsProfile}>{numPlaylists}</Text>
                     <Text style={styles.statsProfileWord}>Playlists</Text>
                   </View>
                 </View>
@@ -197,15 +203,14 @@ function RecentlyPlayed({ route, navigation }) {
               <View>
                 <Text style={styles.playlistTitle}>Playlists:</Text>
                   <ScrollView horizontal={true}>
-                    <Image
-                      source={{
-                          url: pic,
-                      }}
-                      //borderRadius style will help us make the Round Shape Image
-                      style={{ width: 200, height: 200, borderRadius: 200 / 2 }}
-                    />
+                    {PlaylistCollection}
                   </ScrollView>
               </View>
+
+              <View style={{paddingVertical: '5%'}}>
+                <Text style={styles.playlistTitle}>Recenty Played:</Text>
+                {recentlyPlayedView}
+                </View>
               
             </ScrollView>
         </SafeAreaView >
