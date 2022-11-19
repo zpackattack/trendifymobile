@@ -93,6 +93,7 @@ export default function SpotifyLogin({navigation}) {
         "playlist-modify-private",
         "user-read-recently-played",
         "user-top-read",
+        "user-follow-read"
     ],
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
@@ -107,13 +108,16 @@ export default function SpotifyLogin({navigation}) {
       const { access_token } = response.params;
       console.log("Access Token: " + access_token);
       storeData(access_token);
-      navigation.navigate('MainApp');
+      console.log(access_token);
+      navigation.navigate('MainApp', {accessToken:access_token,});
     }
   }, [response]);
 
   const storeData = async(token) =>{
     try{
-      await AsyncStorage.setItem('@access_token', token);
+      await AsyncStorage.setItem('@access_Token', token);
+      //const value = await AsyncStorage.getItem('@accesstoken');
+      //console.log("Value: "+ value);
     } catch (e) {
       console.log('Error', e);
     }

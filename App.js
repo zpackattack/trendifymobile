@@ -11,6 +11,7 @@ import Home from './screens/Home';
 import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
 import RecentlyPlayed from './screens/RecentlyPlayed';
+import HomeWNav from './screens/HomeWNav';
 //import {Provider} from 'react-redux';
 //import {store} from './redux';
 
@@ -19,7 +20,8 @@ import RecentlyPlayed from './screens/RecentlyPlayed';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MyTabs({route}) {
+  const { accessToken } = route.params;
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -31,7 +33,8 @@ function MyTabs() {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeWNav}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Home',
@@ -43,6 +46,7 @@ function MyTabs() {
       <Tab.Screen
         name="TopTracks"
         component={TopTracks}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Top Tracks',
@@ -54,6 +58,7 @@ function MyTabs() {
       <Tab.Screen
         name="TopArtists"
         component={TopArtists}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Top Artists',
@@ -65,6 +70,7 @@ function MyTabs() {
       <Tab.Screen
         name="RecentlyPlayed"
         component={RecentlyPlayed}
+        initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
           tabBarLabel: 'Recently Played',
@@ -93,6 +99,7 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
+      
       
       <Stack.Screen name="MainApp" component={MyTabs}
       options={{

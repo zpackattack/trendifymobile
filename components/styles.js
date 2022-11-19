@@ -97,11 +97,60 @@ const styles = StyleSheet.create({
     },
 
     //Home Screen Styles
+    trackRow: {
+      marginVertical: 6,
+      marginHorizontal: '2%',
+      flex:1,
+      flexDirection: 'row', 
+      justifyContent: 'center',
+      backgroundColor: "#110118",
+      borderRadius: 40 / 2, 
+      paddingVertical: 10,
+    },
+    trackCol: {
+      flex:1,
+      flexDirection: 'column', 
+      alignContent: 'left',
+    },
+    artistCol: {
+      flex:1,
+      flexDirection: 'column', 
+      justifyContent: 'center',
+      alignContent: 'left',
+    },
+    trackText: {
+      fontSize: 20,
+      alignItems: 'left',
+      color: '#fff',
+    },
+
+    artistText: {
+      fontSize: 20,
+      alignItems: 'left',
+      color: '#fff',
+    },
+
+    homeContainer: {
+      flex: 1,
+      backgroundColor: "#240530",
+    },
+    headerRow: {
+      flex:1,
+      flexDirection: 'row', 
+      justifyContent: 'center',
+    },
     homeScreeBackground: { 
         flex: 1, 
         alignItems: 'center', 
         justifyContent: 'center',
         backgroundColor: '#240530', 
+      },
+      
+      TrendifyHome: {
+        marginBottom: 25,
+        fontSize: 50,
+        color:  '#FFF',
+        textAlign: 'center',
       },
       subText:{ 
         fontSize: 20,
@@ -110,6 +159,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         //flex: 2
       },
+      playlistTitleHome:{
+        fontSize: 40,
+        color:  '#FFF',
+        fontWeight: 'bold',
+        textAlign: 'left',
+      },
+
       ButtonText:{
         textColor: '#1BD760',
       },
@@ -146,8 +202,60 @@ const styles = StyleSheet.create({
         //text-align: center,
         //height: 150,
         //margin: 20px 0
-      }
+      },
       
+      //Profile aka recently played
+
+      statsCenter:{
+        flex:6,
+        alignItems: 'center',
+        paddingBottom: 20,
+      },
+      statsRow: {
+        paddingTop: 20,
+        flex:1,
+        flexDirection: 'row', 
+        alignItems: 'center',
+        flexWrap: "space-between",
+      },
+      statsCol1: {
+        width: '33%',
+
+      },
+      statsCol2: {
+        width: '33%',
+        
+      },
+      statsCol3: {
+        width: '33%',
+      },
+
+      username: {
+        alignItems: 'center',
+        textAlign: 'center',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 40,
+      },
+
+      statsProfile: {
+        fontSize: 35,
+        color:  '#1BD760',
+        textAlign: 'center',
+        fontWeight: 'bold',
+      },
+      statsProfileWord: {
+        fontSize: 25,
+        color:  '#FFF',
+        textAlign: 'center',
+      },
+      playlistTitle:{
+        fontSize: 40,
+        color:  '#FFF',
+        fontWeight: 'bold',
+        textAlign: 'left',
+        paddingLeft: '4%',
+      },
 
   });
 
