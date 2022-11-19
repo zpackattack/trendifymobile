@@ -97,6 +97,27 @@ const styles = StyleSheet.create({
     },
 
     //Home Screen Styles
+    trackRow: {
+      marginVertical: 10,
+      marginHorizontal: '2%',
+      flex:1,
+      flexDirection: 'row', 
+      justifyContent: 'center',
+      backgroundColor: "#000",
+      borderRadius: 40 / 2, 
+      paddingVertical: 10,
+    },
+    trackCol: {
+      flex:1,
+      flexDirection: 'column', 
+      alignContent: 'left',
+    },
+    trackText: {
+      fontSize: 20,
+      alignItems: 'left',
+      color: '#fff',
+    },
+
     homeContainer: {
       flex: 1,
       backgroundColor: "#240530",

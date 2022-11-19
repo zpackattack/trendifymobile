@@ -104,9 +104,10 @@ export default function Dashboard({route, navigation}) {
         spotifyApi.getUserPlaylists(user.id).then(
             function(data) {
                 const j = JSON.stringify(data.body);
-                setPlaylist(data.body);
+                setPlaylist(data.body.items);
                 //console.log('Playlist: '+ data.body.items[0].images[0].url);
                 setPlaylistCover(data.body.items[0].images[0].url);
+                setNumPlaylists(data.body.total);
                 
             },
             function(err) {
@@ -128,7 +129,7 @@ export default function Dashboard({route, navigation}) {
             {
                 setProfilePic(data.body.items[0].images[0].url);
             }
-            setNumPlaylists(data.body.total);
+            
             //setTopArtistPic(data.body.items[0].images[0].url)
             //console.log('TopArt1'+ data.body.items);
 
@@ -147,8 +148,7 @@ export default function Dashboard({route, navigation}) {
         //if(!accessToken) return
         spotifyApi.getMyTopTracks({limit : 10 , time_range: timeRange})
         .then(function(data) {
-            let topTracks = data.body.items;
-            setTopTracks(topTracks)
+            setTopTenTracks(data.body.items)
             //console.log(data.body.items[0].name)
         }, function(err) {
             console.log('Something went wrong! ', err);
@@ -169,10 +169,39 @@ export default function Dashboard({route, navigation}) {
         }
     );}, [])
 */
-    function tester()
-    {
-        console.log("Top tracks test" , topTracks[2].name)
-    }
+
+    const PlaylistCollection = playlist.map((play) => {
+    
+            return(
+                <Image
+                      source={{
+                          url: play.images[0].url,
+                      }}
+                      //borderRadius style will help us make the Round Shape Image
+                      style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
+                    />
+            );
+    })
+
+    const topTenTracksView = topTenTracks.map((track) => {
+    
+        return(
+            <View style={styles.trackRow}>
+            <Image
+                  source={{
+                      url: track.album.images[0].url,
+                  }}
+                  //borderRadius style will help us make the Round Shape Image
+                  style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+                />
+                <View style={styles.trackCol}>
+                    <Text style={styles.trackText}>{track.name}</Text>
+                    <Text style={styles.trackText}>{track.album.name}</Text>
+                    <Text style={styles.trackText}>{track.artists.name}</Text>
+                </View>
+            </View>
+        );
+})
     
 
     return(
@@ -190,36 +219,17 @@ export default function Dashboard({route, navigation}) {
                         />
                     </View>
                 </View>
-                <Text style={styles.registerTxt}>{user.id}</Text>
-                <Text style={styles.LoginTxt}>Following: {numFollowing}</Text>
-                <Text style={styles.LoginTxt}>Followers: {numFollowers}</Text>
-                <Text style={styles.LoginTxt}>Playlists: {playlist.total}</Text>
-                <Button onPress={tester} title="Test"/>
-
+                
                 <View>
                 <Text style={styles.playlistTitle}>Playlists:</Text>
                   <ScrollView horizontal={true}>
-                    <Image
-                      source={{
-                          url: playlistCover,
-                      }}
-                      //borderRadius style will help us make the Round Shape Image
-                      style={{ width: 200, height: 200, borderRadius: 50 / 2 }}
-                    />
+                    {PlaylistCollection}
                   </ScrollView>
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
-                  <ScrollView horizontal={true}>
-                    <Image
-                      source={{
-                          url: playlistCover,
-                      }}
-                      //borderRadius style will help us make the Round Shape Image
-                      style={{ width: 200, height: 200, borderRadius: 50 / 2 }}
-                    />
-                  </ScrollView>
+                  {topTenTracksView}
                 </View>
 
             </ScrollView>
