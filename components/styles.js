@@ -123,6 +123,12 @@ const styles = StyleSheet.create({
       alignItems: 'left',
       color: '#fff',
     },
+    trackSubText: {
+      fontSize: 20,
+      alignItems: 'left',
+      color: '#fff',
+      fontWeight: '200',
+    },
 
     artistText: {
       fontSize: 20,
