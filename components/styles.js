@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
 
     //Home Screen Styles
     trackRow: {
-      marginVertical: 10,
+      marginVertical: 6,
       marginHorizontal: '2%',
       flex:1,
       flexDirection: 'row', 
       justifyContent: 'center',
-      backgroundColor: "#000",
+      backgroundColor: "#110118",
       borderRadius: 40 / 2, 
       paddingVertical: 10,
     },
@@ -112,7 +112,19 @@ const styles = StyleSheet.create({
       flexDirection: 'column', 
       alignContent: 'left',
     },
+    artistCol: {
+      flex:1,
+      flexDirection: 'column', 
+      justifyContent: 'center',
+      alignContent: 'left',
+    },
     trackText: {
+      fontSize: 20,
+      alignItems: 'left',
+      color: '#fff',
+    },
+
+    artistText: {
       fontSize: 20,
       alignItems: 'left',
       color: '#fff',

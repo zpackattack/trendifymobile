@@ -121,10 +121,9 @@ export default function Dashboard({route, navigation}) {
     useEffect(() => {
         //if(!accessToken) return
         
-        spotifyApi.getMyTopArtists({limit : 50 , time_range: timeRange})
+        spotifyApi.getMyTopArtists({limit : 10 , time_range: timeRange})
         .then(function(data) {
-            let topArtists = data.body.items;
-            setTopArtists(topArtists);
+            setTopTenArtists(data.body.items);
             if(useAltPFP)
             {
                 setProfilePic(data.body.items[0].images[0].url);
@@ -133,12 +132,6 @@ export default function Dashboard({route, navigation}) {
             //setTopArtistPic(data.body.items[0].images[0].url)
             //console.log('TopArt1'+ data.body.items);
 
-        });
-        spotifyApi.getMyTopArtists({limit : 10 , time_range: "long_term"})
-        .then(function(data) {
-            let topArtists = data.body.items;
-            setTopTenArtists(topArtists);
-            //console.log('TopArt '+ topArtists);
         });
     }, [timeRange])
     
@@ -197,10 +190,28 @@ export default function Dashboard({route, navigation}) {
                 <View style={styles.trackCol}>
                     <Text style={styles.trackText}>{track.name}</Text>
                     <Text style={styles.trackText}>{track.album.name}</Text>
-                    <Text style={styles.trackText}>{track.artists.name}</Text>
+                    <Text style={styles.trackText}>{track.artists[0].name}</Text>
                 </View>
             </View>
         );
+})
+
+const topTenArtistView = topTenArtists.map((art) => {
+    
+    return(
+        <View style={styles.trackRow}>
+            <Image
+                source={{
+                    url: art.images[0].url,
+                }}
+                //borderRadius style will help us make the Round Shape Image
+                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+            />
+            <View style={styles.artistCol}>
+                <Text style={styles.artistText}>{art.name}</Text>
+            </View>
+        </View>
+    );
 })
     
 
@@ -230,6 +241,11 @@ export default function Dashboard({route, navigation}) {
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
                   {topTenTracksView}
+                </View>
+
+                <View style={{paddingVertical: '5%'}}>
+                <Text style={styles.playlistTitle}>Top 10 Artists:</Text>
+                  {topTenArtistView}
                 </View>
 
             </ScrollView>
