@@ -105,8 +105,9 @@ const styles = StyleSheet.create({
       },
       subText:{ 
         fontSize: 20,
-        alignItems: 'left',
         color: '#fff',
+        left: 25,
+        fontWeight: 'bold',
         //flex: 2
       },
       ButtonText:{
@@ -125,11 +126,13 @@ const styles = StyleSheet.create({
         //left: 22
       },
       title:{
-        alignItems: 'center',
+        //alignItems: 'center',
+        //alignContent: 'center',
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 40,
-        //bottom: 225,
+        left: 15,
+        bottom: -10,
         //left: -10
       },
 

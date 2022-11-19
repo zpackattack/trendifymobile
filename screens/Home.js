@@ -22,12 +22,12 @@ function Home({ navigation, route }) {
 
 
 
-            <View style = {{flex:1,flexDirection: 'row', padding: 30}}>
+            <View style = {{flex:1,flexDirection: 'row', backgroundColor:'red'}}>
 
-                <View style= {{flex:1}}>
+                <View style= {{flex:1,backgroundColor:'yellow'}}>
                     <TouchableOpacity>
                         <Image
-                            style={styles.searchlogo}
+                            style={[styles.searchlogo,{bottom: -20, left: 20}]}
                             source={require("../images/search.png")}
                         />
                     </TouchableOpacity>
@@ -35,20 +35,20 @@ function Home({ navigation, route }) {
                 </View>
 
                 
-                <View style = {{flex:2}}>
+                <View style = {{flex:2,backgroundColor:'green'}}>
                     <Text style={styles.title}>Trendify</Text>
                     
                 </View>
                 
                 <View style = {{flex: 1, backgroundColor:'red'}}>
                     
-                    <View style = {{width: 50, height: 50, borderRadius: 50 / 2, backgroundColor: 'blue'}}>
+                    <View style = {{width: 50, height: 50, borderRadius: 50 / 2, bottom: -12, left: 20, backgroundColor: 'blue'}}>
                             <Text
                             
-                            //borderRadius style will help us make the Round Shape Image
-                            //style={{ width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, background:'green'}}
-                            style={{textText: 'center', justifyContent: 'center', fontSize: 30, color: '#fff'}}
-                            >H
+                                //borderRadius style will help us make the Round Shape Image
+                                //style={{ width: 50, height: 50, borderRadius: 50 / 2, bottom: 223, left:10, background:'green'}}
+                                style={{left:14, bottom: -5, fontSize: 30, color: '#fff'}}
+                                >H
                             </Text>
 
 
@@ -62,15 +62,29 @@ function Home({ navigation, route }) {
             </View>
             
             
-            <View style = {{flex:2,padding: 30}}>
+            <View style = {{flex:4, flexDirection:'row', backgroundColor:'blue'}}>
 
-                <Text style={styles.subText}>PlayList</Text>
+                <Text style={[styles.subText,{bottom:-45}]}>PlayList</Text>
+
+                <Image style = {{flex:2, height:150, width:150, bottom:-80, left:-50, borderRadius: 20}}
+                    source={require("../images/search.png")}
+                >
+                </Image>
+
+
+
+                <Image style = {{flex:2, height:150, width:150, bottom:-80, left:-40, borderRadius: 20}}
+                    source={require("../images/search.png")}
+                >
+                </Image>
+
+
 
             </View>
 
 
-            <View style = {{flex:2,padding:30}}>
-                <Text style={styles.subText}>Top Tracks</Text>
+            <View style = {{flex:5, background: 'red'}}>
+                <Text style={[styles.subText, {left: -105}]}>Top Tracks</Text>
             </View>
 
                 
