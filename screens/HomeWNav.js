@@ -176,10 +176,11 @@ export default function Dashboard({route, navigation}) {
             );
     })
 
-    const topTenTracksView = topTenTracks.map((track) => {
+    const topTenTracksView = topTenTracks.map((track, index) => {
     
         return(
             <View style={styles.trackRow}>
+                <Text style={styles.trackSubText}>{index+1}</Text>
             <Image
                   source={{
                       url: track.album.images[0].url,
