@@ -63,7 +63,7 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { spotifyCredentials } from "../secrets";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 

@@ -18,15 +18,8 @@ import SpotifyWebApi from "spotify-web-api-node";
 import * as WebBrowser from 'expo-web-browser';
 import topTenTrackComp from '../components/spotifyComp/topTracks'
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Route } from 'react-native';
 
-//import Nav from "../components/spotify/spotify.nav"
-import Profile from "../components/spotify/spotify.profile"
-//import Tracks from "../components/spotify/spotify.tracks"
-//import Artists from "../components/spotify/spotify.artists"
-//import Player from "../components/spotify/spotify.player"
-//import Playlists from "../components/spotify/spotify.playlists"
+
 
 const spotifyApi = new SpotifyWebApi({
     clientId: 'f2654301008b4cba927766c7b3efdbcb',
@@ -46,11 +39,9 @@ export default function Dashboard({route, navigation}) {
     const [topArtists, setTopArtists] = useState([]);
     const [ProfilePic, setProfilePic] = useState();
     const [topTenArtists, setTopTenArtists] = useState([]);
-    const [secondFive, setSecondFive] = useState([]);
     const [playlistCover, setPlaylistCover] = useState([]);
     const [topTracks, setTopTracks] = useState([]);
     const [topTenTracks, setTopTenTracks] = useState([]);
-    const [recents, setRecents] = useState();
     const { accessToken } = route.params;
     //console.log("working?: "+ accessToken);
 
@@ -140,31 +131,17 @@ export default function Dashboard({route, navigation}) {
 
     // TOP TRACKS 
     useEffect(() => {
-        //if(!accessToken) return
-        spotifyApi.getMyTopTracks({limit : 10 , time_range: timeRange})
+        if(!accessToken) return
+        spotifyApi.getMyTopTracks({limit : 10 , time_range: 'long_term'})
         .then(function(data) {
-            setTopTenTracks(data.body.items);
-            setSecondFive(data.body.items);
-            //console.log(data.body.items[0].name)
-        }, function(err) {
-            console.log('Something went wrong! ', err);
-        });
+            setTopTracks(data.body.items)
+        //console.log(data.body.items[0].name)
+    }, function(err) {
+        console.log('Something went wrong! ', err);
+    });
     }, [timeRange])
-    /*
-    
-    // SHOW RECENTLY PLAYED TRACKS
-    useEffect(() => {
-        //if(!accessToken) return
-        spotifyApi.getMyRecentlyPlayedTracks({
-            limit : 50
-        }).then(function(data) {
-            // Output items
-            setRecents(data.body.items)
-        }, function(err) {
-            console.log('Something went wrong!', err);
-        }
-    );}, [])
-*/
+
+    //Open Spotify
     const _handlePressButtonAsync = async (url) => {
         await WebBrowser.openBrowserAsync(url);
     };
@@ -184,33 +161,12 @@ export default function Dashboard({route, navigation}) {
             );
     })
 
-
-    const topTenTracksView = topTenTracks.map((track, index) => {
+    
+    const topTenTracksView = topTracks.map((track, index) => {
     
         return(
-            <View style={styles.trackRow}>
-                <Text style={styles.trackSubText}>{index+1}</Text>
-            <Image
-                  source={{
-                      url: track.album.images[0].url,
-                  }}
-                  //borderRadius style will help us make the Round Shape Image
-                  style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
-                />
-                <View style={styles.trackCol}>
-                    <Text style={styles.trackText}>{track.name}</Text>
-                    <Text style={styles.trackText}>{track.album.name}</Text>
-                    <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
-                </View>
-            </View>
-        );
-})
-/*
-const topTenTracksView2 = secondFive.slice(5,10).map((track, index) => {
-    
-    return(
         <View style={styles.trackRow}>
-            <Text style={styles.trackSubText}>{index+1}</Text>
+        <Text style={styles.trackSubText}>{index+1}</Text>
         <Image
               source={{
                   url: track.album.images[0].url,
@@ -219,14 +175,15 @@ const topTenTracksView2 = secondFive.slice(5,10).map((track, index) => {
               style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
             />
             <View style={styles.trackCol}>
-                <Text style={styles.trackText}>{track.name}</Text>
+                <Text style={styles.trackText}>{track.artists[0].name}</Text>
                 <Text style={styles.trackText}>{track.album.name}</Text>
                 <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
             </View>
+            
         </View>
     );
-})
-*/
+    })
+
 
 const topTenArtistView = topTenArtists.map((art) => {
     
@@ -246,11 +203,7 @@ const topTenArtistView = topTenArtists.map((art) => {
     );
 })
 
-function goToProfile()
-{
-    navigation.navigate('RecentlyPlayed', {accessToken: accessToken});
-}
-    
+
 
     return(
         <SafeAreaView style={styles.homeContainer}>
@@ -281,9 +234,7 @@ function goToProfile()
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
-                <ScrollView horizontal={true}>
-                  {topTenTracksView }
-                </ScrollView>
+                  {topTenTracksView}
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
