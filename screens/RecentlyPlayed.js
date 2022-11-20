@@ -13,6 +13,7 @@ import {
     ScrollView,
 } from "react-native";
 import { useState, useEffect } from "react";
+import * as WebBrowser from 'expo-web-browser';
 
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
@@ -45,6 +46,8 @@ function RecentlyPlayed({ route, navigation }) {
   const updateTimeRange = (timeTerm) => {
       setTimeRange(timeTerm);
   }
+
+
 
 
   useEffect(() => {
@@ -133,10 +136,15 @@ function RecentlyPlayed({ route, navigation }) {
           console.log('Something went wrong!', err);
       }
   );}, [accessToken])
+
+  const _handlePressButtonAsync = async (url) => {
+    await WebBrowser.openBrowserAsync(url);
+  };
   
     const PlaylistCollection = playlist.map((play) => {
         
       return(
+        <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
           <Image
                 source={{
                     url: play.images[0].url,
@@ -144,24 +152,27 @@ function RecentlyPlayed({ route, navigation }) {
                 //borderRadius style will help us make the Round Shape Image
                 style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
               />
+        </Pressable>
       );
     })
 
     const recentlyPlayedView = recents.map((recent) => {
         return(
             <View style={styles.trackRow}>
-            <Image
+              
+              <Image
                   source={{
                       url: recent.track.album.images[0].url,
                   }}
                   //borderRadius style will help us make the Round Shape Image
                   style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
-                />
-                <View style={styles.trackCol}>
-                    <Text style={styles.trackText}>{recent.track.name}</Text>
-                    <Text style={styles.trackText}>{recent.track.album.name}</Text>
-                    <Text style={styles.trackSubText}>{recent.track.artists[0].name}</Text>
-                </View>
+              />
+              
+              <View style={styles.trackCol}>
+                  <Text style={styles.trackText}>{recent.track.name}</Text>
+                  <Text style={styles.trackText}>{recent.track.album.name}</Text>
+                  <Text style={styles.trackSubText}>{recent.track.artists[0].name}</Text>
+              </View>
             </View>
         );
   })

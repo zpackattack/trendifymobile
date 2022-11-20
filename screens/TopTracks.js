@@ -67,7 +67,7 @@ useEffect(() => {
   
   spotifyApi.getMyTopArtists({limit : 10 , time_range: timeRange})
   .then(function(data) {
-      setTopTenArtists(data.body.items);
+      
       if(useAltPFP)
       {
           setProfilePic(data.body.items[0].images[0].url);
@@ -106,6 +106,12 @@ useEffect(() => {
     });
   }, [timeRange]) 
 
+  const formatDuration = millis => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
   const AllTimeTracks = allTime.map((track, index) => {
     
     return(
@@ -119,10 +125,11 @@ useEffect(() => {
               style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
             />
             <View style={styles.trackCol}>
-                <Text style={styles.trackText}>{track.name}</Text>
+                <Text style={styles.trackText}>{track.artists[0].name}</Text>
                 <Text style={styles.trackText}>{track.album.name}</Text>
                 <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
             </View>
+            <Text style={styles.trackSubText}>{formatDuration(track.duration_ms)}</Text>
         </View>
     );
   })

@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
 import SpotifyWebApi from "spotify-web-api-node";
+import * as WebBrowser from 'expo-web-browser';
 import topTenTrackComp from '../components/spotifyComp/topTracks'
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -45,6 +46,7 @@ export default function Dashboard({route, navigation}) {
     const [topArtists, setTopArtists] = useState([]);
     const [ProfilePic, setProfilePic] = useState();
     const [topTenArtists, setTopTenArtists] = useState([]);
+    const [secondFive, setSecondFive] = useState([]);
     const [playlistCover, setPlaylistCover] = useState([]);
     const [topTracks, setTopTracks] = useState([]);
     const [topTenTracks, setTopTenTracks] = useState([]);
@@ -141,7 +143,8 @@ export default function Dashboard({route, navigation}) {
         //if(!accessToken) return
         spotifyApi.getMyTopTracks({limit : 10 , time_range: timeRange})
         .then(function(data) {
-            setTopTenTracks(data.body.items)
+            setTopTenTracks(data.body.items);
+            setSecondFive(data.body.items);
             //console.log(data.body.items[0].name)
         }, function(err) {
             console.log('Something went wrong! ', err);
@@ -162,10 +165,14 @@ export default function Dashboard({route, navigation}) {
         }
     );}, [])
 */
+    const _handlePressButtonAsync = async (url) => {
+        await WebBrowser.openBrowserAsync(url);
+    };
 
     const PlaylistCollection = playlist.map((play) => {
     
             return(
+                <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
                 <Image
                       source={{
                           url: play.images[0].url,
@@ -173,8 +180,10 @@ export default function Dashboard({route, navigation}) {
                       //borderRadius style will help us make the Round Shape Image
                       style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
                     />
+                </Pressable>
             );
     })
+
 
     const topTenTracksView = topTenTracks.map((track, index) => {
     
@@ -196,6 +205,28 @@ export default function Dashboard({route, navigation}) {
             </View>
         );
 })
+/*
+const topTenTracksView2 = secondFive.slice(5,10).map((track, index) => {
+    
+    return(
+        <View style={styles.trackRow}>
+            <Text style={styles.trackSubText}>{index+1}</Text>
+        <Image
+              source={{
+                  url: track.album.images[0].url,
+              }}
+              //borderRadius style will help us make the Round Shape Image
+              style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+            />
+            <View style={styles.trackCol}>
+                <Text style={styles.trackText}>{track.name}</Text>
+                <Text style={styles.trackText}>{track.album.name}</Text>
+                <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
+            </View>
+        </View>
+    );
+})
+*/
 
 const topTenArtistView = topTenArtists.map((art) => {
     
@@ -250,7 +281,9 @@ function goToProfile()
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
+                <ScrollView horizontal={true}>
                   {topTenTracksView }
+                </ScrollView>
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
