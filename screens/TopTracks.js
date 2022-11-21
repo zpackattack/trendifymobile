@@ -12,6 +12,12 @@ import {
     SafeAreaView, 
     ScrollView,
 } from "react-native";
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_200Regular,
+  Poppins_300Light,
+} from "@expo-google-fonts/dev";
 
 import { useState, useEffect } from "react";
 import axios from 'axios';
@@ -24,6 +30,15 @@ const spotifyApi = new SpotifyWebApi({
 })
 
 function TopTracks({route, navigation }) {
+  //FONTS
+  let [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+    Poppins_200Regular,
+    Poppins_300Light,
+  });
+
+
+
   const [isShown, setIsShown] = useState("allTime");
   const [user, setUser] = useState([]);
   const [allTime, setAllTime] = useState([]);
@@ -126,9 +141,9 @@ useEffect(() => {
               style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
             />
             <View style={styles.trackCol}>
-                <Text style={styles.trackText}>{track.artists[0].name}</Text>
-                <Text style={styles.trackText}>{track.album.name}</Text>
-                <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
+                <Text style={localStyles.tracks}>{track.name}</Text>
+                <Text style={localStyles.tracks}>{track.album.name}</Text>
+                <Text style={localStyles.trackSubtext}>{track.artists[0].name}</Text>
             </View>
             <Text style={styles.trackSubText}>{formatDuration(track.duration_ms)}</Text>
         </View>
@@ -234,3 +249,19 @@ useEffect(() => {
   }
 
 export default TopTracks;
+
+
+const localStyles = StyleSheet.create({
+
+   
+  tracks: {
+    fontSize: 20, alignItems: 'left', color: '#fff',fontFamily:'Poppins_500Medium',
+  },
+  trackSubtext: {
+    fontSize: 20,
+      alignItems: 'left',
+      color: '#fff',
+      fontFamily:'Poppins_300Light',
+  },
+
+});
