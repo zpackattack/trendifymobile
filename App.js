@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import SpotifyLogin from './screens/SpotifyLogin';
-import Home from './screens/Home';
+//import Home from './screens/Home';
 import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
 import RecentlyPlayed from './screens/RecentlyPlayed';
@@ -73,7 +73,7 @@ function MyTabs({route}) {
         initialParams={{accessToken: accessToken}}
         options={{
           header: () => null,
-          tabBarLabel: 'Recently Played',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" color={color} size={size} />
           ),

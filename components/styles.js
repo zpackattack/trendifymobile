@@ -3,7 +3,6 @@ import { useFonts, Open_Sans } from '@expo-google-fonts/inter';
 import {   StyleSheet,} from 'react-native';
   
 
-  
 
 const styles = StyleSheet.create({
     //Register and Login styles
@@ -107,10 +106,12 @@ const styles = StyleSheet.create({
       borderRadius: 40 / 2, 
       paddingVertical: 10,
     },
+
     trackCol: {
       flex:1,
       flexDirection: 'column', 
       alignContent: 'left',
+      left:15,
     },
     artistCol: {
       flex:1,
@@ -125,15 +126,27 @@ const styles = StyleSheet.create({
     },
     trackSubText: {
       fontSize: 20,
-      alignItems: 'left',
+      //alignItems: 'left',
       color: '#fff',
       fontWeight: '200',
+      //left:25,
+    },
+    numText: {
+      fontSize: 20,
+      //alignItems: 'left',
+      color: '#fff',
+      fontWeight: '500',
+      bottom:-25,
+      left:1,
     },
 
     artistText: {
-      fontSize: 20,
-      alignItems: 'left',
+      fontSize: 13,
+      alignItems: 'center',
+      textAlign: 'center',
       color: '#fff',
+      bottom: -3,
+      //left: 35,
     },
 
     homeContainer: {
@@ -157,6 +170,8 @@ const styles = StyleSheet.create({
         fontSize: 50,
         color:  '#FFF',
         textAlign: 'center',
+        left:45,
+        
       },
       subText:{ 
         fontSize: 20,
@@ -241,7 +256,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 25,
       },
 
       statsProfile: {
@@ -256,11 +271,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
       playlistTitle:{
-        fontSize: 40,
+        fontSize: 25,
         color:  '#FFF',
         fontWeight: 'bold',
         textAlign: 'left',
-        paddingLeft: '4%',
+        paddingLeft: '3%',
+        height: 40
       },
 
   });
