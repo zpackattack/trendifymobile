@@ -9,7 +9,6 @@ import {
     TouchableOpacity,
     SafeAreaView, 
     ScrollView,
-    FlatList,
 } from "react-native";
 
 import { useState, useEffect } from "react";
@@ -68,12 +67,10 @@ export default function Dashboard({route, navigation}) {
             if(data.body.images.length != 0){
                 setProfilePic(data.body.images[0].url);
             }
-            
             else{
                 useAltPFP = true;
                 console.log(useAltPFP);
             }
-
             
         }, function(err) {
             console.log('Something went wrong!', err);
@@ -158,13 +155,9 @@ export default function Dashboard({route, navigation}) {
                           url: play.images[0].url,
                       }}
                       //borderRadius style will help us make the Round Shape Image
-                      style={{ marginHorizontal: 5, width: 178, height: 178, borderRadius: 50 / 2 }}
+                      style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
                     />
-<<<<<<< Updated upstream
                 </Pressable>
-=======
-                
->>>>>>> Stashed changes
             );
     })
 
@@ -172,7 +165,6 @@ export default function Dashboard({route, navigation}) {
     const topTenTracksView = topTracks.map((track, index) => {
     
         return(
-<<<<<<< Updated upstream
         <View style={styles.trackRow}>
         <Text style={styles.trackSubText}>{index+1}</Text>
         <Image
@@ -186,30 +178,6 @@ export default function Dashboard({route, navigation}) {
                 <Text style={styles.trackText}>{track.artists[0].name}</Text>
                 <Text style={styles.trackText}>{track.album.name}</Text>
                 <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
-=======
-            <View style={styles.trackRow}>
-                
-
-                <Image
-                source={{
-                    url: track.album.images[0].url,
-                }}
-                //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
-                />
-
-                <Text style={styles.numText}>{index+1}</Text>
-                
-                <View style={styles.trackCol}>
-                    <Text style={styles.trackText}>{track.name}</Text>
-                    {/*<Text style={styles.trackText}>{track.album.name}</Text>*/}
-                    <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
-                </View>
-
-
-            
-
->>>>>>> Stashed changes
             </View>
             
         </View>
@@ -219,25 +187,6 @@ export default function Dashboard({route, navigation}) {
 
 const topTenArtistView = topTenArtists.map((art) => {
     
-
-    return(
-        <View>
-            <Image
-                source={{
-                    url: art.images[0].url,
-                }}
-                //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 10, width: 105, height: 105, borderRadius: 105 / 2 }}
-            />
-            <View style={styles.artistCol}>
-                <Text style={styles.artistText}>{art.name}</Text>
-            </View>
-        </View>
-        
-    );
-
-
-    /*
     return(
         <View style={styles.trackRow}>
             <Image
@@ -245,14 +194,13 @@ const topTenArtistView = topTenArtists.map((art) => {
                     url: art.images[0].url,
                 }}
                 //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 20, width: 80, height: 80, borderRadius: 80 / 2 }}
+                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 80 / 2 }}
             />
             <View style={styles.artistCol}>
                 <Text style={styles.artistText}>{art.name}</Text>
             </View>
         </View>
     );
-    */
 })
 
 
@@ -262,15 +210,7 @@ const topTenArtistView = topTenArtists.map((art) => {
             <ScrollView>
                 <View style={styles.headerRow}>
                     <Text style={styles.TrendifyHome}>Trendify</Text>
-
-                    {/*
-                    <Image
-                            style={{width: 175, height: 87, resizeMode: 'stretch'}}
-                            source={require("../images/logotransparent.png")}
-                    />
-                    */}
-              
-                    <View style={{alignItems: 'flex-end', left: 55}}>
+                    <View style={{alignItems: 'flex-end'}}>
                         <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
                             <Image
                                 source={{
@@ -278,7 +218,7 @@ const topTenArtistView = topTenArtists.map((art) => {
                                 }}
                                 
                                 //borderRadius style will help us make the Round Shape Image
-                                style={{alignSelf: 'flex-end', width: 60, height: 60, borderRadius: 60/ 2, }}
+                                style={{alignSelf: 'flex-end', width: 75, height: 75, borderRadius: 75 / 2, }}
                             />
                         </Pressable>
                     </View>
@@ -294,21 +234,12 @@ const topTenArtistView = topTenArtists.map((art) => {
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
-<<<<<<< Updated upstream
                   {topTenTracksView}
-=======
-                    {topTenTracksView}
-   
-
->>>>>>> Stashed changes
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Artists:</Text>
-                    <ScrollView horizontal={true}>
-                        {topTenArtistView}
-                    </ScrollView>
-                    
+                  {topTenArtistView}
                 </View>
 
             </ScrollView>

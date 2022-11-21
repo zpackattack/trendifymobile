@@ -63,10 +63,7 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
