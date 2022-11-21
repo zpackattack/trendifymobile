@@ -24,6 +24,7 @@ const spotifyApi = new SpotifyWebApi({
 })
 
 function TopTracks({route, navigation }) {
+  const [isShown, setIsShown] = useState("allTime");
   const [user, setUser] = useState([]);
   const [allTime, setAllTime] = useState([]);
   const [sixMonths, setSixMonths] = useState([]);
@@ -112,7 +113,7 @@ useEffect(() => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  const AllTimeTracks = allTime.map((track, index) => {
+  const renderTracks = (track, index) => {
     
     return(
         <View style={styles.trackRow}>
@@ -132,7 +133,45 @@ useEffect(() => {
             <Text style={styles.trackSubText}>{formatDuration(track.duration_ms)}</Text>
         </View>
     );
-  })
+  }
+
+  const tracks = allTime.map((tracks, index) => {
+    return renderTracks(tracks, index);
+  });
+  const tracksSixMos = sixMonths.map((tracks, index) => {
+    return renderTracks(tracks, index);
+  });
+  const tracksThreeMos = threeMonths.map((tracks, index) => {
+    return renderTracks(tracks, index);
+  });
+
+  function showTrack()
+  {
+    if(isShown === "allTime")
+    {
+        console.log(isShow);
+        return tracks;
+    }
+    else if(isShown === "sixMonth")
+    {
+        console.log(isShow);
+        return tracksSixMos;
+    }
+    else if(isShown === "threeMonth")
+    {
+        return tracksThreeMos;
+    }
+  }
+
+  let isShow = 'allTime';
+  function setShow(setter)
+  {
+    isShow = setter;
+  }
+  const highlightButton = (event, showTheRecents) => {
+    setIsShown(showTheRecents);
+    console.log(isShown);
+  };
 
   return(
     <SafeAreaView style={styles.homeContainer}>
@@ -156,14 +195,27 @@ useEffect(() => {
             <View style={styles.headerRow}>
               <Button
                     title="All Time"
-                    
+                    onClick={(event) => {
+                        highlightButton(event, 'allTime');
+                        showTrack();
+                        console.log(isShow);
+                    }}    
                 />
                 <Button
                     title="6 Months"
+                    onClick={() => {
+                        setShow('sixMonth');
+
+                        console.log(isShow);
+                    }}  
                     
                 />
                 <Button
                     title="3 Months"
+                    onClick={() => {
+                        highlightButton('threeMonth');
+                        showTrack();
+                    }}  
                     
                 />
             </View>
@@ -172,7 +224,7 @@ useEffect(() => {
 
             <View style={{paddingVertical: '5%'}}>
             <Text style={styles.playlistTitle}>Tracks:</Text>
-              {AllTimeTracks}
+              {showTrack()}
             </View>
 
 
