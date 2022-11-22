@@ -148,25 +148,28 @@ const renderTracks = (art, index) => {
             <View style={styles.headerRow}>
             <Pressable
                     //onPress={highlightButton('allTime')}  
+                    style={isShown === 'allTime' ? localStyles.setterButtonsActive: localStyles.setterButtons}
                     onPress={(event) => {
                       highlightButton(event, 'allTime');
                       }}
                 >
-                  <Text>All Time</Text>
+                  <Text style={isShown === 'allTime' ? localStyles.setterTextActive:localStyles.setterText}>All Time</Text>
                 </Pressable>
                 <Pressable
+                    style={isShown === 'sixMonth' ? localStyles.setterButtonsActive: localStyles.setterButtons}
                     onPress={(event) => {
                       highlightButton(event, 'sixMonth');
                       }}  
                 >
-                  <Text>6 Months</Text>
+                  <Text style={isShown === 'sixMonth' ? localStyles.setterTextActive:localStyles.setterText}>6 Months</Text>
                 </Pressable>
                 <Pressable
+                    style={isShown === 'threeMonth' ? localStyles.setterButtonsActive: localStyles.setterButtons}
                     onPress={(event) => {
                       highlightButton(event, 'threeMonth');
                       }}   
                 >
-                  <Text>3 Months</Text>
+                  <Text style={isShown === 'threeMonth' ? localStyles.setterTextActive:localStyles.setterText}>3 Months</Text>
                 </Pressable>
             </View>
             
@@ -190,3 +193,46 @@ const renderTracks = (art, index) => {
   }
 
 export default TopArtists;
+const localStyles = StyleSheet.create({
+
+   
+    tracks: {
+      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+    },
+    trackSubtext: {
+      fontSize: 20,
+        alignItems: 'left',
+        color: '#FBFBFB',
+        fontFamily:'Poppins_300Light',
+    },
+  
+    setterButtons: {
+      alignItems: 'center',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 4,
+      elevation: 3,
+      borderRadius: 50 / 2,
+      borderColor: '#FBFBFB',
+      borderWidth: 1,
+      marginHorizontal: 5,
+    },
+    setterButtonsActive: {
+      alignItems: 'center',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 4,
+      elevation: 3,
+      borderRadius: 50 / 2,
+      borderColor: '#2ebd59',
+      borderWidth: 1,
+      marginHorizontal: 5,
+    },
+    setterText: {
+      color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+    },
+    setterTextActive: {
+      color: '#2ebd59',fontFamily:'Poppins_500Medium',
+    },
+  
+  });
