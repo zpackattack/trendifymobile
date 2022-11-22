@@ -3,7 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons,Ionicons } from '@expo/vector-icons';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import SpotifyLogin from './screens/SpotifyLogin';
@@ -82,7 +82,7 @@ function MyTabs({route}) {
           header: () => null,
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="history" color={color} size={size} />
+            <Ionicons name="ios-person-circle-outline" color={color} size={size} />
           ),
         }}
       />
