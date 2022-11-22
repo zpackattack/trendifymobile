@@ -80,6 +80,7 @@ export default function Dashboard({route, navigation}) {
     }, [accessToken])
 
     // FOLLOWING 
+    /*
     useEffect(() => {
         //if(!accessToken) return
         spotifyApi.getFollowedArtists().then(
@@ -91,7 +92,7 @@ export default function Dashboard({route, navigation}) {
             console.log('Something went wrong! here?', err);
         });
     }, [])
-    
+    */
     // PLAYLIST 
 
     useEffect(() => {
@@ -175,9 +176,9 @@ export default function Dashboard({route, navigation}) {
                 url: track.album.images[0].url,
             }}
             //borderRadius style will help us make the Round Shape Image
-            style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+            style={{ marginHorizontal: 10, width: 60, height: 60, borderRadius: 30 / 2 }}
             />
-
+            
             <Text style={styles.numText}>{index+1}</Text>
             
             <View style={styles.trackCol}>
@@ -191,16 +192,16 @@ export default function Dashboard({route, navigation}) {
 
 
 const topTenArtistView = topTenArtists.map((art) => {
-    
     return(
-        <View>
+        <View style={{marginBottom: 20}}>
             <Image
                 source={{
                     url: art.images[0].url,
                 }}
                 //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 20, width: 80, height: 80, borderRadius: 80 / 2 }}
+                style={{ marginHorizontal: 10, width: 110, height: 110, borderRadius: 110 / 2 }}
             />
+           
             <View style={styles.artistCol}>
                 <Text style={styles.artistText}>{art.name}</Text>
             </View>
@@ -239,7 +240,7 @@ const topTenArtistView = topTenArtists.map((art) => {
                 </View>
                 
                 <View>
-                <Text style={styles.playlistTitle}>Playlists:</Text>
+                <Text style={styles.playlistTitle}>Playlists</Text>
                   <ScrollView horizontal={true}>
                     {PlaylistCollection}
                   </ScrollView>
@@ -247,12 +248,12 @@ const topTenArtistView = topTenArtists.map((art) => {
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
-                <Text style={styles.playlistTitle}>Top 10 Tracks:</Text>
+                <Text style={styles.playlistTitle}>Top 10 Tracks</Text>
                   {topTenTracksView}
                 </View>
 
                 <View style={{paddingVertical: '5%'}}>
-                <Text style={styles.playlistTitle}>Top 10 Artists:</Text>
+                <Text style={styles.playlistTitle}>Top 10 Artists</Text>
                     <ScrollView horizontal={true}>
                         {topTenArtistView}
                     </ScrollView>

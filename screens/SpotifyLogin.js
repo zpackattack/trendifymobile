@@ -125,13 +125,32 @@ export default function SpotifyLogin({navigation}) {
 
   return (
     <View style={styles.homeScreeBackground}>
-      <Button
+      <Pressable
+        style={styleLocal.loginButton}
         disabled={!request}
         title="Login"
         onPress={() => {
           promptAsync();
         }}
-      />
+      >
+      
+      <Text>Login</Text>
+      </Pressable>
     </View>
   )
 }
+const styleLocal = StyleSheet.create({
+  loginButton:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 80,
+    borderRadius: 4,
+    elevation: 3,
+    borderRadius: 50 / 2,
+    backgroundColor: '#1BD760',
+  },
+  loginText: {
+    color: '#FBFBFB',
+  }
+});

@@ -239,7 +239,7 @@ useEffect(() => {
 
             <View style={{paddingVertical: '5%'}}>
             <Text style={styles.playlistTitle}>Tracks:</Text>
-              {showTrack()}
+              {tracks}
             </View>
 
 
@@ -255,12 +255,12 @@ const localStyles = StyleSheet.create({
 
    
   tracks: {
-    fontSize: 20, alignItems: 'left', color: '#fff',fontFamily:'Poppins_500Medium',
+    fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
   },
   trackSubtext: {
     fontSize: 20,
       alignItems: 'left',
-      color: '#fff',
+      color: '#FBFBFB',
       fontFamily:'Poppins_300Light',
   },
 

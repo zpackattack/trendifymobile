@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
    
     inputView: {
-      backgroundColor: "#ffffff",
+      backgroundColor: "#FBFBFB",
       borderRadius: 30,
       width: "70%",
       height: 45,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     Trendify: {
       marginBottom: 25,
       fontSize: 60,
-      color:  '#FFF',
+      color:  '#FBFBFB',
     },
    
     TextInput: {
@@ -123,13 +123,15 @@ const styles = StyleSheet.create({
     trackText: {
       fontSize: 20,
       alignItems: 'left',
-      color: '#fff',
+      color: '#FBFBFB',
+      marginTop: 5,
     },
     trackSubText: {
       fontSize: 20,
       alignItems: 'left',
-      color: '#fff',
+      color: '#FBFBFB',
       fontWeight: '200',
+      marginTop: 3,
     },
 
     numText: {
@@ -137,15 +139,15 @@ const styles = StyleSheet.create({
       //alignItems: 'left',
       color: '#fff',
       fontWeight: '500',
-      bottom:-25,
+      marginVertical: '5%',
       left:1,
     },
 
     artistText: {
-      fontSize: 13,
+      fontSize: 15,
       alignItems: 'center',
       textAlign: 'center',
-      color: '#fff',
+      color: '#FBFBFB',
       bottom: -3,
       //left: 35,
     },
@@ -169,19 +171,19 @@ const styles = StyleSheet.create({
       TrendifyHome: {
         marginBottom: 25,
         fontSize: 50,
-        color:  '#FFF',
+        color:  '#FBFBFB',
         textAlign: 'center',
       },
       subText:{ 
         fontSize: 25,
-        color: '#fff',
+        color: '#FBFBFB',
         left: 25,
         fontWeight: 'bold',
         //flex: 2
       },
       playlistTitleHome:{
         fontSize: 40,
-        color:  '#FFF',
+        color:  '#FBFBFB',
         fontWeight: 'bold',
         textAlign: 'left',
       },
@@ -204,7 +206,7 @@ const styles = StyleSheet.create({
       title:{
         //alignItems: 'center',
         //alignContent: 'center',
-        color: '#fff',
+        color: '#FBFBFB',
         fontWeight: 'bold',
         fontSize: 40,
         left: 15,
@@ -253,7 +255,7 @@ const styles = StyleSheet.create({
       username: {
         alignItems: 'center',
         textAlign: 'center',
-        color: '#fff',
+        color: '#FBFBFB',
         fontWeight: 'bold',
         fontSize: 40,
       },
@@ -266,12 +268,12 @@ const styles = StyleSheet.create({
       },
       statsProfileWord: {
         fontSize: 25,
-        color:  '#FFF',
+        color:  '#FBFBFB',
         textAlign: 'center',
       },
       playlistTitle:{
         fontSize: 25,
-        color:  '#FFF',
+        color:  '#FBFBFB',
         fontWeight: 'bold',
         textAlign: 'left',
         paddingLeft: '3%',
