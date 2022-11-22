@@ -173,7 +173,7 @@ const renderTracks = (art, index) => {
             
 
             <View style={{paddingVertical: '5%'}}>
-            <Text style={styles.playlistTitle}>Artists:</Text>
+            <Text style={styles.playlistTitle}>Artists</Text>
             {isShown === 'allTime' ? <View>{AllTimeArtist}</View>: <>
             {isShown === 'sixMonth' ? <View>{ArtistsSixMos}</View>: <>
             {isShown === 'threeMonth'? <View>{ArtistsThreeMos}</View>:

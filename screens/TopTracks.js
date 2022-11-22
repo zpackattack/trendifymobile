@@ -143,8 +143,8 @@ useEffect(() => {
               style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
             />
             <View style={styles.trackCol}>
-                <Text style={localStyles.tracks}>{track.name}</Text>
-                <Text style={localStyles.tracks}>{track.album.name}</Text>
+                <Text numberOfLines={1} style={localStyles.tracks}>{track.name}</Text>
+                <Text numberOfLines={1} style={localStyles.tracks}>{track.album.name}</Text>
                 <Text style={localStyles.trackSubtext}>{track.artists[0].name}</Text>
             </View>
             <Text style={styles.trackSubText}>{formatDuration(track.duration_ms)}</Text>
@@ -214,7 +214,7 @@ useEffect(() => {
             
 
             <View style={{paddingVertical: '5%'}}>
-            <Text style={styles.playlistTitle}>Tracks:</Text>
+            <Text style={styles.playlistTitle}>Tracks</Text>
             {isShown === 'allTime' ? <View>{allTimeTracks}</View>: <>
             {isShown === 'sixMonth' ? <View>{tracksSixMos}</View>: <>
             {isShown === 'threeMonth'? <View>{tracksThreeMos}</View>:

@@ -158,16 +158,21 @@ function RecentlyPlayed({ route, navigation }) {
     const PlaylistCollection = playlist.map((play) => {
         
       return(
+        <View style={{flex:1,
+            flexDirection: 'column', 
+            alignContent: 'center', width: 190, marginHorizontal: 5,}}>
         <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
-          <Image
-                source={{
-                    url: play.images[0].url,
-                }}
-                //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 5, width: 178, height: 178, borderRadius: 50 / 2 }}
-              />
+        <Image
+              source={{
+                  url: play.images[0].url,
+              }}
+              //borderRadius style will help us make the Round Shape Image
+              style={{ marginHorizontal: 5, width: 185, height: 185, borderRadius: 50 / 2 }}
+            />
+        <Text numberOfLines={1} style={localStyles.tracks}>{play.name}</Text>
         </Pressable>
-      );
+        </View>
+    ); 
     })
 
     const recentlyPlayedView = recents.map((recent) => {
@@ -239,7 +244,7 @@ function RecentlyPlayed({ route, navigation }) {
                 </View>
               
                 <View>
-                  <Text style={styles.playlistTitle}>Playlists:</Text>
+                  <Text style={styles.playlistTitle}>Playlists</Text>
                     <ScrollView horizontal={true}>
                       {PlaylistCollection}
                     </ScrollView>
@@ -248,7 +253,7 @@ function RecentlyPlayed({ route, navigation }) {
               </View>
               
                 <View style={{paddingVertical: '3%', bottom:-75}}>
-                  <Text style={styles.playlistTitle}>Recenty Played:</Text>
+                  <Text style={styles.playlistTitle}>Recenty Played</Text>
                     {recentlyPlayedView}
                 </View>
               

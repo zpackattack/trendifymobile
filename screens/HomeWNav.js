@@ -152,15 +152,20 @@ export default function Dashboard({route, navigation}) {
     const PlaylistCollection = playlist.map((play) => {
     
             return(
+                <View style={{flex:1,
+                    flexDirection: 'column', 
+                    alignContent: 'center', width: 190, marginHorizontal: 5,}}>
                 <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
                 <Image
                       source={{
                           url: play.images[0].url,
                       }}
                       //borderRadius style will help us make the Round Shape Image
-                      style={{ marginHorizontal: 5, width: 178, height: 178, borderRadius: 50 / 2 }}
+                      style={{ marginHorizontal: 5, width: 185, height: 185, borderRadius: 50 / 2 }}
                     />
+                <Text numberOfLines={1} style={localStyles.tracks}>{play.name}</Text>
                 </Pressable>
+                </View>
             ); 
     })
 
@@ -265,3 +270,18 @@ const topTenArtistView = topTenArtists.map((art) => {
 
 }
 
+const localStyles = StyleSheet.create({
+
+   
+    tracks: {
+      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+    },
+    trackSubtext: {
+      fontSize: 20,
+        alignItems: 'left',
+        color: '#FBFBFB',
+        fontFamily:'Poppins_300Light',
+    },
+    
+  
+  });
