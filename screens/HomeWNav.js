@@ -9,6 +9,8 @@ import {
     TouchableOpacity,
     SafeAreaView, 
     ScrollView,
+    FlatList,
+
 } from "react-native";
 
 import { useState, useEffect } from "react";
@@ -155,31 +157,34 @@ export default function Dashboard({route, navigation}) {
                           url: play.images[0].url,
                       }}
                       //borderRadius style will help us make the Round Shape Image
-                      style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
+                      style={{ marginHorizontal: 5, width: 178, height: 178, borderRadius: 50 / 2 }}
                     />
                 </Pressable>
-            );
+            ); 
     })
 
     
     const topTenTracksView = topTracks.map((track, index) => {
     
         return(
-        <View style={styles.trackRow}>
-        <Text style={styles.trackSubText}>{index+1}</Text>
-        <Image
-              source={{
-                  url: track.album.images[0].url,
-              }}
-              //borderRadius style will help us make the Round Shape Image
-              style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+            <View style={styles.trackRow}>
+                
+
+            <Image
+            source={{
+                url: track.album.images[0].url,
+            }}
+            //borderRadius style will help us make the Round Shape Image
+            style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
             />
+
+            <Text style={styles.numText}>{index+1}</Text>
+            
             <View style={styles.trackCol}>
-                <Text style={styles.trackText}>{track.artists[0].name}</Text>
-                <Text style={styles.trackText}>{track.album.name}</Text>
+                <Text style={styles.trackText}>{track.name}</Text>
+                {/*<Text style={styles.trackText}>{track.album.name}</Text>*/}
                 <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
             </View>
-            
         </View>
     );
     })
@@ -188,19 +193,21 @@ export default function Dashboard({route, navigation}) {
 const topTenArtistView = topTenArtists.map((art) => {
     
     return(
-        <View style={styles.trackRow}>
+        <View>
             <Image
                 source={{
                     url: art.images[0].url,
                 }}
                 //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 80 / 2 }}
+                style={{ marginHorizontal: 20, width: 80, height: 80, borderRadius: 80 / 2 }}
             />
             <View style={styles.artistCol}>
                 <Text style={styles.artistText}>{art.name}</Text>
             </View>
         </View>
+        
     );
+
 })
 
 
@@ -210,7 +217,14 @@ const topTenArtistView = topTenArtists.map((art) => {
             <ScrollView>
                 <View style={styles.headerRow}>
                     <Text style={styles.TrendifyHome}>Trendify</Text>
-                    <View style={{alignItems: 'flex-end'}}>
+                    {/*
+                    <Image
+                            style={{width: 175, height: 87, resizeMode: 'stretch'}}
+                            source={require("../images/logotransparent.png")}
+                    />
+                    */}
+              
+                    <View style={{alignItems: 'flex-end', left: 55}}>
                         <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
                             <Image
                                 source={{
@@ -239,7 +253,9 @@ const topTenArtistView = topTenArtists.map((art) => {
 
                 <View style={{paddingVertical: '5%'}}>
                 <Text style={styles.playlistTitle}>Top 10 Artists:</Text>
-                  {topTenArtistView}
+                    <ScrollView horizontal={true}>
+                        {topTenArtistView}
+                    </ScrollView>
                 </View>
 
             </ScrollView>

@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     SafeAreaView, 
     ScrollView,
+    ImageBackground,
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as WebBrowser from 'expo-web-browser';
@@ -150,7 +151,7 @@ function RecentlyPlayed({ route, navigation }) {
                     url: play.images[0].url,
                 }}
                 //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 10, width: 200, height: 200, borderRadius: 50 / 2 }}
+                style={{ marginHorizontal: 5, width: 178, height: 178, borderRadius: 50 / 2 }}
               />
         </Pressable>
       );
@@ -167,12 +168,12 @@ function RecentlyPlayed({ route, navigation }) {
                   //borderRadius style will help us make the Round Shape Image
                   style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
               />
-              
-              <View style={styles.trackCol}>
-                  <Text style={styles.trackText}>{recent.track.name}</Text>
-                  <Text style={styles.trackText}>{recent.track.album.name}</Text>
-                  <Text style={styles.trackSubText}>{recent.track.artists[0].name}</Text>
-              </View>
+            
+                <View style={styles.trackCol}>
+                    <Text style={styles.trackText}>{recent.track.name}</Text>
+                    {/*<Text style={styles.trackText}>{recent.track.album.name}</Text>*/}
+                    <Text style={styles.trackSubText}>{recent.track.artists[0].name}</Text>
+                </View>
             </View>
         );
   })
@@ -181,47 +182,64 @@ function RecentlyPlayed({ route, navigation }) {
       <SafeAreaView style={styles.container}>
             <ScrollView>
               
-              <Text style={styles.TrendifyHome}>Profile</Text>
-              <View style={styles.statsCenter}>
-              <Image
-                  source={{
-                      url: ProfilePic,
-                  }}
-                  //borderRadius style will help us make the Round Shape Image
-                  style={{ width: 200, height: 200, borderRadius: 200 / 2 }}
-              />
-              </View>
-             
-              <Text style={styles.username}>{user.id}</Text>
-              
-              <View style={styles.statsCenter}>
-                <View style={styles.statsRow}>
-                  <View style={styles.statsCol1}>
-                    <Text style={styles.statsProfile}>{numFollowing}</Text>
-                    <Text style={styles.statsProfileWord}>Following</Text>
-                  </View>
-                  <View style={styles.statsCol2}>
-                    <Text style={styles.statsProfile}>{numFollowers}</Text>
-                    <Text style={styles.statsProfileWord}>Followers</Text>
-                  </View>
-                  <View style={styles.statsCol3}>
-                    <Text style={styles.statsProfile}>{numPlaylists}</Text>
-                    <Text style={styles.statsProfileWord}>Playlists</Text>
-                  </View>
-                </View>
-              </View>
-              
-              <View>
-                <Text style={styles.playlistTitle}>Playlists:</Text>
-                  <ScrollView horizontal={true}>
-                    {PlaylistCollection}
-                  </ScrollView>
-              </View>
+              <ImageBackground source={{
+                        url: ProfilePic,
+                    }}
+                    //borderRadius style will help us make the Round Shape Image
+                    imageStyle={{height:150, borderRadius: 25}}>
 
-              <View style={{paddingVertical: '5%'}}>
-                <Text style={styles.playlistTitle}>Recenty Played:</Text>
-                {recentlyPlayedView}
+
+                  
+                {/*<Text style={styles.TrendifyHome}>Profile</Text>*/}
+
+
+                <View style={styles.statsCenter}>
+
+                <Image
+                    source={{
+                        url: ProfilePic,
+                    }}
+                    //borderRadius style will help us make the Round Shape Image
+                    style={{ width: 75, height: 75, borderRadius: 75 / 2, bottom: -110}}
+                />
                 </View>
+              </ImageBackground>
+              <View style={[styles.statsCenter,{bottom:-90}]}>
+             
+                <Text style={styles.username}>{user.id}</Text>
+
+                <View style={styles.statsCenter}>
+                  <View style={styles.statsRow}>
+                    <View style={styles.statsCol1}>
+                      <Text style={styles.statsProfile}>{numFollowing}</Text>
+                      <Text style={styles.statsProfileWord}>Following</Text>
+                    </View>
+                    <View style={styles.statsCol2}>
+                      <Text style={styles.statsProfile}>{numFollowers}</Text>
+                      <Text style={styles.statsProfileWord}>Followers</Text>
+                    </View>
+                    <View style={styles.statsCol3}>
+                      <Text style={styles.statsProfile}>{numPlaylists}</Text>
+                      <Text style={styles.statsProfileWord}>Playlists</Text>
+                    </View>
+                  </View>
+                </View>
+              
+                <View>
+                  <Text style={styles.playlistTitle}>Playlists:</Text>
+                    <ScrollView horizontal={true}>
+                      {PlaylistCollection}
+                    </ScrollView>
+                </View>
+
+              </View>
+              
+                <View style={{paddingVertical: '3%', bottom:-75}}>
+                  <Text style={styles.playlistTitle}>Recenty Played:</Text>
+                    {recentlyPlayedView}
+                </View>
+              
+             
               
             </ScrollView>
         </SafeAreaView >

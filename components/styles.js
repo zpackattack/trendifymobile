@@ -107,10 +107,12 @@ const styles = StyleSheet.create({
       borderRadius: 40 / 2, 
       paddingVertical: 10,
     },
+
     trackCol: {
       flex:1,
       flexDirection: 'column', 
       alignContent: 'left',
+      left: 15,
     },
     artistCol: {
       flex:1,
@@ -130,10 +132,22 @@ const styles = StyleSheet.create({
       fontWeight: '200',
     },
 
-    artistText: {
+    numText: {
       fontSize: 20,
-      alignItems: 'left',
+      //alignItems: 'left',
       color: '#fff',
+      fontWeight: '500',
+      bottom:-25,
+      left:1,
+    },
+
+    artistText: {
+      fontSize: 13,
+      alignItems: 'center',
+      textAlign: 'center',
+      color: '#fff',
+      bottom: -3,
+      //left: 35,
     },
 
     homeContainer: {
@@ -159,7 +173,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
       subText:{ 
-        fontSize: 20,
+        fontSize: 25,
         color: '#fff',
         left: 25,
         fontWeight: 'bold',
@@ -256,11 +270,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
       playlistTitle:{
-        fontSize: 40,
+        fontSize: 25,
         color:  '#FFF',
         fontWeight: 'bold',
         textAlign: 'left',
-        paddingLeft: '4%',
+        paddingLeft: '3%',
+        height: 40,
       },
 
   });
