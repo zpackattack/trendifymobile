@@ -49,6 +49,7 @@ function TopTracks({route, navigation }) {
   const [recents, setRecents] = useState([]);
   const { accessToken } = route.params;
 
+
   const [timeRange, setTimeRange] = useState('long_term');
   const updateTimeRange = (timeTerm) => {
       setTimeRange(timeTerm);
@@ -99,7 +100,8 @@ useEffect(() => {
     //if(!accessToken) return
     spotifyApi.getMyTopTracks({limit : 50 , time_range: 'long_term'})
     .then(function(data) {
-        setAllTime(data.body.items)
+        setAllTime(data.body.items);
+        showTrack("allTime");
         //console.log(data.body.items[0].name)
     }, function(err) {
         console.log('Something went wrong! ', err);
@@ -150,7 +152,7 @@ useEffect(() => {
     );
   }
 
-  const tracks = allTime.map((tracks, index) => {
+  const allTimeTracks = allTime.map((tracks, index) => {
     return renderTracks(tracks, index);
   });
   const tracksSixMos = sixMonths.map((tracks, index) => {
@@ -160,32 +162,9 @@ useEffect(() => {
     return renderTracks(tracks, index);
   });
 
-  function showTrack()
-  {
-    if(isShown === "allTime")
-    {
-        console.log(isShow);
-        return tracks;
-    }
-    else if(isShown === "sixMonth")
-    {
-        console.log(isShow);
-        return tracksSixMos;
-    }
-    else if(isShown === "threeMonth")
-    {
-        return tracksThreeMos;
-    }
-  }
 
-  let isShow = 'allTime';
-  function setShow(setter)
-  {
-    isShow = setter;
-  }
   const highlightButton = (event, showTheRecents) => {
     setIsShown(showTheRecents);
-    console.log(isShown);
   };
 
   return(
@@ -208,38 +187,42 @@ useEffect(() => {
             </View>
 
             <View style={styles.headerRow}>
-              <Button
-                    title="All Time"
-                    onClick={(event) => {
-                        highlightButton(event, 'allTime');
-                        showTrack();
-                        console.log(isShow);
-                    }}    
-                />
-                <Button
-                    title="6 Months"
-                    onClick={() => {
-                        setShow('sixMonth');
-
-                        console.log(isShow);
-                    }}  
-                    
-                />
-                <Button
-                    title="3 Months"
-                    onClick={() => {
-                        highlightButton('threeMonth');
-                        showTrack();
-                    }}  
-                    
-                />
+              <Pressable
+                    //onPress={highlightButton('allTime')}  
+                    onPress={(event) => {
+                      highlightButton(event, 'allTime');
+                      }}
+                >
+                  <Text>All Time</Text>
+                </Pressable>
+                <Pressable
+                    onPress={(event) => {
+                      highlightButton(event, 'sixMonth');
+                      }}  
+                >
+                  <Text>6 Months</Text>
+                </Pressable>
+                <Pressable
+                    onPress={(event) => {
+                      highlightButton(event, 'threeMonth');
+                      }}   
+                >
+                  <Text>3 Months</Text>
+                </Pressable>
             </View>
             
             
 
             <View style={{paddingVertical: '5%'}}>
             <Text style={styles.playlistTitle}>Tracks:</Text>
-              {tracks}
+            {isShown === 'allTime' ? <View>{allTimeTracks}</View>: <>
+            {isShown === 'sixMonth' ? <View>{tracksSixMos}</View>: <>
+            {isShown === 'threeMonth'? <View>{tracksThreeMos}</View>:
+            <Text>Loading...</Text>
+            }</>
+            }</>
+            }
+              
             </View>
 
 

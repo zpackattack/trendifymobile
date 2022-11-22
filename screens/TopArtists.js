@@ -24,6 +24,7 @@ const spotifyApi = new SpotifyWebApi({
 })
 
 function TopArtists({route, navigation }) {
+  const [isShown, setIsShown] = useState("allTime");
   const [user, setUser] = useState([]);
   const [allTime, setAllTime] = useState([]);
   const [sixMonths, setSixMonths] = useState([]);
@@ -93,29 +94,43 @@ useEffect(() => {
   });
 }, [timeRange])
 
-const AllTimeArtist = allTime.map((art) => {
+const renderTracks = (art, index) => {
     
-  return(
-      <View style={styles.trackRow}>
-          <Image
-              source={{
-                  url: art.images[0].url,
-              }}
-              //borderRadius style will help us make the Round Shape Image
-              style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 80 / 2 }}
-          />
-          <View style={styles.artistCol}>
-              <Text style={styles.artistText}>{art.name}</Text>
-          </View>
-      </View>
-  );
-})
+    return(
+        <View style={styles.trackRow}>
+            <Image
+                source={{
+                    url: art.images[0].url,
+                }}
+                //borderRadius style will help us make the Round Shape Image
+                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 80 / 2 }}
+            />
+            <View style={styles.artistCol}>
+                <Text style={styles.artistText}>{art.name}</Text>
+            </View>
+        </View>
+    );
+  }
+
+  const AllTimeArtist = allTime.map((tracks, index) => {
+    return renderTracks(tracks, index);
+  });
+  const ArtistsSixMos = sixMonths.map((tracks, index) => {
+    return renderTracks(tracks, index);
+  });
+  const ArtistsThreeMos = threeMonths.map((tracks, index) => {
+    return renderTracks(tracks, index);
+  });
+
+  const highlightButton = (event, showTheRecents) => {
+    setIsShown(showTheRecents);
+  };
 
   return(
     <SafeAreaView style={styles.homeContainer}>
         <ScrollView>
             <View style={styles.headerRow}>
-                <Text style={styles.TrendifyHome}>Top Tracks</Text>
+                <Text style={styles.TrendifyHome}>Top Artists</Text>
                 <View style={{alignItems: 'flex-end'}}>
                     <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
                         <Image
@@ -131,25 +146,41 @@ const AllTimeArtist = allTime.map((art) => {
             </View>
 
             <View style={styles.headerRow}>
-              <Button
-                    title="All Time"
-                    
-                />
-                <Button
-                    title="6 Months"
-                    
-                />
-                <Button
-                    title="3 Months"
-                    
-                />
+            <Pressable
+                    //onPress={highlightButton('allTime')}  
+                    onPress={(event) => {
+                      highlightButton(event, 'allTime');
+                      }}
+                >
+                  <Text>All Time</Text>
+                </Pressable>
+                <Pressable
+                    onPress={(event) => {
+                      highlightButton(event, 'sixMonth');
+                      }}  
+                >
+                  <Text>6 Months</Text>
+                </Pressable>
+                <Pressable
+                    onPress={(event) => {
+                      highlightButton(event, 'threeMonth');
+                      }}   
+                >
+                  <Text>3 Months</Text>
+                </Pressable>
             </View>
             
             
 
             <View style={{paddingVertical: '5%'}}>
             <Text style={styles.playlistTitle}>Artists:</Text>
-              {AllTimeArtist}
+            {isShown === 'allTime' ? <View>{AllTimeArtist}</View>: <>
+            {isShown === 'sixMonth' ? <View>{ArtistsSixMos}</View>: <>
+            {isShown === 'threeMonth'? <View>{ArtistsThreeMos}</View>:
+            <Text>Loading...</Text>
+            }</>
+            }</>
+            }
             </View>
 
 
