@@ -12,8 +12,15 @@ import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
 import RecentlyPlayed from './screens/RecentlyPlayed';
 import HomeWNav from './screens/HomeWNav';
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_200Regular,
+  Poppins_300Light,
+} from "@expo-google-fonts/dev";
 //import {Provider} from 'react-redux';
 //import {store} from './redux';
+
 
 
 
@@ -83,6 +90,7 @@ function MyTabs({route}) {
   );
 }
 function MyStack() {
+  
   return (
     <Stack.Navigator>
       <Stack.Screen name="SpotifyLogin" component={SpotifyLogin} 
@@ -110,6 +118,13 @@ function MyStack() {
 }
 //for now change MyStack to MyTabs to see the other pages
 function App() {
+     //FONTS
+     let [fontsLoaded] = useFonts({
+      Poppins_500Medium,
+      Poppins_200Regular,
+      Poppins_300Light,
+    });
+  
   return (
     <NavigationContainer>
       <MyStack />

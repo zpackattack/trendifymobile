@@ -15,6 +15,12 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as WebBrowser from 'expo-web-browser';
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_200Regular,
+  Poppins_300Light,
+} from "@expo-google-fonts/dev";
 
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
@@ -27,6 +33,13 @@ const spotifyApi = new SpotifyWebApi({
 
 
 function RecentlyPlayed({ route, navigation }) {
+    //FONTS
+    let [fontsLoaded] = useFonts({
+      Poppins_500Medium,
+      Poppins_200Regular,
+      Poppins_300Light,
+    });
+
   let useAltPFP = false;
 
   // Stores the result from the api calls
@@ -170,9 +183,9 @@ function RecentlyPlayed({ route, navigation }) {
               />
             
                 <View style={styles.trackCol}>
-                    <Text style={styles.trackText}>{recent.track.name}</Text>
+                    <Text style={localStyles.tracks}>{recent.track.name}</Text>
                     {/*<Text style={styles.trackText}>{recent.track.album.name}</Text>*/}
-                    <Text style={styles.trackSubText}>{recent.track.artists[0].name}</Text>
+                    <Text style={localStyles.trackSubtext}>{recent.track.artists[0].name}</Text>
                 </View>
             </View>
         );
@@ -248,3 +261,17 @@ function RecentlyPlayed({ route, navigation }) {
 
 export default RecentlyPlayed;
 
+const localStyles = StyleSheet.create({
+
+   
+  tracks: {
+    fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+  },
+  trackSubtext: {
+    fontSize: 20,
+      alignItems: 'left',
+      color: '#FBFBFB',
+      fontFamily:'Poppins_300Light',
+  },
+
+});

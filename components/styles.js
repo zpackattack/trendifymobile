@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
    
     Logo: {
       marginTop: 25,
-      marginBottom: 40,
-      width: 345,
-      height: 100,
+      marginBottom: 60,
+      width: 360,
+      height: 105,
       resizeMode: 'cover',
     },
    
@@ -53,13 +53,14 @@ const styles = StyleSheet.create({
       height: 30,
       marginTop: 30,
       color:  '#1BD760',
+      fontFamily:'Poppins_300Light',
     },
    
     registerTxt: {
       height: 30,
       marginTop: 30,
       color:  '#1BD760',
-      
+      fontFamily:'Poppins_300Light',
     },
 
     ForgotPassword: {
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
 
     //Spotify Login Styles
     spotifyLoginButton:{
-      backgroundColor: '2ebd59'
+      backgroundColor: '#2ebd59',
     },
 
     //Home Screen Styles
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     numText: {
       fontSize: 20,
       //alignItems: 'left',
-      color: '#fff',
+      color: '#FBFBFB',
       fontWeight: '500',
       marginVertical: '5%',
       left:1,

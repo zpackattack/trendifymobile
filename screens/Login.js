@@ -120,7 +120,7 @@ function Login({navigation})
 
               <TouchableOpacity style={styles.loginBtn}>
                 <Text 
-                  style={styles.loginText} 
+                  style={localStyles.loginText} 
                   onPress={props.handleSubmit}
                   textAlign={'center'}>Login</Text>
               </TouchableOpacity>
@@ -138,3 +138,11 @@ function Login({navigation})
 }
 
 export default Login;
+
+const localStyles = StyleSheet.create({
+
+  loginText: {
+    fontFamily:'Poppins_500Medium',
+    fontSize: 20,
+  },
+});

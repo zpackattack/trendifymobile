@@ -263,18 +263,5 @@ const topTenArtistView = topTenArtists.map((art) => {
         </SafeAreaView >
      );
 
-    /*return (
-        <View>
-
-            <Profile     
-            profile = {user}
-            numFollowing = {numFollowing}
-            playlist = {playlist}
-            topTracks = {topTenTracks}
-            topArtists = {topTenArtists}
-            /> 
-        
-        </View>
-    )*/
 }
 

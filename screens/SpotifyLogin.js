@@ -1,54 +1,3 @@
-/*import "react-native-gesture-handler";
-import { useEffect } from "react";
-import {
-    Button,
-    View,
-    Text,
-    Pressable,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-} from "react-native";
-import styles from "../components/styles";
-import { NavigationContainer } from "@react-navigation/native";
-import axios from "axios";
-
-import * as AuthSession from "expo-auth-session";
-
-import { encode as btoa } from "base-64";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { refreshTokens } from "../spotifyAuth/refreshTokens";
-import { getTokens } from "../spotifyAuth/getTokens";
-import { getAuthorizationCode } from "../spotifyAuth/getAuthCode";
-
-function SpotifyLogin({ navigation, route }) {
-    
-
-    const componentDidMount = async () => {
-        const tokenExpirationTime = await getUserData('expirationTime');
-        if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
-          await refreshTokens();
-        } else {
-          this.setState({ accessTokenAvailable: true });
-        }
-    }
-
-    return (
-        <View style={styles.homeScreeBackground}>
-            <TouchableOpacity
-                onPress={() => {
-                    console.log(getAuthorizationCode());
-                }}
-                style={styles.spotifyLoginButton}
-            >
-                <Text style={styles.ForgotPassword}>Login to Spotify</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
-
-export default SpotifyLogin;
-*/
 import styles from "../components/styles";
 
 import * as React from 'react';
@@ -63,6 +12,12 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_200Regular,
+  Poppins_300Light,
+} from "@expo-google-fonts/dev";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -76,6 +31,12 @@ const discovery = {
 };
 
 export default function SpotifyLogin({navigation}) {
+   //FONTS
+   let [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+    Poppins_200Regular,
+    Poppins_300Light,
+  });
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -106,35 +67,29 @@ export default function SpotifyLogin({navigation}) {
   React.useEffect(() => {
     if (response?.type === 'success') {
       const { access_token } = response.params;
-      console.log("Access Token: " + access_token);
-      storeData(access_token);
       console.log(access_token);
       navigation.navigate('MainApp', {accessToken:access_token,});
     }
   }, [response]);
 
-  const storeData = async(token) =>{
-    try{
-      await AsyncStorage.setItem('@access_Token', token);
-      //const value = await AsyncStorage.getItem('@accesstoken');
-      //console.log("Value: "+ value);
-    } catch (e) {
-      console.log('Error', e);
-    }
-  };
 
   return (
     <View style={styles.homeScreeBackground}>
       <Pressable
         style={styleLocal.loginButton}
         disabled={!request}
-        title="Login"
         onPress={() => {
           promptAsync();
         }}
       >
-      
-      <Text>Login</Text>
+      <Image
+                source={
+                    require('../images/spotifyLogo.png')
+                }
+                //borderRadius style will help us make the Round Shape Image
+                style={{width: 50, height: 50, alignSelf:'center'}}
+            />
+      <Text style={styleLocal.loginText}>Spotify Login</Text>
       </Pressable>
     </View>
   )
@@ -142,15 +97,16 @@ export default function SpotifyLogin({navigation}) {
 const styleLocal = StyleSheet.create({
   loginButton:{
     alignItems: 'center',
-    justifyContent: 'center',
     paddingVertical: 20,
     paddingHorizontal: 80,
     borderRadius: 4,
     elevation: 3,
     borderRadius: 50 / 2,
-    backgroundColor: '#1BD760',
+    backgroundColor: '#110118',
   },
   loginText: {
-    color: '#FBFBFB',
+    color: '#1BD760',
+    fontFamily:'Poppins_500Medium',
+    marginTop:3,
   }
 });

@@ -7,21 +7,27 @@ import {   StyleSheet,
     TextInput,
     Button,
     TouchableOpacity, } from 'react-native';
-import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_200Regular,
+  Poppins_300Light,
+} from "@expo-google-fonts/dev";
 
 function LogoHeader()
 {
-    let [fontsLoaded] = useFonts({
-        Inter_900Black,
-      });
+   //FONTS
+   let [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+    Poppins_200Regular,
+    Poppins_300Light,
+  });
+
     
-      if (!fontsLoaded) {
-        return null;
-      }
     return (
         <View style={styles.container}>
         <Image style={styles.Logo} source={require("../images/logo.png")} />
-        <Text style={{ fontFamily: 'Inter_900Black', fontSize: 65, marginBottom: 25, color: '#FFF'}}>Trendify</Text>
+        <Text style={{ fontFamily:'Poppins_500Medium', fontSize: 65, marginBottom: 25, color: '#FBFBFB'}}>Trendify</Text>
         </View>
     );
 }

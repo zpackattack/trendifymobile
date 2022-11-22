@@ -44,6 +44,7 @@ function Register({navigation})
         if (response.data == 200)
         {
           navigation.navigate('MainApp');
+
           
         }
         else
@@ -64,8 +65,7 @@ function Register({navigation})
 
     return (
       <View style={styles.container}>
-      <Image style={styles.Logo} source={require("../images/logotransparent.png")} />
-
+          <Image style={styles.Logo} source={require("../images/logoHorizontal.png")} />
       <Formik 
         initialValues={{name:'', email: '', password: '', confirmPassword: ''}}
         onSubmit={(values) => 
@@ -158,7 +158,7 @@ function Register({navigation})
 
           <TouchableOpacity style={styles.loginBtn}>
             <Text 
-              style={styles.loginText} 
+              style={localStyles.registerText} 
               onPress={props.handleSubmit}
               textAlign={'center'}>Register</Text>
           </TouchableOpacity>
@@ -177,3 +177,28 @@ function Register({navigation})
 }
 
 export default Register;
+
+const localStyles = StyleSheet.create({
+  logoContainer: {
+    flexDirection: 'row', 
+    justifyContent: 'center',
+  },
+   
+  Logo: {
+    width: 100, 
+    height: 100,
+    marginBottom: 25,
+    alignSelf:'center',
+  },
+  
+  logoText: {
+    fontFamily:'Poppins_500Medium', fontSize: 65, marginBottom: 25, color: '#FBFBFB',
+  },
+
+  registerText: {
+    fontFamily:'Poppins_500Medium',
+    fontSize: 20,
+  },
+
+
+});
