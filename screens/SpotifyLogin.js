@@ -12,14 +12,17 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import {
+/*import {
   useFonts,
   Poppins_500Medium,
   Poppins_200Regular,
   Poppins_300Light,
+  Poppins_400Regular,
 } from "@expo-google-fonts/dev";
-
+*/
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFonts } from 'expo-font';
+import appLoading from'expo-app-loading';
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -33,9 +36,9 @@ const discovery = {
 export default function SpotifyLogin({navigation}) {
    //FONTS
    let [fontsLoaded] = useFonts({
-    Poppins_500Medium,
-    Poppins_300Light,
+    'Poppins-Medium': require('../fonts/Poppins-Medium.ttf'),
   });
+
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -88,7 +91,7 @@ export default function SpotifyLogin({navigation}) {
                 //borderRadius style will help us make the Round Shape Image
                 style={{width: 50, height: 50, alignSelf:'center'}}
             />
-      <Text style={styleLocal.loginText}>Spotify Login</Text>
+      <Text style={[styleLocal.loginText, {fontFamily:'Poppins-Medium'}]}>Spotify Login</Text>
       </Pressable>
     </View>
   )
@@ -105,7 +108,7 @@ const styleLocal = StyleSheet.create({
   },
   loginText: {
     color: '#1BD760',
-    fontFamily:'Poppins_500Medium',
+    
     marginTop:3,
   }
 });
