@@ -188,7 +188,7 @@ function RecentlyPlayed({ route, navigation }) {
               />
             
                 <View style={styles.trackCol}>
-                    <Text style={localStyles.tracks}>{recent.track.name}</Text>
+                    <Text numberOfLines={1} style={localStyles.tracks}>{recent.track.name}</Text>
                     {/*<Text style={styles.trackText}>{recent.track.album.name}</Text>*/}
                     <Text style={localStyles.trackSubtext}>{recent.track.artists[0].name}</Text>
                 </View>

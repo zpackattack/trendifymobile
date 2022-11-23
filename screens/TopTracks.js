@@ -18,6 +18,7 @@ import {
   Poppins_200Regular,
   Poppins_300Light,
 } from "@expo-google-fonts/dev";
+import * as WebBrowser from 'expo-web-browser';
 
 import { useState, useEffect } from "react";
 import axios from 'axios';
@@ -37,6 +38,10 @@ function TopTracks({route, navigation }) {
     Poppins_300Light,
   });
 
+        //Open Spotify
+        const _handlePressButtonAsync = async (url) => {
+          await WebBrowser.openBrowserAsync(url);
+      };
 
 
   const [isShown, setIsShown] = useState("allTime");
@@ -133,6 +138,7 @@ useEffect(() => {
   const renderTracks = (track, index) => {
     
     return(
+      <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>
         <View style={styles.trackRow}>
         <Text style={styles.trackSubText}>{index+1}</Text>
         <Image
@@ -149,6 +155,7 @@ useEffect(() => {
             </View>
             <Text style={styles.trackSubText}>{formatDuration(track.duration_ms)}</Text>
         </View>
+        </Pressable>
     );
   }
 

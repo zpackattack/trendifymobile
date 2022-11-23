@@ -34,7 +34,6 @@ export default function SpotifyLogin({navigation}) {
    //FONTS
    let [fontsLoaded] = useFonts({
     Poppins_500Medium,
-    Poppins_200Regular,
     Poppins_300Light,
   });
 

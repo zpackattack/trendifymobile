@@ -12,6 +12,7 @@ import TopTracks from './screens/TopTracks';
 import TopArtists from './screens/TopArtists';
 import RecentlyPlayed from './screens/RecentlyPlayed';
 import HomeWNav from './screens/HomeWNav';
+import Track from './screens/Track';
 import {
   useFonts,
   Poppins_500Medium,
@@ -29,6 +30,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs({route}) {
   const { accessToken } = route.params;
+  const song = [];
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -86,6 +88,7 @@ function MyTabs({route}) {
           ),
         }}
       />
+      
     </Tab.Navigator>
   );
 }

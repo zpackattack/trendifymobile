@@ -14,6 +14,7 @@ import {
 } from "react-native";
 
 import { useState, useEffect } from "react";
+import * as WebBrowser from 'expo-web-browser';
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
 import SpotifyWebApi from "spotify-web-api-node";
@@ -38,6 +39,11 @@ function TopArtists({route, navigation }) {
   const updateTimeRange = (timeTerm) => {
       setTimeRange(timeTerm);
   }
+
+      //Open Spotify
+      const _handlePressButtonAsync = async (url) => {
+        await WebBrowser.openBrowserAsync(url);
+    };
 
   useEffect(() => {
     if (!accessToken){console.log("NO"); return;}
@@ -94,10 +100,11 @@ useEffect(() => {
   });
 }, [timeRange])
 
-const renderTracks = (art, index) => {
+const renderArtists = (art, index) => {
     
     return(
         <View style={styles.trackRow}>
+            <Pressable onPress = {() => _handlePressButtonAsync(art.external_urls.spotify)}>
             <Image
                 source={{
                     url: art.images[0].url,
@@ -108,18 +115,19 @@ const renderTracks = (art, index) => {
             <View style={styles.artistCol}>
                 <Text style={styles.artistText}>{art.name}</Text>
             </View>
+            </Pressable>
         </View>
     );
   }
 
   const AllTimeArtist = allTime.map((tracks, index) => {
-    return renderTracks(tracks, index);
+    return renderArtists(tracks, index);
   });
   const ArtistsSixMos = sixMonths.map((tracks, index) => {
-    return renderTracks(tracks, index);
+    return renderArtists(tracks, index);
   });
   const ArtistsThreeMos = threeMonths.map((tracks, index) => {
-    return renderTracks(tracks, index);
+    return renderArtists(tracks, index);
   });
 
   const highlightButton = (event, showTheRecents) => {

@@ -56,7 +56,7 @@ export default function Dashboard({route, navigation}) {
     useEffect(() => {
         if (!accessToken){console.log("NO"); return;}
         spotifyApi.setAccessToken(accessToken);
-    }, [accessToken])
+    }, [accessToken]);
     let useAltPFP = false;
     // AUTHENTICATED USER
     useEffect(() => {
@@ -77,7 +77,7 @@ export default function Dashboard({route, navigation}) {
         }, function(err) {
             console.log('Something went wrong!', err);
         });
-    }, [accessToken])
+    }, [accessToken]);
 
     // FOLLOWING 
     /*
@@ -110,7 +110,7 @@ export default function Dashboard({route, navigation}) {
             console.log('Something went wrong.. here', err.message);
             }
         );
-    }, [, user])
+    }, [, user]);
     
 
     // TOP ARTISTS
@@ -129,7 +129,7 @@ export default function Dashboard({route, navigation}) {
             //console.log('TopArt1'+ data.body.items);
 
         });
-    }, [timeRange])
+    }, [timeRange]);
     
 
     // TOP TRACKS 
@@ -167,14 +167,15 @@ export default function Dashboard({route, navigation}) {
                 </Pressable>
                 </View>
             ); 
-    })
+    });
 
     
     const topTenTracksView = topTracks.map((track, index) => {
     
         return(
+            <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>
             <View style={styles.trackRow}>
-                
+            
 
             <Image
             source={{
@@ -192,13 +193,15 @@ export default function Dashboard({route, navigation}) {
                 <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
             </View>
         </View>
+        </Pressable>
     );
-    })
+    });
 
 
 const topTenArtistView = topTenArtists.map((art) => {
     return(
         <View style={{marginBottom: 20}}>
+            <Pressable onPress={() => _handlePressButtonAsync(art.external_urls.spotify)}>
             <Image
                 source={{
                     url: art.images[0].url,
@@ -210,11 +213,12 @@ const topTenArtistView = topTenArtists.map((art) => {
             <View style={styles.artistCol}>
                 <Text style={styles.artistText}>{art.name}</Text>
             </View>
+            </Pressable>
         </View>
         
     );
 
-})
+});
 
 
 
