@@ -24,8 +24,8 @@ import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 
 
 const spotifyApi = new SpotifyWebApi({
-    clientId: 'f2654301008b4cba927766c7b3efdbcb',
-    redirectUri: "exp://172.20.10.3:19000",
+    clientId: '57411e11c64544e1b6a193a7af57fcc9',
+    redirectUri: "exp://10.0.0.149:19000",
   })
   
 export default function Dashboard({route, navigation}) {   
@@ -154,7 +154,8 @@ export default function Dashboard({route, navigation}) {
             return(
                 <View style={{flex:1,
                     flexDirection: 'column', 
-                    alignContent: 'center', width: 190, marginHorizontal: 5,}}>
+                    // alignContent: 'center', width: 190, marginHorizontal: 5,
+                    }}>
                 <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
                 <Image
                       source={{
@@ -234,7 +235,7 @@ const topTenArtistView = topTenArtists.map((art) => {
                     />
                     */}
               
-                    <View style={{alignItems: 'flex-end', left: 55}}>
+                    <View >
                         <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
                             <Image
                                 source={{
@@ -278,11 +279,11 @@ const localStyles = StyleSheet.create({
 
    
     tracks: {
-      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+    //   fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
     },
     trackSubtext: {
       fontSize: 20,
-        alignItems: 'left',
+        // alignItems: 'left',
         color: '#FBFBFB',
         fontFamily:'Poppins_300Light',
     },

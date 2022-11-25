@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "#240530",
-      alignItems: "center",
+      // alignItems: "center",
       justifyContent: "center",
     },
    
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
       height: 45,
       marginBottom: 20,
       flexDirection: 'row',
-      alignItems: 'center',
+      // alignItems: 'center',
     },
 
     LoginLogo: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
       width: 275,
       borderRadius: 25,
       height: 50,
-      alignItems: "center",
+      // alignItems: "center",
       justifyContent: "center",
       marginTop: 20,
       backgroundColor: "#af40e3",
@@ -112,24 +112,24 @@ const styles = StyleSheet.create({
     trackCol: {
       flex:1,
       flexDirection: 'column', 
-      alignContent: 'left',
+      // alignContent: 'left',
       left: 15,
     },
     artistCol: {
       flex:1,
       flexDirection: 'column', 
       justifyContent: 'center',
-      alignContent: 'left',
+      // alignContent: 'left',
     },
     trackText: {
       fontSize: 20,
-      alignItems: 'left',
+      // alignItems: 'left',
       color: '#FBFBFB',
       marginTop: 5,
     },
     trackSubText: {
       fontSize: 20,
-      alignItems: 'left',
+      // alignItems: 'left',
       color: '#FBFBFB',
       fontWeight: '200',
       marginTop: 3,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
 
     artistText: {
       fontSize: 15,
-      alignItems: 'center',
+      // alignItems: 'center',
       textAlign: 'center',
       color: '#FBFBFB',
       bottom: -3,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     },
     homeScreeBackground: { 
         flex: 1, 
-        alignItems: 'center', 
+        // alignItems: 'center', 
         justifyContent: 'center',
         backgroundColor: '#240530', 
       },
@@ -231,15 +231,15 @@ const styles = StyleSheet.create({
 
       statsCenter:{
         flex:6,
-        alignItems: 'center',
+        // alignItems: 'center',
         paddingBottom: 20,
       },
       statsRow: {
         paddingTop: 20,
         flex:1,
         flexDirection: 'row', 
-        alignItems: 'center',
-        flexWrap: "space-between",
+        // alignItems: 'center',
+        // flexWrap: "space-between",
       },
       statsCol1: {
         width: '33%',
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
       },
 
       username: {
-        alignItems: 'center',
+        // alignItems: 'center',
         textAlign: 'center',
         color: '#FBFBFB',
         fontWeight: 'bold',

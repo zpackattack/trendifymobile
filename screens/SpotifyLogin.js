@@ -43,7 +43,7 @@ export default function SpotifyLogin({navigation}) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: 'f2654301008b4cba927766c7b3efdbcb',
+      clientId: '57411e11c64544e1b6a193a7af57fcc9',
       scopes: [
         "user-modify-playback-state",
         "user-read-currently-playing",
@@ -61,7 +61,7 @@ export default function SpotifyLogin({navigation}) {
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
       usePKCE: false,
-      redirectUri: "exp://172.20.10.3:19000",
+      redirectUri: "exp://10.0.0.149:19000",
     },
     discovery
   );
@@ -98,7 +98,7 @@ export default function SpotifyLogin({navigation}) {
 }
 const styleLocal = StyleSheet.create({
   loginButton:{
-    alignItems: 'center',
+    // alignItems: 'center',
     paddingVertical: 20,
     paddingHorizontal: 80,
     borderRadius: 4,

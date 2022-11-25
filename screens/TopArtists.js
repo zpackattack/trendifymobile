@@ -20,8 +20,8 @@ import axios from 'axios';
 import SpotifyWebApi from "spotify-web-api-node";
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: 'f2654301008b4cba927766c7b3efdbcb',
-  redirectUri: "exp://172.20.10.3:19000",
+  clientId: '57411e11c64544e1b6a193a7af57fcc9',
+  redirectUri: "exp://10.0.0.149:19000",
 })
 
 function TopArtists({route, navigation }) {
@@ -139,7 +139,7 @@ const renderArtists = (art, index) => {
         <ScrollView>
             <View style={styles.headerRow}>
                 <Text style={styles.TrendifyHome}>Top Artists</Text>
-                <View style={{alignItems: 'flex-end'}}>
+                <View>
                     <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
                         <Image
                             source={{
@@ -205,17 +205,17 @@ const localStyles = StyleSheet.create({
 
    
     tracks: {
-      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+      // fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
     },
     trackSubtext: {
       fontSize: 20,
-        alignItems: 'left',
+        // alignItems: 'left',
         color: '#FBFBFB',
         fontFamily:'Poppins_300Light',
     },
   
     setterButtons: {
-      alignItems: 'center',
+      // alignItems: 'center',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 4,
@@ -226,7 +226,7 @@ const localStyles = StyleSheet.create({
       marginHorizontal: 5,
     },
     setterButtonsActive: {
-      alignItems: 'center',
+      // alignItems: 'center',
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 4,
