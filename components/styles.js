@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
       flex:1,
       flexDirection: 'column', 
       alignContent: 'left',
-      left: 15,
+      left: 12,
     },
     artistCol: {
       flex:1,

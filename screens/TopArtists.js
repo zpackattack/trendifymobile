@@ -12,6 +12,7 @@ import {
     SafeAreaView, 
     ScrollView,
 } from "react-native";
+import Data from "../components/data";
 
 import { useState, useEffect } from "react";
 import * as WebBrowser from 'expo-web-browser';
@@ -103,20 +104,23 @@ useEffect(() => {
 const renderArtists = (art, index) => {
     
     return(
+      <Pressable onPress = {() => _handlePressButtonAsync(art.external_urls.spotify)}>
         <View style={styles.trackRow}>
-            <Pressable onPress = {() => _handlePressButtonAsync(art.external_urls.spotify)}>
-            <Image
-                source={{
-                    url: art.images[0].url,
-                }}
-                //borderRadius style will help us make the Round Shape Image
-                style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 80 / 2 }}
-            />
-            <View style={styles.artistCol}>
-                <Text style={styles.artistText}>{art.name}</Text>
-            </View>
-            </Pressable>
-        </View>
+        
+      <Image
+          source={{
+              url: art.images[0].url,
+          }}
+          //borderRadius style will help us make the Round Shape Image
+          style={{ marginHorizontal: 10, width: 60, height: 60, borderRadius: 60 / 2 }}
+      />
+      <View style={styles.artistCol}>
+          <Text style={localStyles.tracks}>{art.name}</Text>
+      </View>
+        <Text style={localStyles.numText}>{index+1}</Text>
+      </View>
+      </Pressable>
+        
     );
   }
 
@@ -194,6 +198,8 @@ const renderArtists = (art, index) => {
             }
             </View>
 
+            <Data/>
+
 
         </ScrollView>
     </SafeAreaView >
@@ -205,7 +211,7 @@ const localStyles = StyleSheet.create({
 
    
     tracks: {
-      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+      fontSize: 20, alignItems: 'center', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
     },
     trackSubtext: {
       fontSize: 20,
@@ -242,5 +248,15 @@ const localStyles = StyleSheet.create({
     setterTextActive: {
       color: '#2ebd59',fontFamily:'Poppins_500Medium',
     },
+    numText:
+    {
+      fontSize: 20,
+      //alignItems: 'left',
+      color: '#FBFBFB',
+      fontWeight: '500',
+      marginVertical: '5%',
+      marginHorizontal: '5%',
+      left:1,
+    }
   
   });

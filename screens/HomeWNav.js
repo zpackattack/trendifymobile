@@ -13,6 +13,7 @@ import {
 
 } from "react-native";
 
+import Data from "../components/data";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
@@ -267,6 +268,8 @@ const topTenArtistView = topTenArtists.map((art) => {
                         {topTenArtistView}
                     </ScrollView>
                 </View>
+
+                <Data/>
 
             </ScrollView>
         </SafeAreaView >

@@ -19,6 +19,7 @@ import {
   Poppins_300Light,
 } from "@expo-google-fonts/dev";
 import * as WebBrowser from 'expo-web-browser';
+import Data from "../components/data";
 
 import { useState, useEffect } from "react";
 import axios from 'axios';
@@ -140,20 +141,21 @@ useEffect(() => {
     return(
       <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>
         <View style={styles.trackRow}>
-        <Text style={styles.trackSubText}>{index+1}</Text>
+        
         <Image
               source={{
                   url: track.album.images[0].url,
               }}
               //borderRadius style will help us make the Round Shape Image
-              style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+              style={{ marginHorizontal: 10, width: 60, height: 60, borderRadius: 30 / 2 }}
             />
+            <Text style={styles.numText}>{index+1}</Text>
             <View style={styles.trackCol}>
                 <Text numberOfLines={1} style={localStyles.tracks}>{track.name}</Text>
-                <Text numberOfLines={1} style={localStyles.tracks}>{track.album.name}</Text>
+                {/*<Text numberOfLines={1} style={localStyles.tracks}>{track.album.name}</Text>*/}
                 <Text style={localStyles.trackSubtext}>{track.artists[0].name}</Text>
             </View>
-            <Text style={styles.trackSubText}>{formatDuration(track.duration_ms)}</Text>
+            <Text style={localStyles.timeText}>{formatDuration(track.duration_ms)}</Text>
         </View>
         </Pressable>
     );
@@ -234,7 +236,7 @@ useEffect(() => {
             }
               
             </View>
-
+            <Data/>
 
         </ScrollView>
     </SafeAreaView >
@@ -255,6 +257,14 @@ const localStyles = StyleSheet.create({
       alignItems: 'left',
       color: '#FBFBFB',
       fontFamily:'Poppins_300Light',
+  },
+  timeText: {
+    fontSize: 20,
+    fontFamily:'Poppins_300Light',
+    color: '#FBFBFB',
+    marginVertical: '5%',
+    marginRight: '2%',
+    right:1,
   },
 
   setterButtons: {

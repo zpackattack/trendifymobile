@@ -21,6 +21,7 @@ import {
   Poppins_200Regular,
   Poppins_300Light,
 } from "@expo-google-fonts/dev";
+import Data from "../components/data";
 
 import axios from 'axios';
 //import useAuth from "../components/spotify.useAuth"
@@ -184,7 +185,7 @@ function RecentlyPlayed({ route, navigation }) {
                       url: recent.track.album.images[0].url,
                   }}
                   //borderRadius style will help us make the Round Shape Image
-                  style={{ marginHorizontal: 10, width: 80, height: 80, borderRadius: 40 / 2 }}
+                  style={{ marginHorizontal: 10, width: 60, height: 60, borderRadius: 30 / 2 }}
               />
             
                 <View style={styles.trackCol}>
@@ -252,11 +253,12 @@ function RecentlyPlayed({ route, navigation }) {
 
               </View>
               
-                <View style={{paddingVertical: '3%', bottom:-75}}>
+                <View style={{paddingVertical: '22%'}}>
                   <Text style={styles.playlistTitle}>Recenty Played</Text>
                     {recentlyPlayedView}
                 </View>
-              
+
+                <Data/>
              
               
             </ScrollView>
