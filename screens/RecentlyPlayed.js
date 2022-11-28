@@ -247,6 +247,7 @@ function RecentlyPlayed({ route, navigation }) {
                     </View>
                   </View>
                 </View>
+                <View>
                 <Pressable
                     //onPress={highlightButton('allTime')}  
                     style={localStyles.setterButtons}
@@ -255,9 +256,9 @@ function RecentlyPlayed({ route, navigation }) {
                       }}
                 >
                   <Text style={localStyles.setterText}>Logout</Text>
-                  </Pressable>
-              
-                <View>
+                 </Pressable>
+                 </View>
+                <View style>
                   <Text style={styles.playlistTitle}>Playlists</Text>
                     <ScrollView horizontal={true}>
                       {PlaylistCollection}
