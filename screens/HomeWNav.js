@@ -199,7 +199,7 @@ export default function Dashboard({route, navigation}) {
             <Text style={styles.numText}>{index+1}</Text>
             
             <View style={styles.trackCol}>
-                <Text style={styles.trackText}>{track.name}</Text>
+                <Text numberOfLines={1} style={styles.trackText}>{track.name}</Text>
                 {/*<Text style={styles.trackText}>{track.album.name}</Text>*/}
                 <Text style={styles.trackSubText}>{track.artists[0].name}</Text>
             </View>
