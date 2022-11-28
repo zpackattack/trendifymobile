@@ -22,6 +22,7 @@ import styles from '../components/styles';
 function Register({navigation})
 {
   const [message, setMessage] = useState();
+  const [isEmailSent, setEmail] = useState(false);
   const [messageType, setMessageType] = useState();
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
@@ -49,11 +50,13 @@ function Register({navigation})
         }
         else
         {
-          handleMessage(message, status);
+          setEmail(true);
+          handleMessage("Email Verification Sent");
         }
       }).catch((error) => {
         console.log(error);
-      handleMessage("An error occurred. Check your network");
+        setEmail(false);
+      handleMessage("Email Already Exists");
     });
   }
 
@@ -154,7 +157,7 @@ function Register({navigation})
           </Pressable>
       </View>
 
-        <Text style={styles.messageBox} type={messageType}>{message}</Text>
+        <Text style={isEmailSent === false ? styles.messageBox: styles.messageBoxAccept} type={messageType}>{message}</Text>
 
           <TouchableOpacity style={styles.loginBtn}>
             <Text 

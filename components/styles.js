@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
    
     Logo: {
       marginTop: 25,
-      marginBottom: 60,
+      marginBottom: 55,
       width: 360,
       height: 105,
-      resizeMode: 'cover',
+      resizeMode: 'contain',
     },
    
     inputView: {
@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontSize: 13,
       color: 'red',
+    },
+    messageBoxAccept:
+    {
+      textAlign: 'center',
+      fontSize: 13,
+      color: '#2ebd59',
     },
 
     iconLR: {
@@ -273,7 +279,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
       playlistTitle:{
-        fontSize: 25,
+        fontSize: 30,
         color:  '#FBFBFB',
         fontWeight: 'bold',
         textAlign: 'left',

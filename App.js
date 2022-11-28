@@ -19,6 +19,9 @@ import {
   Poppins_200Regular,
   Poppins_300Light,
 } from "@expo-google-fonts/dev";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 //import {Provider} from 'react-redux';
 //import {store} from './redux';
 
@@ -96,11 +99,8 @@ function MyStack() {
   
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SpotifyLogin" component={SpotifyLogin} 
-      options={{
-        header: () => null,
-      }}
-      />
+      
+      
       <Stack.Screen name="Login" component={Login} 
       options={{
         header: () => null,
@@ -110,17 +110,28 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
-      
+<Stack.Screen name="SpotifyLogin" component={SpotifyLogin} 
+      options={{
+        header: () => null,
+      }}
+      />
       
       <Stack.Screen name="MainApp" component={MyTabs}
       options={{
         header: () => null,
       }}/>
+<Stack.Screen name="Track" component={Track}
+      options={{
+        header: () => null,
+      }}/>
+      
+
     </Stack.Navigator>
   );
 }
 //for now change MyStack to MyTabs to see the other pages
 function App() {
+  console.disableYellowBox = true;
      //FONTS
      let [fontsLoaded] = useFonts({
       Poppins_500Medium,

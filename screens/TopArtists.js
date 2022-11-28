@@ -13,6 +13,13 @@ import {
     ScrollView,
 } from "react-native";
 import Data from "../components/data";
+import {
+  useFonts,
+  Poppins_500Medium,
+  Poppins_200Regular,
+  Poppins_300Light,
+  Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 
 import { useState, useEffect } from "react";
 import * as WebBrowser from 'expo-web-browser';
@@ -26,6 +33,14 @@ const spotifyApi = new SpotifyWebApi({
 })
 
 function TopArtists({route, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Poppins_500Medium,
+    Poppins_200Regular,
+    Poppins_300Light,
+  });
+
+
+
   const [isShown, setIsShown] = useState("allTime");
   const [user, setUser] = useState([]);
   const [allTime, setAllTime] = useState([]);
@@ -143,7 +158,10 @@ const renderArtists = (art, index) => {
         <ScrollView>
         <View style={styles.headerRow}>
                 <View style={{alignItems: 'flex-end', left: 40}}>
-                    <Text style={styles.TrendifyHome}>Trendify</Text>
+                <Image
+                            style={{width: 180, height: 75, resizeMode: 'contain', marginTop:5, marginBottom:10,}}
+                            source={require("../images/TrendifyWord.png")}
+                    />
                     </View>
                     {/*
                     <Image

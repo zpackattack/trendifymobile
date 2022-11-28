@@ -17,7 +17,8 @@ import {
   Poppins_500Medium,
   Poppins_200Regular,
   Poppins_300Light,
-} from "@expo-google-fonts/dev";
+  Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 import * as WebBrowser from 'expo-web-browser';
 import Data from "../components/data";
 
@@ -37,6 +38,7 @@ function TopTracks({route, navigation }) {
     Poppins_500Medium,
     Poppins_200Regular,
     Poppins_300Light,
+    Poppins_700Bold,
   });
 
         //Open Spotify
@@ -135,10 +137,12 @@ useEffect(() => {
     const seconds = ((millis % 60000) / 1000).toFixed(0);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
+  /*<Pressable onPress={() => navigation.navigate('Track', {accessToken:accessToken,song:track.name, artist:track.artists[0].name, album:track.album.name, songID:track.id})}>*/
 
   const renderTracks = (track, index) => {
     
     return(
+      
       <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>
         <View style={styles.trackRow}>
         
@@ -150,7 +154,7 @@ useEffect(() => {
               style={{ marginHorizontal: 10, width: 60, height: 60, borderRadius: 30 / 2 }}
             />
             <Text style={styles.numText}>{index+1}</Text>
-            <View style={styles.trackCol}>
+            <View style={[styles.trackCol, {paddingRight:20}]}>
                 <Text numberOfLines={1} style={localStyles.tracks}>{track.name}</Text>
                 {/*<Text numberOfLines={1} style={localStyles.tracks}>{track.album.name}</Text>*/}
                 <Text style={localStyles.trackSubtext}>{track.artists[0].name}</Text>
@@ -181,7 +185,10 @@ useEffect(() => {
         <ScrollView>
         <View style={styles.headerRow}>
                 <View style={{alignItems: 'flex-end', left: 40}}>
-                    <Text style={styles.TrendifyHome}>Trendify</Text>
+                <Image
+                            style={{width: 180, height: 75, resizeMode: 'contain', marginTop:5, marginBottom:10,}}
+                            source={require("../images/TrendifyWord.png")}
+                    />
                     </View>
                     {/*
                     <Image
@@ -256,7 +263,11 @@ export default TopTracks;
 
 
 const localStyles = StyleSheet.create({
+  Trendify: {
+    fontSize: 40, color: '#FBFBFB', 
+    textAlign: 'center',marginBottom: 30, marginTop: 10,
 
+},
    
   tracks: {
     fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
@@ -304,5 +315,14 @@ const localStyles = StyleSheet.create({
   setterTextActive: {
     color: '#2ebd59',fontFamily:'Poppins_500Medium',
   },
+
+  titles: {
+    fontSize: 25,
+    color:  '#FBFBFB',
+    fontFamily:'Poppins_500Medium',
+    textAlign: 'left',
+    paddingLeft: '3%',
+    height: 40,
+},
 
 });

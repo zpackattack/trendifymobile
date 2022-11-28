@@ -7,20 +7,32 @@ import {   StyleSheet,
     TextInput,
     Button,
     TouchableOpacity, } from 'react-native';
-import {useFonts } from 'expo-font';
+    import {
+      useFonts,
+      Poppins_500Medium,
+      Poppins_200Regular,
+      Poppins_300Light,
+      Poppins_700Bold,
+    } from "@expo-google-fonts/poppins";
 
 function LogoHeader()
 {
    //FONTS
    let [fontsLoaded] = useFonts({
-    'Poppins-Bold': require('../fonts/Poppins-Bold.ttf'),
+    Poppins_500Medium,
+    Poppins_200Regular,
+    Poppins_300Light,
+    Poppins_700Bold,
   });
 
     
     return (
         <View style={styles.container}>
         <Image style={styles.Logo} source={require("../images/logo.png")} />
-        <Text style={{ fontFamily:'Poppins-Bold', fontSize: 65, marginBottom: 25, color: '#FBFBFB'}}>Trendify</Text>
+        <Image
+                style={{width: 270, height: 100, resizeMode: 'contain'}}
+                source={require("../images/TrendifyWord.png")}
+        />
         </View>
     );
 }

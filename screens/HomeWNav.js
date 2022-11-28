@@ -20,7 +20,7 @@ import axios from 'axios';
 import SpotifyWebApi from "spotify-web-api-node";
 import * as WebBrowser from 'expo-web-browser';
 import topTenTrackComp from '../components/spotifyComp/topTracks'
-import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import { useFonts } from 'expo-font';
 
 
 
@@ -30,6 +30,16 @@ const spotifyApi = new SpotifyWebApi({
   })
   
 export default function Dashboard({route, navigation}) {   
+
+    let [fontsLoaded] = useFonts({
+        'Poppins-Bold': require('../fonts/Poppins-Bold.ttf'),
+        'Poppins-Light': require('../fonts/Poppins-Light.ttf'),
+        'Poppins-Medium': require('../fonts/Poppins-Medium.ttf'),
+      });
+      if(!fontsLoaded)
+      {
+        console.log("noFont");
+      }
     //const currentPath = window.location.pathname;
     
 
@@ -155,7 +165,7 @@ export default function Dashboard({route, navigation}) {
             return(
                 <View style={{flex:1,
                     flexDirection: 'column', 
-                    alignContent: 'center', width: 190, marginHorizontal: 5,}}>
+                    alignContent: 'center', width: 190, marginHorizontal: 5,marginTop:5}}>
                 <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
                 <Image
                       source={{
@@ -228,9 +238,14 @@ const topTenArtistView = topTenArtists.map((art) => {
             <ScrollView>
                 <View style={styles.headerRow}>
                 <View style={{alignItems: 'flex-end', left: 40}}>
-                    <Text style={styles.TrendifyHome}>Trendify</Text>
+                    
+                    <Image
+                            style={{width: 180, height: 75, resizeMode: 'contain', marginTop:5,}}
+                            source={require("../images/TrendifyWord.png")}
+                    />
                     </View>
                     {/*
+                    <Text style={localStyles.Trendify}>Trendify</Text>
                     <Image
                             style={{width: 175, height: 87, resizeMode: 'stretch'}}
                             source={require("../images/logotransparent.png")}
@@ -280,16 +295,29 @@ const topTenArtistView = topTenArtists.map((art) => {
 }
 
 const localStyles = StyleSheet.create({
+    Trendify: {
+        fontSize: 40, color: '#FBFBFB', 
+        textAlign: 'center',marginBottom: 15, marginTop: 10,
+
+    },
 
    
     tracks: {
-      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins_500Medium',
+      fontSize: 20, alignItems: 'left', color: '#FBFBFB',fontFamily:'Poppins-Medium',
     },
     trackSubtext: {
       fontSize: 20,
         alignItems: 'left',
         color: '#FBFBFB',
-        fontFamily:'Poppins_300Light',
+        fontFamily:'Poppins-Light',
+    },
+    titles: {
+        fontSize: 25,
+        color:  '#FBFBFB',
+        fontFamily:'Poppins-Medium',
+        textAlign: 'left',
+        paddingLeft: '3%',
+        height: 40,
     },
     
   

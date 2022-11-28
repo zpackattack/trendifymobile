@@ -85,13 +85,13 @@ export default function SpotifyLogin({navigation}) {
         }}
       >
       <Image
-                source={
-                    require('../images/spotifyLogo.png')
-                }
-                //borderRadius style will help us make the Round Shape Image
-                style={{width: 50, height: 50, alignSelf:'center'}}
-            />
-      <Text style={[styleLocal.loginText, {fontFamily:'Poppins-Medium'}]}>Spotify Login</Text>
+          source={
+              require('../images/spotifyLogo.png')
+          }
+          //borderRadius style will help us make the Round Shape Image
+          style={{width: 50, height: 50, alignSelf:'center'}}
+        />
+      <Text style={styleLocal.loginText}>Spotify Login</Text>
       </Pressable>
     </View>
   )

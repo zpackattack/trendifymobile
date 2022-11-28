@@ -20,7 +20,8 @@ import {
   Poppins_500Medium,
   Poppins_200Regular,
   Poppins_300Light,
-} from "@expo-google-fonts/dev";
+  Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 import Data from "../components/data";
 
 import axios from 'axios';
@@ -52,7 +53,7 @@ function RecentlyPlayed({ route, navigation }) {
   const [topTenArtists, setTopTenArtists] = useState([]);
   const [artProfilePic, setArtProfilePic] = useState();
   const [ProfilePic, setProfilePic] = useState();
-  const [pic, setPic] = useState();
+  const [picAlb, setPicAlb] = useState();
   const [recents, setRecents] = useState([]);
   const { accessToken } = route.params;
   //console.log("working?: "+ accessToken);
@@ -100,6 +101,7 @@ function RecentlyPlayed({ route, navigation }) {
             {
               setProfilePic(data.body.items[0].images[0].url);
             }
+            setArtProfilePic(data.body.items[0].images[0].url);
 
             //setTopArtistPic(data.body.items[0].images[0].url)
             //console.log('TopArt1'+ data.body.items);
@@ -142,7 +144,7 @@ function RecentlyPlayed({ route, navigation }) {
     useEffect(() => {
       if(!accessToken) return
       spotifyApi.getMyRecentlyPlayedTracks({
-          limit : 50
+          limit : 25
       }).then(function(data) {
           // Output items
           setRecents(data.body.items);
@@ -161,7 +163,7 @@ function RecentlyPlayed({ route, navigation }) {
       return(
         <View style={{flex:1,
             flexDirection: 'column', 
-            alignContent: 'center', width: 190, marginHorizontal: 5,}}>
+            alignContent: 'center', width: 190, marginHorizontal: 5,marginTop:5}}>
         <Pressable onPress = {() => _handlePressButtonAsync(play.external_urls.spotify)}>
         <Image
               source={{
@@ -178,7 +180,8 @@ function RecentlyPlayed({ route, navigation }) {
 
     const recentlyPlayedView = recents.map((recent) => {
         return(
-            <View style={styles.trackRow}>
+          <Pressable onPress={() => _handlePressButtonAsync(recent.track.external_urls.spotify)}>
+            <View style={[styles.trackRow, {paddingRight:20}]}>
               
               <Image
                   source={{
@@ -194,6 +197,7 @@ function RecentlyPlayed({ route, navigation }) {
                     <Text style={localStyles.trackSubtext}>{recent.track.artists[0].name}</Text>
                 </View>
             </View>
+            </Pressable>
         );
   })
 
@@ -202,10 +206,10 @@ function RecentlyPlayed({ route, navigation }) {
             <ScrollView>
               
               <ImageBackground source={{
-                        url: ProfilePic,
+                        url: artProfilePic,
                     }}
                     //borderRadius style will help us make the Round Shape Image
-                    imageStyle={{height:150, borderRadius: 25}}>
+                    imageStyle={{height:150, borderRadius: 25, marginHorizontal:10}}>
 
 
                   
@@ -219,30 +223,39 @@ function RecentlyPlayed({ route, navigation }) {
                         url: ProfilePic,
                     }}
                     //borderRadius style will help us make the Round Shape Image
-                    style={{ width: 75, height: 75, borderRadius: 75 / 2, bottom: -110}}
+                    style={{ width: 120, height: 120, borderRadius: 120 / 2, bottom: -90}}
                 />
                 </View>
               </ImageBackground>
               <View style={[styles.statsCenter,{bottom:-90}]}>
              
-                <Text style={styles.username}>{user.id}</Text>
+                <Text style={localStyles.username}>{user.id}</Text>
 
                 <View style={styles.statsCenter}>
                   <View style={styles.statsRow}>
                     <View style={styles.statsCol1}>
                       <Text style={styles.statsProfile}>{numFollowing}</Text>
-                      <Text style={styles.statsProfileWord}>Following</Text>
+                      <Text style={localStyles.statsProfileWord}>Following</Text>
                     </View>
                     <View style={styles.statsCol2}>
                       <Text style={styles.statsProfile}>{numFollowers}</Text>
-                      <Text style={styles.statsProfileWord}>Followers</Text>
+                      <Text style={localStyles.statsProfileWord}>Followers</Text>
                     </View>
                     <View style={styles.statsCol3}>
                       <Text style={styles.statsProfile}>{numPlaylists}</Text>
-                      <Text style={styles.statsProfileWord}>Playlists</Text>
+                      <Text style={localStyles.statsProfileWord}>Playlists</Text>
                     </View>
                   </View>
                 </View>
+                <Pressable
+                    //onPress={highlightButton('allTime')}  
+                    style={localStyles.setterButtons}
+                    onPress={() => {
+                      navigation.navigate("Login");
+                      }}
+                >
+                  <Text style={localStyles.setterText}>Logout</Text>
+                  </Pressable>
               
                 <View>
                   <Text style={styles.playlistTitle}>Playlists</Text>
@@ -253,7 +266,7 @@ function RecentlyPlayed({ route, navigation }) {
 
               </View>
               
-                <View style={{paddingVertical: '22%'}}>
+                <View style={{paddingTop: '22%', paddingBottom:15}}>
                   <Text style={styles.playlistTitle}>Recenty Played</Text>
                     {recentlyPlayedView}
                 </View>
@@ -279,6 +292,34 @@ const localStyles = StyleSheet.create({
       alignItems: 'left',
       color: '#FBFBFB',
       fontFamily:'Poppins_300Light',
+  },
+  statsProfileWord: {
+    fontSize: 25,
+    color:  '#FBFBFB',
+    textAlign: 'center',
+    fontFamily:'Poppins_300Light',
+  },
+  username: {
+    alignItems: 'center',
+    textAlign: 'center',
+    color: '#FBFBFB',
+    fontWeight: 'bold',
+    fontSize: 40,
+    fontFamily:'Poppins_500Medium',
+  },
+  setterButtons: {
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+    elevation: 3,
+    borderRadius: 50 / 2,
+    borderColor: '#FBFBFB',
+    borderWidth: 1,
+    marginHorizontal: 5,
+  },
+  setterText: {
+    color: '#FBFBFB',fontFamily:'Poppins_500Medium',
   },
 
 });

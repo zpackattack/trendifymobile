@@ -31,7 +31,7 @@ function Login({navigation})
     'Poppins-Medium': require('../fonts/Poppins-Medium.ttf'),
   });
 
-  const size = 'invisible';
+  const size = 'normal';
   const [key, setKey] = useState('<none>');
 
   const $recaptcha = useRef();
@@ -74,7 +74,7 @@ function Login({navigation})
         }
       }).catch((error) => {
         console.log(error);
-        handleMessage("An error occurred. Check your network");
+        handleMessage("Incorrect Username or Password");
     });
   }
 
@@ -151,29 +151,30 @@ function Login({navigation})
       </Formik>
  
       <TouchableOpacity>
-          <Text style={localStyles.registerTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
+          <Text style={styles.LoginTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
       <Recaptcha
         ref={$recaptcha}
-        lang="pt"
+        lang="en"
         headerComponent={
           <Button title="Close modal" onPress={handleClosePress} />
         }
         footerComponent={<Text>Footer here</Text>}
-        siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        siteKey="6Le7-FciAAAAACnKxo3JECtz17LYl2VjJgC17ydG"
         baseUrl="http://127.0.0.1"
         size={size}
         theme="dark"
-        onLoad={() => Alert.alert('onLoad event')}
-        onClose={() => Alert.alert('onClose event')}
+        //onLoad={() => Alert.alert('onLoad event')}
+        //onClose={() => Alert.alert('onClose event')}
         onError={(err) => {
-          Alert.alert('onError event');
+          //Alert.alert('onError event');
           console.warn(err);
         }}
-        onExpire={() => Alert.alert('onExpire event')}
+        //onExpire={() => Alert.alert('onExpire event')}
         onVerify={(token) => {
-          Alert.alert('onVerify event');
+          //Alert.alert('onVerify event');
           setKey(token);
+          navigation.navigate("SpotifyLogin");
         }}
         enterprise={false}
         hideBadge={false}

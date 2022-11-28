@@ -19,6 +19,7 @@ import {
   Poppins_200Regular,
   Poppins_300Light,
 } from "@expo-google-fonts/dev";
+import { Chart as ChartJS } from 'chart.js/auto'
 import {
 
     BarChart,
@@ -45,9 +46,8 @@ function Track({route, navigation }) {
       Poppins_200Regular,
       Poppins_300Light,
     });
-  
-   /*
-  
+
+    
     const [isShown, setIsShown] = useState("allTime");
     const [user, setUser] = useState([]);
     const [allTime, setAllTime] = useState([]);
@@ -57,6 +57,12 @@ function Track({route, navigation }) {
     const [pic, setPic] = useState();
     const [recents, setRecents] = useState([]);
     const { accessToken } = route.params;
+    const { song } = route.params;
+    const { songID } = route.params;
+    const {album} = route.params;
+    const {artist} = route.params
+    const [track, setSong] = useState([]);
+    const [features, setFeatures] = useState([]);
 
   
   
@@ -68,13 +74,13 @@ function Track({route, navigation }) {
     useEffect(() => {
       if (!accessToken){console.log("NO"); return;}
       spotifyApi.setAccessToken(accessToken);
-    }, [accessToken])
-    
-*/
+    }, [accessToken]);
+
+  // GET SONG INFORMATION
 
 const MyBarChart = () => {
     return (
-      <>
+      <View>
         <Text style={styles.header}>Bar Chart</Text>
         <BarChart
           data={{
@@ -103,15 +109,84 @@ const MyBarChart = () => {
             borderRadius: 16,
           }}
         />
-      </>
+      </View>
     );
   };
+
+  useEffect(() => {
+    spotifyApi.getAudioFeaturesForTrack('3Qm86XLflmIXVm1wcwkgDK')
+  .then(function(data) {
+    console.log(data.body);
+  }, function(err) {
+    done(err);
+  });
+  })
+  
+  const feats={
+    labels: ['Danceability', 'Acousticness', 'Energy', 'Instrumentalness', 'Liveness', 'Valence', 'Speechiness'],
+    datasets: [
+      {
+        data: [features.danceability*100, features.acousticness*100, features.energy*100, features.instrumentalness*100, features.liveness*100, features.valence*100, features.speechiness*100],
+      }
+    ]
+  };
+  const renderData =(feat) => {
+    return(
+      <Pressable onPress = {() => _handlePressButtonAsync(art.external_urls.spotify)}>
+        <View style={styles.trackRow}>
+        
+      <Image
+          source={{
+              url: art.images[0].url,
+          }}
+          //borderRadius style will help us make the Round Shape Image
+          style={{ marginHorizontal: 10, width: 60, height: 60, borderRadius: 60 / 2 }}
+      />
+      <View style={styles.artistCol}>
+          <Text style={localStyles.tracks}>{art.name}</Text>
+      </View>
+        <Text style={localStyles.numText}>{index+1}</Text>
+      </View>
+      </Pressable>
+        
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView>
             <Text>Track</Text>
-            
+            <Bar
+              width={300}
+              height={400}
+              data={feats}
+              options={{
+                  plugins: {
+                      legend: {
+                          labels: {
+                              font: {
+                                  size: 15
+                              }
+                          }
+                      }
+                  },
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  scales: {
+                      yAxes: {
+                      ticks: {
+                          color: "#d7d8d0",
+                          stepSize: 10
+                      }
+                      },
+                      xAxes: {
+                      ticks: {
+                          color: "#d7d8d0"
+                      }
+                    },
+                  }
+              }}
+              />
         </ScrollView>
     </SafeAreaView>
 );
