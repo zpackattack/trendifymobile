@@ -99,11 +99,7 @@ function MyStack() {
   
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SpotifyLogin" component={SpotifyLogin} 
-      options={{
-        header: () => null,
-      }}
-      />
+      
       
       <Stack.Screen name="Login" component={Login} 
       options={{
@@ -114,7 +110,11 @@ function MyStack() {
       options={{
         header: () => null,
       }}/>
-
+      <Stack.Screen name="SpotifyLogin" component={SpotifyLogin} 
+      options={{
+        header: () => null,
+      }}
+      />
       
       <Stack.Screen name="MainApp" component={MyTabs}
       options={{
