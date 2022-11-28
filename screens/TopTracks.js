@@ -179,21 +179,30 @@ useEffect(() => {
   return(
     <SafeAreaView style={styles.homeContainer}>
         <ScrollView>
-            <View style={styles.headerRow}>
-                <Text style={styles.TrendifyHome}>Top Tracks</Text>
-                <View style={{alignItems: 'flex-end'}}>
-                    <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
-                        <Image
-                            source={{
-                                url: ProfilePic,
-                            }}
-                            
-                            //borderRadius style will help us make the Round Shape Image
-                            style={{alignSelf: 'flex-end', width: 75, height: 75, borderRadius: 75 / 2, }}
-                        />
-                    </Pressable>
+        <View style={styles.headerRow}>
+                <View style={{alignItems: 'flex-end', left: 40}}>
+                    <Text style={styles.TrendifyHome}>Trendify</Text>
+                    </View>
+                    {/*
+                    <Image
+                            style={{width: 175, height: 87, resizeMode: 'stretch'}}
+                            source={require("../images/logotransparent.png")}
+                    />
+                    */}
+              
+                    <View style={{alignItems: 'flex-end', left: 55}}>
+                        <Pressable onPress={() => navigation.navigate('RecentlyPlayed', {accessToken:accessToken})}>
+                            <Image
+                                source={{
+                                    url: ProfilePic,
+                                }}
+                                
+                                //borderRadius style will help us make the Round Shape Image
+                                style={{alignSelf: 'flex-end', width: 75, height: 75, borderRadius: 75 / 2, }}
+                            />
+                        </Pressable>
+                    </View>
                 </View>
-            </View>
 
             <View style={styles.headerRow}>
               <Pressable

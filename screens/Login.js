@@ -1,5 +1,5 @@
+import React, {useRef, useCallback, useState} from 'react';
 import 'react-native-gesture-handler';
-import * as React from 'react';
 import {   StyleSheet,
     Text,
     View,
@@ -8,22 +8,41 @@ import {   StyleSheet,
     TextInput,
     Button,
     TouchableOpacity,
+    Alert,
     Pressable } from 'react-native';
 import LogoHeader from '../components/LogoHeader';
 import axios from 'axios'; 
-import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordAvalibility';
 import styles from '../components/styles';
-
+import { useFonts } from 'expo-font';
+import Recaptcha from 'react-native-recaptcha-that-works';
 
 
 
 function Login({navigation})
 {
+  let [fontsLoaded] = useFonts({
+    'Poppins-Bold': require('../fonts/Poppins-Bold.ttf'),
+    'Poppins-Light': require('../fonts/Poppins-Light.ttf'),
+    'Poppins-Medium': require('../fonts/Poppins-Medium.ttf'),
+  });
+
+  const size = 'invisible';
+  const [key, setKey] = useState('<none>');
+
+  const $recaptcha = useRef();
+
+  const handleOpenPress = useCallback(() => {
+    $recaptcha.current.open();
+  }, []);
+
+  const handleClosePress = useCallback(() => {
+    $recaptcha.current.close();
+  }, []);
 
 
   const [message, setMessage] = useState();
@@ -46,7 +65,7 @@ function Login({navigation})
 
         if (response.status == 200)
         {
-          navigation.navigate('SpotifyLogin');
+          handleOpenPress();
           
         }
         else
@@ -81,6 +100,7 @@ function Login({navigation})
             console.log(values);
             handleMessage("");
             handleLogin(values);
+            //handleOpenPress();
             //navigation.navigate('SpotifyLogin');
             
           }
@@ -131,9 +151,35 @@ function Login({navigation})
       </Formik>
  
       <TouchableOpacity>
-          <Text style={styles.registerTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
+          <Text style={localStyles.registerTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
+      <Recaptcha
+        ref={$recaptcha}
+        lang="pt"
+        headerComponent={
+          <Button title="Close modal" onPress={handleClosePress} />
+        }
+        footerComponent={<Text>Footer here</Text>}
+        siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        baseUrl="http://127.0.0.1"
+        size={size}
+        theme="dark"
+        onLoad={() => Alert.alert('onLoad event')}
+        onClose={() => Alert.alert('onClose event')}
+        onError={(err) => {
+          Alert.alert('onError event');
+          console.warn(err);
+        }}
+        onExpire={() => Alert.alert('onExpire event')}
+        onVerify={(token) => {
+          Alert.alert('onVerify event');
+          setKey(token);
+        }}
+        enterprise={false}
+        hideBadge={false}
+      />
       </View>
+      
   );
 }
 
@@ -142,7 +188,13 @@ export default Login;
 const localStyles = StyleSheet.create({
 
   loginText: {
-    fontFamily:'Poppins_500Medium',
+    fontFamily:'Poppins-Medium',
     fontSize: 20,
+  },
+  registerTxt: {
+    height: 30,
+      marginTop: 30,
+      color:  '#1BD760',
+      fontFamily:'Poppins-Light',
   },
 });

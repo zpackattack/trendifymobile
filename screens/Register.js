@@ -199,6 +199,11 @@ const localStyles = StyleSheet.create({
     fontFamily:'Poppins_500Medium',
     fontSize: 20,
   },
-
+  registerTxt: {
+    height: 30,
+      marginTop: 30,
+      color:  '#1BD760',
+      fontFamily:'Poppins-Light',
+  },
 
 });

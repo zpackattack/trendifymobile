@@ -227,7 +227,9 @@ const topTenArtistView = topTenArtists.map((art) => {
         <SafeAreaView style={styles.homeContainer}>
             <ScrollView>
                 <View style={styles.headerRow}>
+                <View style={{alignItems: 'flex-end', left: 40}}>
                     <Text style={styles.TrendifyHome}>Trendify</Text>
+                    </View>
                     {/*
                     <Image
                             style={{width: 175, height: 87, resizeMode: 'stretch'}}
