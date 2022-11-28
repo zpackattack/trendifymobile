@@ -9,6 +9,8 @@ import {   StyleSheet,
     Button,
     TouchableOpacity,
     Alert,
+    Keyboard,
+    KeyboardAvoidingView,
     Pressable } from 'react-native';
 import LogoHeader from '../components/LogoHeader';
 import axios from 'axios'; 
@@ -87,7 +89,10 @@ function Login({navigation})
   return (
       <View style={styles.container}>
       <LogoHeader />
-
+      <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} style={{alignItems: "center",
+      justifyContent: "center",}}
+    >
       <Formik 
         initialValues={{login: '', password: ''}}
         onSubmit={(values) => 
@@ -149,6 +154,7 @@ function Login({navigation})
         )}
         
       </Formik>
+      </KeyboardAvoidingView>
  
       <TouchableOpacity>
           <Text style={styles.LoginTxt} onPress={() => navigation.navigate('Register')}>Don't have an account? Sign Up</Text>
