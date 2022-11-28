@@ -180,7 +180,7 @@ function RecentlyPlayed({ route, navigation }) {
 
     const recentlyPlayedView = recents.map((recent) => {
         return(
-          <Pressable onPress={() => _handlePressButtonAsync(recent.track.external_urls.spotify)}>
+          <Pressable onPress={() => navigation.navigate('Track', {accessToken:accessToken, popularity: recent.track.popularity,spotifyurl: recent.track.external_urls.spotify,lastScreen: "RecentlyPlayed",trackUrl: recent.track.album.images[0].url,song:recent.track.name, artist:recent.track.artists[0].name, album:recent.track.album.name, songID:recent.track.id})}>
             <View style={[styles.trackRow, {paddingRight:20}]}>
               
               <Image

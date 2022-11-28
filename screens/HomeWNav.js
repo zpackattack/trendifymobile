@@ -184,7 +184,7 @@ export default function Dashboard({route, navigation}) {
     const topTenTracksView = topTracks.map((track, index) => {
     
         return(
-            <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>
+            <Pressable onPress={() => navigation.navigate('Track', {accessToken:accessToken, popularity: track.popularity,spotifyurl: track.external_urls.spotify,lastScreen: "Home",trackUrl: track.album.images[0].url,song:track.name, artist:track.artists[0].name, album:track.album.name, songID:track.id})}>
             <View style={styles.trackRow}>
             
 

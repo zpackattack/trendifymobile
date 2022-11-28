@@ -137,13 +137,16 @@ useEffect(() => {
     const seconds = ((millis % 60000) / 1000).toFixed(0);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
-  /*<Pressable onPress={() => navigation.navigate('Track', {accessToken:accessToken,song:track.name, artist:track.artists[0].name, album:track.album.name, songID:track.id})}>*/
+
+  
+  /*<Pressable onPress={() => navigation.navigate('Track', {accessToken:accessToken,song:track.name, artist:track.artists[0].name, album:track.album.name, songID:track.id})}>
+  <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>*/
 
   const renderTracks = (track, index) => {
     
     return(
+      <Pressable onPress={() => navigation.navigate('Track', {accessToken:accessToken, popularity: track.popularity,spotifyurl: track.external_urls.spotify,lastScreen: "TopTracks",trackUrl: track.album.images[0].url,song:track.name, artist:track.artists[0].name, album:track.album.name, songID:track.id})}>
       
-      <Pressable onPress={() => _handlePressButtonAsync(track.external_urls.spotify)}>
         <View style={styles.trackRow}>
         
         <Image

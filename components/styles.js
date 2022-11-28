@@ -287,6 +287,17 @@ const styles = StyleSheet.create({
         height: 40,
       },
 
+      //tracks
+      trackPageCol: {
+        width: '35%',
+
+      },
+      trackPageCol2: {
+        width: '25%',
+
+      },
+      
+
   });
 
   export default styles;
